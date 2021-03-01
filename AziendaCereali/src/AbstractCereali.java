@@ -1,5 +1,5 @@
 
-public class AbstractCereali implements Cereali {
+public class AbstractCereali implements Cereale {
 	
 	private String proprietaNutritive;
 	private int giorniFreschezza;

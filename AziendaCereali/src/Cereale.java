@@ -1,5 +1,5 @@
 
-public interface Cereali {
+public interface Cereale {
 	
 	public Double getPrezzo();
 	public int getTempoFreschezza();
