@@ -2,15 +2,16 @@
 public class CerealeFactory {
 
 	public static Cereale creatoreCereale (String cereale) {
-		Cereale cerealeDaIstanziare;
+		Cereale cerealeDaIstanziare = null;
 		switch (cereale) {
 		
-		case "avena" : {
-			cerealeDaIstanziare = new Avena(ProprietaNutritive.PROPRIETA_AVENA);
+			case "avena" : {
+				cerealeDaIstanziare = new Avena(ProprietaNutritive.PROPRIETA_AVENA);
 			
-		}
-		return cerealeDaIstanziare;
+			}
+		
 		
 		}
+		return cerealeDaIstanziare;
 	}
 }
