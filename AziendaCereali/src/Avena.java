@@ -5,7 +5,7 @@
  * estende la classe astratta @see AbstractCereali
  *  
  */
-public class Avena extends AbstractCereali {
+public class Avena extends AbstractCereale {
 	
 	/**Valore intero che indica quanti giorni il cereale in questione puo mantenere la sua freschezza dala data di imballaggio*/
 	private final static int GIORNI_FRESCHEZZA = 10;
@@ -26,4 +26,4 @@ public class Avena extends AbstractCereali {
 	public Avena(String proprietaNutritive) {
 		super(proprietaNutritive, GIORNI_FRESCHEZZA, PREZZO, NOME_CLASSE); 
 	}
-}
+} 

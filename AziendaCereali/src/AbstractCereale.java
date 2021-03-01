@@ -5,7 +5,7 @@
  * Classe astratta di AbstractCereali  che implementa l' interfaccia Cereale 
  * 
  */
-public class AbstractCereali implements Cereale {
+public class AbstractCereale implements Cereale {
 	
 	/**
 	 * Valore String che indica le proprieta' nutritive del cereale
@@ -31,7 +31,7 @@ public class AbstractCereali implements Cereale {
 	 * @param prezzo Double che indica il prezzo del cereale
 	 * @param nomeCereale String che indica il nome del cereale
 	 */
-	public AbstractCereali(String proprietaNutritive, int giorniFreschezza, Double prezzo, String nomeCereale) {
+	public AbstractCereale(String proprietaNutritive, int giorniFreschezza, Double prezzo, String nomeCereale) {
 		this.proprietaNutritive = proprietaNutritive;
 		this.giorniFreschezza = giorniFreschezza;
 		this.prezzo = prezzo;
