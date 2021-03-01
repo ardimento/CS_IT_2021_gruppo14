@@ -2,7 +2,7 @@
  * 
  * @author Fortunato Giuseppe 724309
  *
- * Interfaccia di AbstractCereali
+ * Interfaccia di AbstractCereali 
  * 
  */
 public interface Cereale {

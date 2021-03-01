@@ -2,7 +2,7 @@
  * 
  * @author Fortunato Giuseppe 724309
  *
- * Classe astratta di AbstractCereali  che implementa l' interfaccia Cereale
+ * Classe astratta di AbstractCereali  che implementa l' interfaccia Cereale 
  * 
  */
 public class AbstractCereali implements Cereale {
