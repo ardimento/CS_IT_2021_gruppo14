@@ -24,6 +24,6 @@ public class Avena extends AbstractCereali {
 	 * 
 	 */
 	public Avena(String proprietaNutritive) {
-		super(proprietaNutritive, GIORNI_FRESCHEZZA, PREZZO, NOME_CLASSE);
+		super(proprietaNutritive, GIORNI_FRESCHEZZA, PREZZO, NOME_CLASSE); 
 	}
 }
