@@ -87,5 +87,5 @@ public class Vendita implements VenditaInterfaccia {
 		// TODO Auto-generated method stub
 		return dataVendita;
 	}
-
+ 
 }
