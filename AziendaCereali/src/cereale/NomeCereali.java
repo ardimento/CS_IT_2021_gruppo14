@@ -1,3 +1,4 @@
+package cereale;
 /**
  * Classe che contiene i nomi dei Cereali gestiti dal programma.
  * Questa classe verrà utilizzata dalle classi non logicamente correlate al concetto di Cereale

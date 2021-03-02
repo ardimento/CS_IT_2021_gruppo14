@@ -1,3 +1,4 @@
+package cereale;
 /**
  * Classe che contiene le proprietà nutritive dei Cereali gestiti dal programma.
  * 

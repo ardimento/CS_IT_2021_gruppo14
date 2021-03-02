@@ -1,3 +1,4 @@
+package cereale;
 
 public class AziendaAgricola {
 
