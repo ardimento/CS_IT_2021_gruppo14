@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import cereale.Avena;
 import vendita.Vendita;
 import vendita.VenditaInterfaccia;
 
@@ -25,6 +26,7 @@ public class Impiegato {
 	
 	/**
 	 * Costruttore della classe 
+	 * 
 	 * consente di istanziare un impiegato con tutti i suoi attributi di istanza 
 	 * passando i valori da inserire come parametri di input.
 	 * 
@@ -68,14 +70,28 @@ public class Impiegato {
 	}
 
 
-	public boolean cercaVendita() {
-		return false;
-		//? mi serve che venga fatta una cosa in AbstractCereale
+	/**
+	 * Ricerca se è già presente una vendita con il codice passato come parametro.
+	 * 
+	 * Grazie alla ridefinizione dei metodi @see Vendita#hashCode()  e  @see Vendita#equals() 
+	 * un oggetto vendita risulta confrontabile con un altro, per mezzo del codice che lo identifica.
+	 * Perciò per mezzo del codice, viene creata una vendita puramente finalizzata ad essere ricercata tra la collezione di vendite effettive.
+	 * 
+	 * @param codiceVenditaDaCercare
+	 * @return restituisce true se viene trovata una vendita con il codice indicato, false altrimenti.
+	 */
+	public boolean cercaVendita(String codiceVenditaDaCercare) {
+		VenditaInterfaccia venditaDaCercare = new Vendita(0.0, codiceVenditaDaCercare, "avena", "2000-12-12"); //da rivedere ...
+		boolean esito = false;
+		if (getVendite().contains(venditaDaCercare)) 
+			esito = true; 
+		return esito;
 	}
 	
 	/**
-	 * Effettua l'aggiunta di una vendita all'impiegato 
-	 * se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti durante l'anno.
+	 * Effettua l'aggiunta di una vendita all'impiegato. 
+	 * 
+	 * Questo solo se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti durante l'anno e durante la giornata.
 	 * 
 	 * @param quantitaCereale valore double che rappresenta la quantità di cereale che si vuole vendere
 	 * @param codVendita valore alfanumerico che rapresenta il codice identificativo della vendita (precondizione : sia univoco )
@@ -93,7 +109,12 @@ public class Impiegato {
 		if ( somma > pesoAnnuoMassimo) {
 			esito = true; //la creazione presenta un problema 
 		} else {
-			vendite.add(new  Vendita(quantitaCereale, codVendita, cerealeScelto, data));
+			somma = quantitaVendutaGiornaliera (data);
+			somma = somma + quantitaCereale;
+			if(somma <= 0) {//<-- DA COMPLETARE
+				vendite.add(new  Vendita(quantitaCereale, codVendita, cerealeScelto, data));
+			}
+			
 		}
 		
 		return esito;
@@ -101,8 +122,7 @@ public class Impiegato {
 	}
 
 	/**
-	 * Restituisce la quantità di cereali venduti dall'impiegato in una certo anno 
-	 * tramite il passaggio di una data come parametro.
+	 * Restituisce la quantità di cereali venduti dall'impiegato in una certo anno tramite il passaggio di una data come parametro.
 	 * 
 	 * @param dataVendita valore alfanumerico che rappresenta la data presa in considerazione (precondizione : la data sia nel formato AAAA-MM-GG)
 	 * @return restituisce la quantità di cereali venduti dall'impiegato nell'anno della data passata.
@@ -124,6 +144,26 @@ public class Impiegato {
 	}
 	
 	
+	/**
+	 * Restituisce la quantità di cereali venduti dall'impiegato in una data indicata come parametro.
+	 * 
+	 * @param dataVendita valore alfanumerico che rappresenta la data presa in considerazione (precondizione : la data sia nel formato AAAA-MM-GG)
+	 * @return restituisce la quantità di cereali venduti dall'impiegato nella data passata.
+	 */
+	public double quantitaVendutaGiornaliera (String dataVendita) {
+		double quantita = 0.0;
+		
+		Iterator<VenditaInterfaccia> iterator = vendite.iterator();
+		while (iterator.hasNext()) {
+			VenditaInterfaccia vendita = iterator.next();
+
+			if (vendita.getDataVendita().equals(dataVendita)) {
+				quantita = quantita + vendita.getQuantitaCereale();
+			}
+		}
+		return quantita;
+		
+	}
 
 
 	
