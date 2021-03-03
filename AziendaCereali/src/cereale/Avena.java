@@ -1,3 +1,4 @@
+package cereale;
 /**
  * @autor Ben Sidi Alessio 717848
  * 

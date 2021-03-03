@@ -1,8 +1,10 @@
+package cereale;
 /**
  * 
  * @author Fortunato Giuseppe 724309
  *
- * Interfaccia di AbstractCereali 
+ * Interfaccia che serve nel ricavare dei dati riguardanti i cereali.
+ * Tali dati vengono rappresentati da dei metodi che saranno visibili all'esterno della classe.
  * 
  */
 public interface Cereale {

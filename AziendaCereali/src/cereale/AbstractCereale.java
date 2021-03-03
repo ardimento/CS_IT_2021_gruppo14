@@ -1,8 +1,11 @@
+package cereale;
+
 /**
+ *
+ * Classe astratta di AbstractCereali. Questa classe raccoglie tutte le proprieta' condivise 
+ * dai vari cereali vendibili dall' azienda
  * 
  * @author Fortunato Giuseppe 724309
- *
- * Classe astratta di AbstractCereali  che implementa l' interfaccia Cereale 
  * 
  */
 public class AbstractCereale implements Cereale {
