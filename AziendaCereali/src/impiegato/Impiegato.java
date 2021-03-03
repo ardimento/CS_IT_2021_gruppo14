@@ -73,7 +73,16 @@ public class Impiegato {
 		//? mi serve che venga fatta una cosa in AbstractCereale
 	}
 	
-	
+	/**
+	 * Effettua l'aggiunta di una vendita all'impiegato 
+	 * se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti durante l'anno.
+	 * 
+	 * @param quantitaCereale valore double che rappresenta la quantità di cereale che si vuole vendere
+	 * @param codVendita valore alfanumerico che rapresenta il codice identificativo della vendita (precondizione : sia univoco )
+	 * @param cerealeScelto valore che rappresenta il cereale che si vuole vendere (precondizione : tale stringa sia = all'attributo 'NOME_CLASSE' di un cereale esistente)
+	 * @param data valore alfanumerico che rappresenta la data in cui si è effettuata tale vendita (precondizione : la data sia nel formato AAAA-MM-GG)
+	 * @return restituisce true se si è verificata la condizione per cui la vendita non deve essere creata, false altrimenti.
+	 */
 	public boolean creaVendita(double quantitaCereale, String codVendita, String cerealeScelto, String data) {
 		boolean esito = false; //ok
 		double somma = 0.0;
@@ -91,7 +100,13 @@ public class Impiegato {
 		
 	}
 
-	
+	/**
+	 * Restituisce la quantità di cereali venduti dall'impiegato in una certo anno 
+	 * tramite il passaggio di una data come parametro.
+	 * 
+	 * @param dataVendita valore alfanumerico che rappresenta la data presa in considerazione (precondizione : la data sia nel formato AAAA-MM-GG)
+	 * @return restituisce la quantità di cereali venduti dall'impiegato nell'anno della data passata.
+	 */
 	public double quantitaVendutaAnnua (String dataVendita) {
 		double quantita = 0.0;
 		LocalDate data1 = LocalDate.parse(dataVendita);
