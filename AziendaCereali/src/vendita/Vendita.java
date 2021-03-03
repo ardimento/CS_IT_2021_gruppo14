@@ -111,7 +111,7 @@ public class Vendita implements VenditaInterfaccia {
 		} else if (!codVendita.equals(other.codVendita))
 			return false;
 		return true;
-	}
+	} 
 	
 	
 }
