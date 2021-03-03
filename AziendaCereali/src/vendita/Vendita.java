@@ -87,5 +87,31 @@ public class Vendita implements VenditaInterfaccia {
 		// TODO Auto-generated method stub
 		return dataVendita;
 	}
- 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codVendita == null) ? 0 : codVendita.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vendita other = (Vendita) obj;
+		if (codVendita == null) {
+			if (other.codVendita != null)
+				return false;
+		} else if (!codVendita.equals(other.codVendita))
+			return false;
+		return true;
+	}
+	
+	
 }
