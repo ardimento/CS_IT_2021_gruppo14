@@ -1,10 +1,13 @@
 package azienda;
+import java.awt.EventQueue;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
+
+import gui.Login;
 import impiegato.*;
 import vendita.Vendita;
 import vendita.VenditaInterfaccia;
@@ -79,6 +82,18 @@ public class AziendaAgricola {
 		
 		System.out.println(vendite.toString());
 		System.out.println(impiegato.toString());
+		
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try{
+					Login login = new Login(azienda.getImpiegati());
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}			
+			}
+		});
 		
 	}
 	
