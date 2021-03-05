@@ -10,7 +10,10 @@ package eccezioni;
  *
  */
 public class EccezioniVendita extends Exception {
-	
+	/**
+	 * attributo per la serializzazione della classe.
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * costruttore aparametrico dell'eccezione
 	 */
