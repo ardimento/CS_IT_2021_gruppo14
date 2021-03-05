@@ -15,4 +15,4 @@ public class MessaggiErroreVendita {
 	 * messaggio di errore per il vincolo di vendita annuale del prodotto che è legato al vincolo in questione
 	 */
 	public final static String ERRORE_QUANTITA_ANNUALE = "Errore : vendita non inserita \nla quantita' del prodotto in vendita comporta il superamento della quantita' vendibile annualmente dell'impiegato";
-} 
+}
