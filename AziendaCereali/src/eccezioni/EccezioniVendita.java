@@ -27,4 +27,4 @@ public class EccezioniVendita extends Exception {
 	public EccezioniVendita(String message,Throwable cause) {
 		super(message, cause);
 	}
-}
+} 
