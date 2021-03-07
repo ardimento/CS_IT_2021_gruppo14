@@ -72,5 +72,19 @@ public class AbstractCereale implements Cereale {
 	public String getNomeCereale() {
 		return nomeCereale;
 	}
-	
+	/**
+	 * Controlla se il cereale rispetta i propri vincoli di vendita legati alla quantità, se uno specifico cereale ha dei suoi particolari vincoli legati alla vendita, dovrà essere
+	 * effettuato un override di questo metodo nella sua classe concreta e implementare i dovuti controlli per i suoi vincoli specifici legati alle varie quantita. Altrimenti questo vincolo
+	 * restituisce sempre TRUE se non ci sono vincoli particolari legati al peso legati ad un determinato cereale.
+	 * 
+	 * Per vincoli diversi dal peso, sarà possibile aggiungere l'overload dello stesso metodo con parametri in base al tipo di vincolo che serve passaere per parametro
+	 * e implementarlo nella classe concreta utile.
+	 * 
+	 * @param quantitaCereale valore Double del peso in vendita del cereale in questione
+	 * @param quantitaVenduta valore Double della somma del peso di tutte le vendite dell'impiegato che sta effettuando la vendita dello specifico cereale
+	 * @return true indica che la vendita è sempre effettuabile
+	 */
+	protected boolean isCerealeVendibile(Double quantitaCereale, Double quantitaVenduta) {
+		return true;
+	}
 }
