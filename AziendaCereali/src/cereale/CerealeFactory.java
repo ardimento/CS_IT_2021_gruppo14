@@ -18,3 +18,4 @@ public class CerealeFactory {
 		return cerealeDaIstanziare;
 	}
 }
+ 
