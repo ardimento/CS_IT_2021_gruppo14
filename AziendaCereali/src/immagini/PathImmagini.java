@@ -8,7 +8,7 @@ package immagini;
  * (ad esempio cambio nome all'immagine) tale modifica andrà riportata solamente in questa classe.
  * (elimino la dipendenza tra le immagini utilizzate e la GUI che le richiama).
  *
- * @author Giuseppe Alemanno 716262
+ * @author Alemanno Giuseppe 716262
  *
  */
 public class PathImmagini {
@@ -17,5 +17,7 @@ public class PathImmagini {
 	public final static String IMMAGINE_LOGIN = "/immagini/immagine2.jpg";
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona nella finestra del programma */
 	public final static String IMMAGINE_ICONA_PROGRAMMA = "/immagini/iconaFinestra.png";
+	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona nei bottoni per tornare indieto */
+	public final static String IMMAGINE_BOTTONE_INDIETRO = "/immagini/freccia1.png";
 	
 }
