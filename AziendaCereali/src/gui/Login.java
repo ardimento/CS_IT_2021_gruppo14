@@ -10,7 +10,7 @@ import impiegato.Impiegato;
  * alle proprie aree di lavoro
  * 
  * @author Fortunato Giuseppe 724309
- * @author Giuseppe Alemano 716262
+ * @author Alemanno Giuseppe 716262
  *
  */
 public class Login extends JFrame{
@@ -158,6 +158,7 @@ public class Login extends JFrame{
 				if(impiegati.containsKey(codiceUtente)) {
 					login.setVisible(false);
 					JOptionPane.showMessageDialog(rootPane, "Accesso Eseguito");
+					SchermataImpiegato imp = new SchermataImpiegato(impiegati.get(codiceUtente),login,codiceUtente);
 				}
 				else {
 					labelAccess.setVisible(true);
