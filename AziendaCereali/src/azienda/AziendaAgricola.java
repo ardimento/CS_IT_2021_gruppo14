@@ -73,12 +73,16 @@ public class AziendaAgricola {
 	public static void main(String[] args) {
 		
 		AziendaAgricola azienda = new AziendaAgricola("Azienda Agricola");
+		
 		Vendita v1 = new Vendita(28, "0001", "avena", "2021-03-02");
 		Vendita v2 = new Vendita(18, "0002", "avena", "2021-03-01");
 		Set<VenditaInterfaccia> vendite = new HashSet<VenditaInterfaccia>();
 		vendite.add(v1);
 		vendite.add(v2);
 		Impiegato impiegato = new Impiegato("1234", 1200, vendite);
+		Impiegato impiegato2 = new Impiegato("5678", 1200, vendite);
+		impiegati.put("1234", impiegato);
+		impiegati.put("5678", impiegato2);
 		
 		System.out.println(vendite.toString());
 		System.out.println(impiegato.toString());
