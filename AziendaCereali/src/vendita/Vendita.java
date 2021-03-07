@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import cereale.Cereale;
 import cereale.CerealeFactory;
+import eccezioni.EccezioniVendita;
 
 public class Vendita implements VenditaInterfaccia {
 	/** valore che indica la quantità in kg di cereali che è stata venduta*/
@@ -40,11 +41,17 @@ public class Vendita implements VenditaInterfaccia {
 	 * @param codVendita Stringa di caratteri alfanumerico che identifica univocamente la vendita effettuata con successo
 	 * @param cerealeScelto Stringa di caratteri che rappresenta il cereale venduto
 	 * @param data Stringa che indica la data di vendita, il formato è rappresentato in forma YYYY-MM-GG
+	 * @param quantitaVenduta somma delle quantità vendute dal venditore che sta creando la vendita
 	 * 
+	 * @pre devono essere rispettati i vincoli legati al cereale scelto per permettere che la vendita venga istanziata con successo
+	 * @pre per la data deve essere rispettato il seguente formato: YYYY-MM-GG
+	 * @pre la data di imballaggio viene stabilita in base alla data di vendita (un giorno precedente alla data di vendita)
+	 * @pre la data di scadenza viene stabilita in base alla data di imballaggio (varia in base alla giorni di freschezza del cereale)
+	 * @post viene creato l'oggetto vendita
 	 */
-	public Vendita(double quantitaCereale, String codVendita, String cerealeScelto, String data) {
+	public Vendita(double quantitaCereale, String codVendita, String cerealeScelto, String data, double quantitaVenduta) throws EccezioniVendita {
 		
-		this.cerealeInVendita = CerealeFactory.creatoreCereale(cerealeScelto);
+		this.cerealeInVendita = CerealeFactory.creatoreCereale(cerealeScelto, quantitaCereale, quantitaVenduta);
 		this.quantitaCereale = quantitaCereale;
 		LocalDate dataOdierna = LocalDate.parse(data);
 		LocalDate dataImballaggio = dataOdierna.minusDays(1);

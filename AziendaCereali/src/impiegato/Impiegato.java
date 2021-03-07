@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 import cereale.Avena;
+import eccezioni.EccezioniVendita;
+import eccezioni.MessaggiErroreVendita;
 import vendita.Vendita;
 import vendita.VenditaInterfaccia;
 
@@ -91,7 +93,7 @@ public class Impiegato {
 	/**
 	 * Effettua l'aggiunta di una vendita all'impiegato. 
 	 * 
-	 * Questo solo se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti durante l'anno e durante la giornata.
+	 * Questo solo se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti tramite il metodo @seequantitaVendutaAnnua durante l'anno e durante la giornata tramite il metodo @seequantitaVendutaGiornaliera.
 	 * 
 	 * @param quantitaCereale valore double che rappresenta la quantità di cereale che si vuole vendere
 	 * @param codVendita valore alfanumerico che rapresenta il codice identificativo della vendita (precondizione : sia univoco )
@@ -99,7 +101,7 @@ public class Impiegato {
 	 * @param data valore alfanumerico che rappresenta la data in cui si è effettuata tale vendita (precondizione : la data sia nel formato AAAA-MM-GG)
 	 * @return restituisce true se si è verificata la condizione per cui la vendita non deve essere creata, false altrimenti.
 	 */
-	public boolean creaVendita(double quantitaCereale, String codVendita, String cerealeScelto, String data) {
+	public boolean creaVendita(double quantitaCereale, String codVendita, String cerealeScelto, String data) throws EccezioniVendita {
 		boolean esito = false; //ok
 		double somma = 0.0;
 		
@@ -107,12 +109,14 @@ public class Impiegato {
 		somma = somma + quantitaCereale;
 		
 		if ( somma > pesoAnnuoMassimo) {
-			esito = true; //la creazione presenta un problema 
+			esito = true;
+			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_QUANTITA_ANNUALE, new EccezioniVendita());
+			
 		} else {
 			somma = quantitaVendutaGiornaliera (data);
 			somma = somma + quantitaCereale;
 			if(somma <= 0) {//<-- DA COMPLETARE
-				vendite.add(new  Vendita(quantitaCereale, codVendita, cerealeScelto, data));
+				vendite.add(new  Vendita(quantitaCereale, codVendita, cerealeScelto, data, quantitaVendutaGiornaliera(data)));
 			}
 			
 		}
