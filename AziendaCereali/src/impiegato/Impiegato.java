@@ -81,9 +81,11 @@ public class Impiegato {
 	 * 
 	 * @param codiceVenditaDaCercare
 	 * @return restituisce true se viene trovata una vendita con il codice indicato, false altrimenti.
+	 * @throws EccezioniVendita lanciata se i vincoli riguardante la vendita dei vari cereali dell'azienda non sono rispettati
+	 * 
 	 */
-	public boolean cercaVendita(String codiceVenditaDaCercare) {
-		VenditaInterfaccia venditaDaCercare = new Vendita(0.0, codiceVenditaDaCercare, "avena", "2000-12-12"); //da rivedere ...
+	public boolean cercaVendita(String codiceVenditaDaCercare) throws EccezioniVendita {
+		VenditaInterfaccia venditaDaCercare = new Vendita(0.0, codiceVenditaDaCercare, "avena", "2000-12-12",0.0); //da rivedere ...
 		boolean esito = false;
 		if (getVendite().contains(venditaDaCercare)) 
 			esito = true; 
