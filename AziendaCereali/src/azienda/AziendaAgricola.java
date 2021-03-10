@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
+import eccezioni.EccezioniVendita;
 import gui.Login;
 import impiegato.*;
 import vendita.Vendita;
@@ -69,13 +70,14 @@ public class AziendaAgricola {
 	 * Main del programma. Qui avviene l'avvio del programma. Tale main realizza in primis la realizzazione dell'azienda
 	 * ed in un secondo momento andrà a fare uso di tutte le funzionalità del programma.
 	 * Per ora si è pensato di creare semplicemente dei test, per testare l'effettiva funzionalità del programma.
+	 * @throws EccezioniVendita 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws EccezioniVendita {
 		
 		AziendaAgricola azienda = new AziendaAgricola("Azienda Agricola");
 		
-		Vendita v1 = new Vendita(28, "0001", "avena", "2021-03-02");
-		Vendita v2 = new Vendita(18, "0002", "avena", "2021-03-01");
+		Vendita v1 = new Vendita(28, "0001", "avena", "2021-03-02",0.0);
+		Vendita v2 = new Vendita(18, "0002", "avena", "2021-03-01",0.0);
 		Set<VenditaInterfaccia> vendite = new HashSet<VenditaInterfaccia>();
 		vendite.add(v1);
 		vendite.add(v2);
