@@ -10,6 +10,7 @@ import impiegato.Impiegato;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 import java.util.Map;
 
 /**
@@ -24,16 +25,19 @@ public class SchermataImpiegato extends JFrame{
 
 	private Impiegato impiegato;
 	private JFrame frame;
-	private JPanel panelTop, panelDown, panelRight,panelLeft;
-	private JLabel labelTitleSoftware, labelToday, labelRights;
+	private JPanel panelTop, panelDown, panelRight,panelLeft, panelCenterRight,panelCenterLeft;
+	private JLabel labelTitleSoftware, labelToday, labelRights, labelCode;
 	private JButton btnGoBack;
-	private GroupLayout glPanelDown;
+	private GroupLayout glPanelDown,glPanelCenterLeft;
+	private JTable table;
 	
 	public SchermataImpiegato(Impiegato impiegato, JFrame login, String codiceImpiegato) {
 		this.frame = new JFrame();
 		this.impiegato = impiegato;
 		setSchermataImpiegato();
 		setImageBtnGoBack();
+		searchDate ();
+		azioneBottoneIndietro(login);
 		
 	}
 	
@@ -72,7 +76,7 @@ public class SchermataImpiegato extends JFrame{
 		btnGoBack.setBounds(-100,0,30,30);
 		
 		
-		labelRights = new JLabel ("By ...");
+		labelRights = new JLabel ("    By Alemanno, Ben Sidi, Fortunato");
 		
 		glPanelDown = new GroupLayout (panelDown);
 		setGlPanelDown();
@@ -87,8 +91,43 @@ public class SchermataImpiegato extends JFrame{
 		panelLeft.setBackground(SystemColor.control);
 		frame.getContentPane().add(panelLeft, BorderLayout.CENTER);
 		
+		panelCenterLeft = new JPanel();
+		panelCenterLeft.setBackground(SystemColor.scrollbar);
+		setGlPanelCenterLeft();
+		panelCenterLeft.setLayout(glPanelCenterLeft);
+		
+		
 	}
-	
+	private void setGlPanelCenterLeft() {
+		
+		glPanelCenterLeft.setHorizontalGroup( 
+				glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
+				.addGroup(
+							glPanelCenterLeft.createSequentialGroup() 
+							.addContainerGap()
+							.addGroup(
+								glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
+								.addComponent(table, GroupLayout.DEFAULT_SIZE,157,350)
+								.addComponent(labelCode, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,157,350)
+							)
+							.addContainerGap()
+				)
+		);	
+		
+		glPanelCenterLeft.setVerticalGroup(
+				glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
+				.addGroup(glPanelCenterLeft.createSequentialGroup()
+						.addGap(75)
+						.addComponent(labelCode)
+						.addGap(47)
+						.addComponent(table,GroupLayout.PREFERRED_SIZE,144,GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(261,Short.MAX_VALUE)
+						
+				)
+				
+		);
+		
+	}
 	private void setGlPanelDown() {
 		glPanelDown.setHorizontalGroup( 
 			glPanelDown.createParallelGroup(Alignment.LEADING)
@@ -134,6 +173,26 @@ public class SchermataImpiegato extends JFrame{
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Non è stato possibile caricare l'immagine del bottone", "Errore", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param login
+	 */
+	private void azioneBottoneIndietro (JFrame login ) {
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e ) {
+				login.setVisible(true);
+				frame.dispose();
+			}
+		});
+	}
+	
+	private void searchDate () {
+		LocalDate data = LocalDate.now();
+		String dataString = data.toString();
+		labelToday.setText("Data :"+ dataString);
 	}
 }
 
