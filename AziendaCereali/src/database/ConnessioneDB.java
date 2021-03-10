@@ -29,7 +29,7 @@ public class ConnessioneDB {
 	private String host = "localhost";
 	private int port = 3306;
 	private String url = "jbdc:mysql://" + host + ":" + port + "/" + nomeDB + "?servrTimezone=UTC";
-	
+	 
 	private static ConnessioneDB connessioneDB;
 	
 	private Connection connettore;
