@@ -95,6 +95,7 @@ public class SchermataImpiegato extends JFrame{
 		panelCenterLeft = new JPanel();
 		panelCenterLeft.setBackground(SystemColor.scrollbar);
 		panelCenterLeft.setLayout(glPanelCenterLeft);
+		frame.getContentPane().add(panelCenterLeft,BorderLayout.CENTER);
 		
 		table = new JTable();
 		labelCode = new JLabel();
@@ -104,6 +105,8 @@ public class SchermataImpiegato extends JFrame{
 		panelCenterRight = new JPanel();
 		panelCenterRight.setBackground(new Color(245,222,179));
 		glPanelCenterRight = new GroupLayout(panelCenterRight);
+		frame.getContentPane().add(panelCenterRight,BorderLayout.EAST);
+		//panelCenterRight
 		
 		btnMakeSell = new JButton("Effettua vendite");
 		btnMakeSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -112,7 +115,6 @@ public class SchermataImpiegato extends JFrame{
 		btnShowSell = new JButton("Visualizza vendite effettuate");
 		btnShowSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnShowSell.setBackground(SystemColor.controlHighlight);
-		
 		
 		setGlPanelCenterRight();
 		panelCenterRight.setLayout(glPanelCenterRight);		
@@ -176,8 +178,6 @@ public class SchermataImpiegato extends JFrame{
 				)
 				
 		);
-		
-		
 	}
 	
 	private void setGlPanelDown() {
