@@ -27,8 +27,8 @@ public class SchermataImpiegato extends JFrame{
 	private JFrame frame;
 	private JPanel panelTop, panelDown, panelRight,panelLeft, panelCenterRight,panelCenterLeft;
 	private JLabel labelTitleSoftware, labelToday, labelRights, labelCode;
-	private JButton btnGoBack;
-	private GroupLayout glPanelDown,glPanelCenterLeft;
+	private JButton btnGoBack, btnShowSell, btnMakeSell;
+	private GroupLayout glPanelDown,glPanelCenterLeft,glPanelCenterRight;
 	private JTable table;
 	
 	public SchermataImpiegato(Impiegato impiegato, JFrame login, String codiceImpiegato) {
@@ -91,13 +91,62 @@ public class SchermataImpiegato extends JFrame{
 		panelLeft.setBackground(SystemColor.control);
 		frame.getContentPane().add(panelLeft, BorderLayout.CENTER);
 		
+		
 		panelCenterLeft = new JPanel();
 		panelCenterLeft.setBackground(SystemColor.scrollbar);
-		setGlPanelCenterLeft();
 		panelCenterLeft.setLayout(glPanelCenterLeft);
 		
+		table = new JTable();
+		labelCode = new JLabel();
+		glPanelCenterLeft = new GroupLayout (panelCenterLeft);
+		setGlPanelCenterLeft();
+		
+		panelCenterRight = new JPanel();
+		panelCenterRight.setBackground(new Color(245,222,179));
+		glPanelCenterRight = new GroupLayout(panelCenterRight);
+		
+		btnMakeSell = new JButton("Effettua vendite");
+		btnMakeSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnMakeSell.setBackground(SystemColor.controlHighlight);
+		
+		btnShowSell = new JButton("Visualizza vendite effettuate");
+		btnShowSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnShowSell.setBackground(SystemColor.controlHighlight);
+		
+		
+		setGlPanelCenterRight();
+		panelCenterRight.setLayout(glPanelCenterRight);		
 		
 	}
+	
+	private void setGlPanelCenterRight() {
+		glPanelCenterRight.setHorizontalGroup( 
+				glPanelCenterRight.createParallelGroup(Alignment.CENTER)
+				.addGroup(
+						Alignment.CENTER, glPanelCenterRight.createSequentialGroup() 
+						.addGap(142)
+						.addGroup(
+							glPanelCenterRight.createParallelGroup(Alignment.CENTER)
+							.addComponent(btnMakeSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,250,Short.MAX_VALUE)
+							.addComponent(btnShowSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,250,Short.MAX_VALUE)
+						)
+						.addGap(138)
+				)
+		);
+		
+		glPanelCenterRight.setVerticalGroup( 
+				glPanelCenterRight.createParallelGroup(Alignment.CENTER)
+				.addGroup(
+						Alignment.CENTER, glPanelCenterRight.createSequentialGroup() 
+						.addGap(112)
+						.addComponent(btnShowSell, GroupLayout.PREFERRED_SIZE,77,500)
+						.addGap(55)
+						.addComponent(btnMakeSell, GroupLayout.PREFERRED_SIZE,77,500 )
+						.addContainerGap(112,Short.MAX_VALUE)
+				)
+		);
+	}
+	
 	private void setGlPanelCenterLeft() {
 		
 		glPanelCenterLeft.setHorizontalGroup( 
@@ -116,7 +165,8 @@ public class SchermataImpiegato extends JFrame{
 		
 		glPanelCenterLeft.setVerticalGroup(
 				glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
-				.addGroup(glPanelCenterLeft.createSequentialGroup()
+				.addGroup(
+						glPanelCenterLeft.createSequentialGroup()
 						.addGap(75)
 						.addComponent(labelCode)
 						.addGap(47)
@@ -127,7 +177,9 @@ public class SchermataImpiegato extends JFrame{
 				
 		);
 		
+		
 	}
+	
 	private void setGlPanelDown() {
 		glPanelDown.setHorizontalGroup( 
 			glPanelDown.createParallelGroup(Alignment.LEADING)
@@ -148,16 +200,17 @@ public class SchermataImpiegato extends JFrame{
 			.addGroup(
 						glPanelDown.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(glPanelDown.createParallelGroup(Alignment.BASELINE))
-						.addComponent(btnGoBack)
+						.addGroup(glPanelDown.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnGoBack)
 						.addComponent(labelToday, GroupLayout.PREFERRED_SIZE,30,GroupLayout.PREFERRED_SIZE)
-						.addComponent(labelRights, GroupLayout.PREFERRED_SIZE,28,GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelRights, GroupLayout.PREFERRED_SIZE,28,GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnGoBack, GroupLayout.PREFERRED_SIZE,0,GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)					
-			)
-		);
-				
+						.addContainerGap(GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))					
+			
+		);		
 	}
+	
+	
 	
 	/**
 	 * Metodo che imposta l'immagine del bottone btnGoBack 
@@ -182,13 +235,17 @@ public class SchermataImpiegato extends JFrame{
 	 */
 	private void azioneBottoneIndietro (JFrame login ) {
 		btnGoBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e ) {
+			public void actionPerformed( ActionEvent e ) {
 				login.setVisible(true);
+				frame.setVisible(false);
 				frame.dispose();
 			}
 		});
 	}
 	
+	/**
+	 * 
+	 */
 	private void searchDate () {
 		LocalDate data = LocalDate.now();
 		String dataString = data.toString();
