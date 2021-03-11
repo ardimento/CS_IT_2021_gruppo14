@@ -28,7 +28,7 @@ public class SchermataImpiegato extends JFrame{
 	private JPanel panelTop, panelDown, panelRight,panelLeft, panelCenterRight,panelCenterLeft;
 	private JLabel labelTitleSoftware, labelToday, labelRights, labelCode;
 	private JButton btnGoBack, btnShowSell, btnMakeSell;
-	private GroupLayout glPanelDown,glPanelCenterLeft,glPanelCenterRight;
+	private GroupLayout glPanelDown,glPanelLeft,glPanelCenterLeft,glPanelCenterRight;
 	private JTable table;
 	
 	public SchermataImpiegato(Impiegato impiegato, JFrame login, String codiceImpiegato) {
@@ -56,13 +56,14 @@ public class SchermataImpiegato extends JFrame{
 		frame.setBackground(SystemColor.window);
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(immagini.PathImmagini.IMMAGINE_ICONA_PROGRAMMA)));
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
+		//---------------------------------------------------------------
 		panelTop = new JPanel();
 		panelTop.setBackground(new Color(244,164,96));
 		frame.getContentPane().add(panelTop, BorderLayout.NORTH);
 		labelTitleSoftware = new JLabel("Software Azienda Cereale");
 		panelTop.add(labelTitleSoftware);
 		
+		//---------------------------------------------------------------
 		panelDown = new JPanel();
 		panelDown.setBackground(new Color(244,164,96));
 		frame.getContentPane().add(panelDown, BorderLayout.SOUTH);
@@ -75,39 +76,39 @@ public class SchermataImpiegato extends JFrame{
 		btnGoBack.setBackground(new Color(244,164,96));
 		btnGoBack.setBounds(-100,0,30,30);
 		
-		
 		labelRights = new JLabel ("    By Alemanno, Ben Sidi, Fortunato");
 		
 		glPanelDown = new GroupLayout (panelDown);
 		setGlPanelDown();
 		panelDown.setLayout(glPanelDown);
 		
+		//---------------------------------------------------------------
 		panelRight = new JPanel();
 		panelRight.setBackground(SystemColor.controlShadow);
 		frame.getContentPane().add(panelRight, BorderLayout.EAST);
 		
-		
+		//---------------------------------------------------------------	
 		panelLeft = new JPanel();
 		panelLeft.setBackground(SystemColor.control);
 		frame.getContentPane().add(panelLeft, BorderLayout.CENTER);
 		
-		
+		//---------------------------------------------------------------
 		panelCenterLeft = new JPanel();
 		panelCenterLeft.setBackground(SystemColor.scrollbar);
-		panelCenterLeft.setLayout(glPanelCenterLeft);
-		frame.getContentPane().add(panelCenterLeft,BorderLayout.CENTER);
 		
 		table = new JTable();
 		labelCode = new JLabel();
+		
 		glPanelCenterLeft = new GroupLayout (panelCenterLeft);
 		setGlPanelCenterLeft();
+		panelCenterLeft.setLayout(glPanelCenterLeft);
 		
+		//---------------------------------------------------------------
 		panelCenterRight = new JPanel();
 		panelCenterRight.setBackground(new Color(245,222,179));
-		glPanelCenterRight = new GroupLayout(panelCenterRight);
-		frame.getContentPane().add(panelCenterRight,BorderLayout.EAST);
-		//panelCenterRight
-		
+
+		glPanelLeft = new GroupLayout (panelLeft);
+		setGlPanelLeft();
 		btnMakeSell = new JButton("Effettua vendite");
 		btnMakeSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnMakeSell.setBackground(SystemColor.controlHighlight);
@@ -116,9 +117,48 @@ public class SchermataImpiegato extends JFrame{
 		btnShowSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnShowSell.setBackground(SystemColor.controlHighlight);
 		
+		glPanelCenterRight = new GroupLayout(panelCenterRight);
 		setGlPanelCenterRight();
-		panelCenterRight.setLayout(glPanelCenterRight);		
+		panelCenterRight.setLayout(glPanelCenterRight);
+
+		//---------------------------------------------------------------
+		panelLeft.setLayout(glPanelLeft);
 		
+
+		
+				
+		
+
+	}
+	
+	
+	private void setGlPanelLeft() {
+		glPanelLeft.setHorizontalGroup(
+				glPanelLeft.createParallelGroup(Alignment.CENTER)
+				.addGroup( 
+					glPanelLeft.createSequentialGroup()
+					.addGap(0)
+					.addComponent(panelCenterLeft,GroupLayout.DEFAULT_SIZE,177,400)
+					.addGap(34)
+					.addComponent(panelCenterRight,GroupLayout.DEFAULT_SIZE,530,1200)
+					.addGap(33)
+				)
+		);
+
+		glPanelLeft.setVerticalGroup(
+				glPanelLeft.createParallelGroup(Alignment.CENTER)
+				.addGroup( 
+					glPanelLeft.createSequentialGroup()
+					.addComponent(panelCenterLeft,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+					.addGap(0)
+				)
+				.addGroup( 
+					glPanelLeft.createSequentialGroup()
+					.addGap(35)	
+					.addComponent(panelCenterRight,GroupLayout.DEFAULT_SIZE,471,500)
+					.addGap(35)
+				)
+		);
 	}
 	
 	private void setGlPanelCenterRight() {
