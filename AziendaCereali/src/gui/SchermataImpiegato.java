@@ -155,7 +155,7 @@ public class SchermataImpiegato extends JFrame{
 	}
 	
 	/**
-	 * Metodo che setta le informazioni mostrate a video dell'impiegato.
+	 * Metodo che setta le informazioni mostrate a video dell'impiegato. 
 	 */
 	private void setInfoImpiegato() {
 		labelCode.setText("Codice Impiegato : "+impiegato.getCodiceImpiegato());

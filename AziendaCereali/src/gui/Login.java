@@ -7,7 +7,7 @@ import impiegato.Impiegato;
 
 /**
  * Classe che gestisce graficamente l'accesso degli impiegati
- * alle proprie aree di lavoro
+ * alle proprie aree di lavoro 
  * 
  * @author Fortunato Giuseppe 724309
  * @author Alemanno Giuseppe 716262
