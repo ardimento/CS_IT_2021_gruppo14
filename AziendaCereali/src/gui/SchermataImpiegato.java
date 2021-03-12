@@ -14,33 +14,56 @@ import java.time.LocalDate;
 import java.util.Map;
 
 /**
- * Classe che gestisce graficamente il layout e le funzionalità base d
- * elle schermate relative all'impiegato 
+ * Classe che gestisce graficamente il layout e le funzionalità base
+ * delle schermate relative all'impiegato 
  * 
  * @author Fortunato Giuseppe 724309
  * @author Alemanno Giuseppe 716262
  *
  */
 public class SchermataImpiegato extends JFrame{
-
+	/**
+	 * Impiegato che ha eseguito l'accesso
+	 */
 	private Impiegato impiegato;
+	/**
+	 * Frame di nome frame che visualizza la schermata basica (di partenza) dell' impiegato.
+	 */
 	private JFrame frame;
+	/**
+	 * Pannelli utilizzati per la creazione e l'inserimento delle varie componenti grafiche per la realizzazione della schermata.
+	 */
 	private JPanel panelTop, panelDown, panelRight,panelLeft, panelCenterRight,panelCenterLeft;
-	private JLabel labelTitleSoftware, labelToday, labelRights, labelCode;
+	/**
+	 * Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
+	 */
+	private JLabel labelTitleSoftware, labelToday, labelRights, labelCode, labelQuanGiornaliera, labelQuanAnnua;
+	/**
+	 * Bottoni di interazione, con i quali si accede ad aree diverse del programma(schermata visualizza, crea vendita e ritorno al Login)
+	 */
 	private JButton btnGoBack, btnShowSell, btnMakeSell;
+	/**
+	 * Gruppi per gestire i layout delle componenti grafiche disposte nei vari pannelli(label, textbox ecc..)
+	 */
 	private GroupLayout glPanelDown,glPanelLeft,glPanelCenterLeft,glPanelCenterRight;
-	private JTable table;
 	
-	public SchermataImpiegato(Impiegato impiegato, JFrame login, String codiceImpiegato) {
+	/**
+	 * Costruttore di schermata impiegato, crea nuovo frame, ed imposta le nuove componenti.
+	 * @param impiegato istanza contenente le informazioni dell' impiegato
+	 * @param login frame della schermata Login, chiamata nel caso di un eventuale logout.
+	 */
+	public SchermataImpiegato(Impiegato impiegato, JFrame login) {
 		this.frame = new JFrame();
 		this.impiegato = impiegato;
 		setSchermataImpiegato();
 		setImageBtnGoBack();
-		searchDate ();
 		azioneBottoneIndietro(login);
-		
+		setInfoImpiegato();	
 	}
 	
+	/**
+	 * Metodo che imposta le componenti grafiche della nostra interfaccia.
+	 */
 	public void setSchermataImpiegato() {
 		
 		/**
@@ -68,7 +91,7 @@ public class SchermataImpiegato extends JFrame{
 		panelDown.setBackground(new Color(244,164,96));
 		frame.getContentPane().add(panelDown, BorderLayout.SOUTH);
 		
-		labelToday = new JLabel("Data: ");
+		labelToday = new JLabel("Data :"+ searchDate());
 		
 		btnGoBack = new JButton("Logout");	
 		btnGoBack.setFont(new Font("Tahoma", Font.PLAIN, 16) );
@@ -96,8 +119,12 @@ public class SchermataImpiegato extends JFrame{
 		panelCenterLeft = new JPanel();
 		panelCenterLeft.setBackground(SystemColor.scrollbar);
 		
-		table = new JTable();
 		labelCode = new JLabel();
+		labelCode.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		labelQuanGiornaliera = new JLabel();
+		labelQuanGiornaliera.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		labelQuanAnnua = new JLabel();
+		labelQuanAnnua.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		glPanelCenterLeft = new GroupLayout (panelCenterLeft);
 		setGlPanelCenterLeft();
@@ -125,13 +152,20 @@ public class SchermataImpiegato extends JFrame{
 		panelLeft.setLayout(glPanelLeft);
 		
 
-		
-				
-		
-
 	}
 	
+	/**
+	 * Metodo che setta le informazioni mostrate a video dell'impiegato.
+	 */
+	private void setInfoImpiegato() {
+		labelCode.setText("Codice Impiegato : "+impiegato.getCodiceImpiegato());
+		labelQuanGiornaliera.setText("Quantita' Giornaliera: "+impiegato.quantitaVendutaGiornaliera(searchDate()));
+		labelQuanAnnua.setText("Quantita' Annua: " + impiegato.quantitaVendutaAnnua(searchDate()));
+	}
 	
+	/**
+	 * Metodo che setta il layout di panelLeft
+	 */
 	private void setGlPanelLeft() {
 		glPanelLeft.setHorizontalGroup(
 				glPanelLeft.createParallelGroup(Alignment.CENTER)
@@ -160,7 +194,9 @@ public class SchermataImpiegato extends JFrame{
 				)
 		);
 	}
-	
+	/**
+	 * Metodo che setta il layout di panelCenterRight
+	 */
 	private void setGlPanelCenterRight() {
 		glPanelCenterRight.setHorizontalGroup( 
 				glPanelCenterRight.createParallelGroup(Alignment.CENTER)
@@ -188,7 +224,9 @@ public class SchermataImpiegato extends JFrame{
 				)
 		);
 	}
-	
+	/**
+	 * Metodo che setta il layout di panelCenterLeft
+	 */
 	private void setGlPanelCenterLeft() {
 		
 		glPanelCenterLeft.setHorizontalGroup( 
@@ -198,8 +236,9 @@ public class SchermataImpiegato extends JFrame{
 							.addContainerGap()
 							.addGroup(
 								glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
-								.addComponent(table, GroupLayout.DEFAULT_SIZE,157,350)
-								.addComponent(labelCode, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,157,350)
+								.addComponent(labelCode, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,350)
+								.addComponent(labelQuanGiornaliera, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,350)
+								.addComponent(labelQuanAnnua, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,350)
 							)
 							.addContainerGap()
 				)
@@ -209,17 +248,21 @@ public class SchermataImpiegato extends JFrame{
 				glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
 				.addGroup(
 						glPanelCenterLeft.createSequentialGroup()
-						.addGap(75)
+						.addGap(20)
 						.addComponent(labelCode)
-						.addGap(47)
-						.addComponent(table,GroupLayout.PREFERRED_SIZE,144,GroupLayout.PREFERRED_SIZE)
+						.addGap(20)
+						.addComponent(labelQuanGiornaliera)
+						.addGap(20)
+						.addComponent(labelQuanAnnua)
 						.addContainerGap(261,Short.MAX_VALUE)
 						
 				)
 				
 		);
 	}
-	
+	/**
+	 * Metodo che setta il layout di panelDown
+	 */
 	private void setGlPanelDown() {
 		glPanelDown.setHorizontalGroup( 
 			glPanelDown.createParallelGroup(Alignment.LEADING)
@@ -251,7 +294,6 @@ public class SchermataImpiegato extends JFrame{
 	}
 	
 	
-	
 	/**
 	 * Metodo che imposta l'immagine del bottone btnGoBack 
 	 * E lancia una eccezione se l'immagine non viene creata.
@@ -270,26 +312,29 @@ public class SchermataImpiegato extends JFrame{
 	
 	
 	/**
-	 * 
-	 * @param login
+	 * Metodo con il quale si assegna al bottone l'azione di effettuare il logout.
+	 * Rendiamo visibile il frame Login e distruggiamo dalla memoria il frame Schermata Impiegato dell'utente loggato.
+	 * @param login frame che viene richiamato 
 	 */
 	private void azioneBottoneIndietro (JFrame login ) {
 		btnGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e ) {
 				login.setVisible(true);
-				frame.setVisible(false);
 				frame.dispose();
 			}
 		});
 	}
 	
 	/**
-	 * 
+	 * Metodo che restituisce la data odierna come stringa.
+	 * @return dataString data odierna sottoforma di stringa.
 	 */
-	private void searchDate () {
+	private String searchDate () {
 		LocalDate data = LocalDate.now();
 		String dataString = data.toString();
-		labelToday.setText("Data :"+ dataString);
+	
+		return dataString;
 	}
+	
 }
 
