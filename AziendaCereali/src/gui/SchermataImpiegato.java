@@ -37,7 +37,7 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
 	 */
-	private JLabel labelTitleSoftware, labelToday, labelRights, labelCode, labelQuanGiornaliera, labelQuanAnnua;
+	private JLabel labelTitleSoftware, labelToday, labelRights,labelIconUser,labelDatiImpiegato, labelCode, labelQuanGiornaliera, labelQuanAnnua;
 	/**
 	 * Bottoni di interazione, con i quali si accede ad aree diverse del programma(schermata visualizza, crea vendita e ritorno al Login)
 	 */
@@ -56,9 +56,11 @@ public class SchermataImpiegato extends JFrame{
 		this.frame = new JFrame();
 		this.impiegato = impiegato;
 		setSchermataImpiegato();
-		setImageBtnGoBack();
 		azioneBottoneIndietro(login);
 		setInfoImpiegato();	
+		setImmagini();
+		ModificaDimensioniDinamicamente();
+		
 	}
 	
 	/**
@@ -119,12 +121,15 @@ public class SchermataImpiegato extends JFrame{
 		panelCenterLeft = new JPanel();
 		panelCenterLeft.setBackground(SystemColor.scrollbar);
 		
+		
+		labelIconUser = new JLabel();
+		labelIconUser.setHorizontalAlignment(SwingConstants.CENTER);
+		labelDatiImpiegato = new JLabel("DATI IMPIEGATO :");
+		labelDatiImpiegato.setHorizontalAlignment(SwingConstants.CENTER);
 		labelCode = new JLabel();
-		labelCode.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelQuanGiornaliera = new JLabel();
-		labelQuanGiornaliera.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelQuanAnnua = new JLabel();
-		labelQuanAnnua.setFont(new Font("Tahoma", Font.PLAIN, 17));
+
 		
 		glPanelCenterLeft = new GroupLayout (panelCenterLeft);
 		setGlPanelCenterLeft();
@@ -137,11 +142,9 @@ public class SchermataImpiegato extends JFrame{
 		glPanelLeft = new GroupLayout (panelLeft);
 		setGlPanelLeft();
 		btnMakeSell = new JButton("Effettua vendite");
-		btnMakeSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnMakeSell.setBackground(SystemColor.controlHighlight);
 		
 		btnShowSell = new JButton("Visualizza vendite effettuate");
-		btnShowSell.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnShowSell.setBackground(SystemColor.controlHighlight);
 		
 		glPanelCenterRight = new GroupLayout(panelCenterRight);
@@ -153,6 +156,45 @@ public class SchermataImpiegato extends JFrame{
 		
 
 	}
+	
+	/**
+	 * Metodo che modifica a runtime il font delle label e la dimensione delle icone / immagini 
+	 * 
+	 */
+	private void ModificaDimensioniDinamicamente () {
+		
+		panelLeft.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent componentEvent) {
+				int valoreCalcolato = frame.getWidth()/40;
+				Font nuovoFont = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+				btnMakeSell.setFont(nuovoFont);
+				btnShowSell.setFont(nuovoFont);
+				
+				valoreCalcolato = labelCode.getWidth()/12;
+				nuovoFont = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+				labelCode.setFont(nuovoFont);
+				labelDatiImpiegato.setFont(nuovoFont);
+				labelQuanGiornaliera.setFont(nuovoFont);
+				labelQuanAnnua.setFont(nuovoFont);
+					
+				
+				valoreCalcolato = labelIconUser.getWidth()/2;
+				Image immagine = setImage(PathImmagini.IMMAGINE_ICONA_UTENTE,valoreCalcolato, valoreCalcolato);
+				if(immagine!=null)
+					labelIconUser.setIcon(new ImageIcon(immagine));
+				
+				valoreCalcolato = btnMakeSell.getHeight()/2;;
+				immagine = setImage(PathImmagini.IMMAGINE_ICONA_VENDI, valoreCalcolato, valoreCalcolato);
+				if(immagine!=null)
+					btnMakeSell.setIcon(new ImageIcon(immagine));
+				
+				immagine = setImage(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valoreCalcolato, valoreCalcolato);
+				if(immagine!=null)
+					btnShowSell.setIcon(new ImageIcon(immagine));
+			}
+		});
+	}
+	
 	
 	/**
 	 * Metodo che setta le informazioni mostrate a video dell'impiegato. 
@@ -173,9 +215,9 @@ public class SchermataImpiegato extends JFrame{
 					glPanelLeft.createSequentialGroup()
 					.addGap(0)
 					.addComponent(panelCenterLeft,GroupLayout.DEFAULT_SIZE,177,400)
-					.addGap(34)
-					.addComponent(panelCenterRight,GroupLayout.DEFAULT_SIZE,530,1200)
-					.addGap(33)
+					.addGap(35)
+					.addComponent(panelCenterRight,GroupLayout.DEFAULT_SIZE,530,1300)
+					.addGap(35)
 				)
 		);
 
@@ -183,13 +225,13 @@ public class SchermataImpiegato extends JFrame{
 				glPanelLeft.createParallelGroup(Alignment.CENTER)
 				.addGroup( 
 					glPanelLeft.createSequentialGroup()
-					.addComponent(panelCenterLeft,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+					.addComponent(panelCenterLeft,GroupLayout.PREFERRED_SIZE,400,Short.MAX_VALUE)
 					.addGap(0)
 				)
 				.addGroup( 
 					glPanelLeft.createSequentialGroup()
 					.addGap(35)	
-					.addComponent(panelCenterRight,GroupLayout.DEFAULT_SIZE,471,500)
+					.addComponent(panelCenterRight,GroupLayout.PREFERRED_SIZE,400,700)
 					.addGap(35)
 				)
 		);
@@ -202,13 +244,13 @@ public class SchermataImpiegato extends JFrame{
 				glPanelCenterRight.createParallelGroup(Alignment.CENTER)
 				.addGroup(
 						Alignment.CENTER, glPanelCenterRight.createSequentialGroup() 
-						.addGap(142)
+						.addGap(50)
 						.addGroup(
 							glPanelCenterRight.createParallelGroup(Alignment.CENTER)
-							.addComponent(btnMakeSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,250,Short.MAX_VALUE)
-							.addComponent(btnShowSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,250,Short.MAX_VALUE)
+							.addComponent(btnMakeSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,100,Short.MAX_VALUE)
+							.addComponent(btnShowSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,100,Short.MAX_VALUE)
 						)
-						.addGap(138)
+						.addGap(50)
 				)
 		);
 		
@@ -216,11 +258,11 @@ public class SchermataImpiegato extends JFrame{
 				glPanelCenterRight.createParallelGroup(Alignment.CENTER)
 				.addGroup(
 						Alignment.CENTER, glPanelCenterRight.createSequentialGroup() 
-						.addGap(112)
-						.addComponent(btnShowSell, GroupLayout.PREFERRED_SIZE,77,500)
-						.addGap(55)
-						.addComponent(btnMakeSell, GroupLayout.PREFERRED_SIZE,77,500 )
-						.addContainerGap(112,Short.MAX_VALUE)
+						.addGap(50)
+						.addComponent(btnShowSell, GroupLayout.PREFERRED_SIZE,100,Short.MAX_VALUE)
+						.addGap(22)
+						.addComponent(btnMakeSell, GroupLayout.PREFERRED_SIZE,100,Short.MAX_VALUE )
+						.addGap(50)
 				)
 		);
 	}
@@ -236,9 +278,11 @@ public class SchermataImpiegato extends JFrame{
 							.addContainerGap()
 							.addGroup(
 								glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
-								.addComponent(labelCode, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,350)
-								.addComponent(labelQuanGiornaliera, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,350)
-								.addComponent(labelQuanAnnua, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,350)
+								.addComponent(labelIconUser, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
+								.addComponent(labelDatiImpiegato, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
+								.addComponent(labelCode, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
+								.addComponent(labelQuanGiornaliera, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
+								.addComponent(labelQuanAnnua, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
 							)
 							.addContainerGap()
 				)
@@ -248,13 +292,16 @@ public class SchermataImpiegato extends JFrame{
 				glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
 				.addGroup(
 						glPanelCenterLeft.createSequentialGroup()
+						.addGap(25)
+						.addComponent(labelIconUser,GroupLayout.DEFAULT_SIZE,200,Short.MAX_VALUE)
+						.addComponent(labelDatiImpiegato,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
 						.addGap(20)
-						.addComponent(labelCode)
-						.addGap(20)
-						.addComponent(labelQuanGiornaliera)
-						.addGap(20)
-						.addComponent(labelQuanAnnua)
-						.addContainerGap(261,Short.MAX_VALUE)
+						.addComponent(labelCode,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(labelQuanGiornaliera,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(labelQuanAnnua,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
+						.addGap(311)
 						
 				)
 				
@@ -295,19 +342,54 @@ public class SchermataImpiegato extends JFrame{
 	
 	
 	/**
-	 * Metodo che imposta l'immagine del bottone btnGoBack 
-	 * E lancia una eccezione se l'immagine non viene creata.
-	 * 
+	 * Metodo che aggiunge le immagini alla schermata 
 	 */
-	private void setImageBtnGoBack() {
+	private void setImmagini() {	
+		Image immagine = null;	
+		int valore;
+		
+		valore = btnGoBack.getWidth();
+		immagine = setImage(PathImmagini.IMMAGINE_BOTTONE_INDIETRO, valore, valore);
+		if(immagine!=null)
+			btnGoBack.setIcon(new ImageIcon(immagine));
+		
+		valore = 100;
+		immagine = setImage(PathImmagini.IMMAGINE_ICONA_UTENTE, valore, valore);
+		if(immagine!=null)
+			labelIconUser.setIcon(new ImageIcon(immagine));
+		
+		valore = 70;
+		immagine = setImage(PathImmagini.IMMAGINE_ICONA_VENDI, valore, valore);
+		if(immagine!=null)
+			btnMakeSell.setIcon(new ImageIcon(immagine));
+		
+		valore = 70;
+		immagine = setImage(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valore, valore);
+		if(immagine!=null)
+			btnShowSell.setIcon(new ImageIcon(immagine));
+	}
+	/**
+	 * Metodo che ritorna l'immagine del path indicato, ridimensionata secondo le dimensini indicate come parametri 
+	 * 
+	 * E lancia una eccezione se l'immagine non viene caricata o ridimensionata.
+	 * 
+	 * @param Path Stringa che rappresenta il path dell'immagine che deve essere caricata e modificata 
+	 * @param dimensione1 larghezza dell'immagine 
+	 * @param dimensione1 altezza   dell'immagine
+	 * 
+	 * @return immagine scelta con le dimensioni volute (null in caso di eccezione)
+	 */
+	private Image setImage(String Path, int dimensione1, int dimensione2) {
+		Image immagineModificata = null;
 		try {
-			Image immagine = ImageIO.read(getClass().getResource(PathImmagini.IMMAGINE_BOTTONE_INDIETRO));
-			Image immagineModificata = immagine.getScaledInstance(btnGoBack.getWidth(), btnGoBack.getHeight(), Image.SCALE_SMOOTH);
-			btnGoBack.setIcon(new ImageIcon(immagineModificata));
+			Image immagine = ImageIO.read(getClass().getResource(Path));
+			immagineModificata = immagine.getScaledInstance(dimensione1, dimensione2, Image.SCALE_SMOOTH);
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Non è stato possibile caricare l'immagine del bottone", "Errore", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Non è stato possibile caricare l'immagine "+ Path, "Errore", JOptionPane.ERROR_MESSAGE);
 		}
+		return immagineModificata;
+		
 	}
 	
 	
