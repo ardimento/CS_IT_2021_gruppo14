@@ -23,17 +23,17 @@ public class PathImmagini {
 	public final static String IMMAGINE_BOTTONE_INDIETRO = "/immagini/freccia1.png";
 	
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona dell'utente */
-	public final static String IMMAGINE_ICONA_UTENTE = "/immagini/male1.png";
+	public final static String IMMAGINE_ICONA_UTENTE = "/immagini/icone possibili/male.png";
 	
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona del bottone @see btnMakeSell */
-	public final static String IMMAGINE_ICONA_VENDI = "/immagini/wheat-sack-money.png";
+	public final static String IMMAGINE_ICONA_VENDI = "/immagini/icone possibili/wheat-sack-money.png";
 	
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona del bottone  @see btnShowSell */
-	public final static String IMMAGINE_ICONA_VISUALIZZA_VENDITE = "/immagini/archive-wheat-sack.png";
+	public final static String IMMAGINE_ICONA_VISUALIZZA_VENDITE = "/immagini/icone possibili/archive-wheat-sack.png";
 	
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona delle vendite giornaliere dell'impiegato */
-	public final static String IMMAGINE_ICONA_VENDITE_GIORNATA = "/immagini/wheat-sack-day.png";
+	public final static String IMMAGINE_ICONA_VENDITE_GIORNATA = "/immagini/icone possibili/wheat-sack-day.png";
 	
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona delle vendite annuali dell'impiegato */
-	public final static String IMMAGINE_ICONA_VENDITE_ANNO= "/immagini/wheat-sack-year.png";
+	public final static String IMMAGINE_ICONA_VENDITE_ANNO= "/immagini/icone possibili/wheat-sack-year.png";
 }
