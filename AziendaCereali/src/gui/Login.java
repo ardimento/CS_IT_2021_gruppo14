@@ -158,7 +158,7 @@ public class Login extends JFrame{
 				if(impiegati.containsKey(codiceUtente)) {
 					login.setVisible(false);
 					JOptionPane.showMessageDialog(rootPane, "Accesso Eseguito");
-					SchermataImpiegato imp = new SchermataImpiegato(impiegati.get(codiceUtente),login);
+					SchermataVisualizzaVendite imp = new SchermataVisualizzaVendite(impiegati.get(codiceUtente),login);
 				}
 				else {
 					labelAccess.setVisible(true);

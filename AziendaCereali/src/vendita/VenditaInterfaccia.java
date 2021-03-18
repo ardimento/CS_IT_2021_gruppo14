@@ -16,5 +16,8 @@ public interface VenditaInterfaccia {
 	public Double getQuantitaCereale();
 	/** restrituisce una stringa con la data della vendita nel formato YYYY-MM-GG*/
 	public String getDataVendita();
-
+	
+	
+	
+	public Object [] arrayDiOggetti ();
 }

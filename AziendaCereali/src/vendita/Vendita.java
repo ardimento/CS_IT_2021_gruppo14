@@ -120,5 +120,18 @@ public class Vendita implements VenditaInterfaccia {
 		return true;
 	} 
 	
+	@Override
+	public Object [] arrayDiOggetti () {
+		Object array [] = {
+				codVendita,
+				dataVendita,
+				cerealeInVendita.getNomeCereale(),
+				quantitaCereale,
+				prezzoVendita,
+				dataImballaggio,
+				dataScadenza
+		};
+		return array;
+	}
 	
 }

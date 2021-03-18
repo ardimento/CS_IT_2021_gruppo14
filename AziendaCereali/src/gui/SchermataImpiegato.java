@@ -33,7 +33,8 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Pannelli utilizzati per la creazione e l'inserimento delle varie componenti grafiche per la realizzazione della schermata.
 	 */
-	private JPanel panelTop, panelDown, panelRight,panelLeft, panelCenterRight,panelCenterLeft;
+	private JPanel panelTop, panelDown, panelRight,panelLeft,panelCenterLeft;
+	protected JPanel panelCenterRight;
 	/**
 	 * Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
 	 */
@@ -41,11 +42,11 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Bottoni di interazione, con i quali si accede ad aree diverse del programma(schermata visualizza, crea vendita e ritorno al Login)
 	 */
-	private JButton btnGoBack, btnShowSell, btnMakeSell;
+	protected JButton btnGoBack, btnShowSell, btnMakeSell;
 	/**
 	 * Gruppi per gestire i layout delle componenti grafiche disposte nei vari pannelli(label, textbox ecc..)
 	 */
-	private GroupLayout glPanelDown,glPanelLeft,glPanelCenterLeft,glPanelCenterRight;
+	private GroupLayout glPanelDown,glPanelLeft,glPanelCenterRight,glPanelCenterLeft;
 	
 	/**
 	 * Costruttore di schermata impiegato, crea nuovo frame, ed imposta le nuove componenti.
