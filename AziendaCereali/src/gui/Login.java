@@ -21,19 +21,19 @@ public class Login extends JFrame{
 	/**
 	 * Pannelli di uso comune inseriti all'interno del frame per la realizzazione della schermata grafica.
 	 */
-	private JPanel panelImage,panelForm;
+	private JPanel panelImmagine,panelForm;
 	/**
 	 * Label, aree di testo precompilate, usate come riferimento nella realizzazione della schermata grafica.
 	 */
-	private JLabel labelAccess,labelCode,labelWelcome,labelImage;
+	private JLabel labelAccesso,labelCodice,labelBenvenuto,labelImmagine;
 	/**
 	 * TextField, area di testo vuota, nel quale l'impiegato inserirà i dati per l'accesso all sua area di lavoro.
 	 */
-	private JTextField textCode;
+	private JTextField tfCodice;
 	/**
 	 * Bottone con il quale si esegue un evento cliccandolo.
 	 */
-	private JButton buttonEnter;
+	private JButton btnAccesso;
 
 	
 	
@@ -48,7 +48,7 @@ public class Login extends JFrame{
 		super();
 		this.login = new JFrame();	
 		setLogin();
-		setImageLogin();
+		setImmagineDiLogin();
 		azioneBottone(impiegati);
 	}
 	
@@ -58,14 +58,14 @@ public class Login extends JFrame{
 	 * E lancia una eccezione se l'immagine non viene creata.
 	 * 
 	 */
-	private void setImageLogin() {
+	private void setImmagineDiLogin() {
 		try {
 			ImageIcon immagineIcona = new ImageIcon(Login.class.getResource(immagini.PathImmagini.IMMAGINE_LOGIN));
 			Image immagine = immagineIcona.getImage();
-			Image immagineModificata = immagine.getScaledInstance(labelImage.getWidth(), labelImage.getHeight(), Image.SCALE_SMOOTH);
+			Image immagineModificata = immagine.getScaledInstance(labelImmagine.getWidth(), labelImmagine.getHeight(), Image.SCALE_SMOOTH);
 			immagineIcona = new ImageIcon(immagineModificata);
 			
-			labelImage.setIcon(immagineIcona);
+			labelImmagine.setIcon(immagineIcona);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Non è stato possibile caricare l'immagine di login", "Errore", JOptionPane.ERROR_MESSAGE);
 		}
@@ -91,54 +91,54 @@ public class Login extends JFrame{
 		/**
 		 * componente grafica pannello(usato come contenitore dell' immagine)
 		 */
-		panelImage = new JPanel();
-		panelImage.setBounds(0, 0, login.getWidth()/2, login.getHeight());
-		panelImage.setBackground(new Color(244,164,96));
-		panelImage.setVisible(true);
-		login.getContentPane().add(panelImage);
-		panelImage.setLayout(null);
-		labelImage = new JLabel();
-		labelImage.setBounds(0, 0, panelImage.getWidth(), panelImage.getHeight());
-		panelImage.add(labelImage);
+		panelImmagine = new JPanel();
+		panelImmagine.setBounds(0, 0, login.getWidth()/2, login.getHeight());
+		panelImmagine.setBackground(new Color(244,164,96));
+		panelImmagine.setVisible(true);
+		login.getContentPane().add(panelImmagine);
+		panelImmagine.setLayout(null);
+		labelImmagine = new JLabel();
+		labelImmagine.setBounds(0, 0, panelImmagine.getWidth(), panelImmagine.getHeight());
+		panelImmagine.add(labelImmagine);
 	
 		/**
 		 * componente grafica pannello(usato come contenitore del form di accesso)
 		 */
 		panelForm = new JPanel();
 		panelForm.setBackground(SystemColor.window);
-		panelForm.setBounds(login.getWidth()/2,0,login.getWidth()-panelImage.getWidth(),login.getHeight());
+		panelForm.setBounds(login.getWidth()/2,0,login.getWidth()-panelImmagine.getWidth(),login.getHeight());
 		login.getContentPane().add(panelForm);
 		panelForm.setLayout(null);
 		
-		labelAccess = new JLabel();
-		panelForm.add(labelAccess);
-		labelAccess.setBounds(66,293,265,31);
-		labelAccess.setVisible(false);
+		labelAccesso = new JLabel();
+		panelForm.add(labelAccesso);
+		labelAccesso.setBounds(66,293,265,31);
+		labelAccesso.setVisible(false);
 		
-		labelCode = new JLabel("Codice accesso: ");
-		labelCode.setBounds(68,190,265,36);
-		labelCode.setFont(new Font("Tahoma",Font.PLAIN,20));
-		panelForm.add(labelCode);
+		labelCodice = new JLabel("Codice accesso: ");
+		labelCodice.setBounds(68,190,265,36);
+		labelCodice.setFont(new Font("Tahoma",Font.PLAIN,20));
+		panelForm.add(labelCodice);
 		
-		textCode = new JTextField();
-		textCode.setBounds(68, 231, 265, 31);
-		panelForm.add(textCode);
+		tfCodice = new JTextField();
+		tfCodice.setBounds(68, 231, 265, 31);
+		panelForm.add(tfCodice);
 		
-		labelWelcome = new JLabel("BENVENUTO", SwingConstants.CENTER);
-		labelWelcome.setBounds(60, 68, 265, 69);
-		labelWelcome.setForeground(Color.BLACK);
-		labelWelcome.setFont(new Font("Tahoma",Font.PLAIN,25));
-		panelForm.add(labelWelcome);
+		labelBenvenuto = new JLabel("BENVENUTO", SwingConstants.CENTER);
+		labelBenvenuto.setBounds(60, 68, 265, 69);
+		labelBenvenuto.setForeground(Color.BLACK);
+		labelBenvenuto.setFont(new Font("Tahoma",Font.PLAIN,25));
+		panelForm.add(labelBenvenuto);
 		
 		/**
 		 *  componente grafica bottone di conferma accesso
 		 */
-		buttonEnter = new JButton("ENTRA");
-		buttonEnter.setBounds(66,489,265,50);
-		buttonEnter.setFont(new Font("Tahoma",Font.PLAIN,24));
-		buttonEnter.setForeground(SystemColor.window);
-		buttonEnter.setBackground(new Color(244,164,96));
-		panelForm.add(buttonEnter);
+		btnAccesso = new JButton("ENTRA");
+		btnAccesso.setBounds(66,489,265,50);
+		btnAccesso.setFont(new Font("Tahoma",Font.PLAIN,24));
+		btnAccesso.setForeground(SystemColor.window);
+		btnAccesso.setBackground(new Color(244,164,96));
+		panelForm.add(btnAccesso);
 		
 	}
 	
@@ -150,10 +150,10 @@ public class Login extends JFrame{
 	 * @param impiegati
 	 */
 	private void azioneBottone(Map<String, Impiegato> impiegati) {
-		buttonEnter.addActionListener(new ActionListener() {
+		btnAccesso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String codiceUtente = textCode.getText();
+				String codiceUtente = tfCodice.getText();
 				
 				if(impiegati.containsKey(codiceUtente)) {
 					login.setVisible(false);
@@ -161,9 +161,9 @@ public class Login extends JFrame{
 					SchermataVisualizzaVendite imp = new SchermataVisualizzaVendite(impiegati.get(codiceUtente),login);
 				}
 				else {
-					labelAccess.setVisible(true);
-					labelAccess.setForeground(Color.RED);
-					labelAccess.setText("ACCESSO NEGATO");
+					labelAccesso.setVisible(true);
+					labelAccesso.setForeground(Color.RED);
+					labelAccesso.setText("ACCESSO NEGATO");
 				}
 			}
 		});

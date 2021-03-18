@@ -26,23 +26,23 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	/**
 	 * Tabella per la visualizzazione delle vendite
 	 */
-	private JTable tableSells;
+	private JTable tabellaVendite;
 	/**
 	 * Pannello che consente lo scroll del suo contenuto 
 	 */
-	private JScrollPane tableScrollPane;
+	private JScrollPane scrollPaneTabella;
 	/**
 	 * Label che rappresenta il nome dell'operazione che si sta effettuando
 	 */
-	private JLabel labelTitle;
+	private JLabel labelTitoloOperazione;
 	/**
 	 * Bottone per ritornare alla schermata "base" dell'impiegato.(SchermataImpiegato) 
 	 */
-	private JButton buttonBack;
+	private JButton btnTornaIndietro;
 	/**
 	 * Gruppo per gestire il layout delle componenti grafiche relative alla visualizzazione delle vendite
 	 */
-	private GroupLayout glPanel_visualizza;
+	private GroupLayout glPanelVisualizza;
 	/**
 	 * Costruttore di SchermataVisuallizaVendite, 
 	 * partendo dal layout e le funzionalità base della schermata @see SchermataImpiegato
@@ -63,50 +63,50 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	 */
 	private void setSchermataVisualizzaVendite() {
 		
-		labelTitle = new JLabel("Visualizza vendite :");
-		labelTitle.setFont(new Font ("Tahoma",Font.PLAIN,20));
+		labelTitoloOperazione = new JLabel("Visualizza vendite :");
+		labelTitoloOperazione.setFont(new Font ("Tahoma",Font.PLAIN,20));
 		
-		tableSells = new JTable();
+		tabellaVendite = new JTable();
 		
-		tableSells.setBounds(0,0,2000,200);
-		tableSells.setMaximumSize(new Dimension(2000,200));
+		tabellaVendite.setBounds(0,0,2000,200);
+		tabellaVendite.setMaximumSize(new Dimension(2000,200));
 		
-		tableScrollPane = new JScrollPane(tableSells);
-		tableScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		tableScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneTabella = new JScrollPane(tabellaVendite);
+		scrollPaneTabella.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneTabella.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		buttonBack = new JButton("Indietro");
-		buttonBack.setFont(new Font ("Tahoma",Font.PLAIN,16));
-		buttonBack.setForeground(Color.white);
-		buttonBack.setBackground(new Color(244,164,96));
+		btnTornaIndietro = new JButton("Indietro");
+		btnTornaIndietro.setFont(new Font ("Tahoma",Font.PLAIN,16));
+		btnTornaIndietro.setForeground(Color.white);
+		btnTornaIndietro.setBackground(new Color(244,164,96));
 		
 		
-		glPanel_visualizza = new GroupLayout(super.panelCenterRight);
-		setGlPanel_visualizza();
-		super.panelCenterRight.setLayout(glPanel_visualizza);
+		glPanelVisualizza = new GroupLayout(super.panelOperazioni);
+		setGlPanelVisualizza();
+		super.panelOperazioni.setLayout(glPanelVisualizza);
 
 		}
 	/**
 	 * Metodo che setta il layout di panelCenterRight per l'operazione di visualizzazione
 	 */
-	private  void setGlPanel_visualizza() {
-		glPanel_visualizza.setHorizontalGroup(
-				glPanel_visualizza.createParallelGroup(Alignment.LEADING)
+	private  void setGlPanelVisualizza() {
+		glPanelVisualizza.setHorizontalGroup(
+				glPanelVisualizza.createParallelGroup(Alignment.LEADING)
 				.addGroup(
-						glPanel_visualizza.createSequentialGroup()
+						glPanelVisualizza.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(
-								glPanel_visualizza.createParallelGroup(Alignment.LEADING)
+								glPanelVisualizza.createParallelGroup(Alignment.LEADING)
 								.addGroup(
-										glPanel_visualizza.createSequentialGroup()
-										.addComponent(tableScrollPane,GroupLayout.DEFAULT_SIZE,510,Short.MAX_VALUE)
+										glPanelVisualizza.createSequentialGroup()
+										.addComponent(scrollPaneTabella,GroupLayout.DEFAULT_SIZE,510,Short.MAX_VALUE)
 										.addContainerGap()
 								)
 								.addGroup(
-										Alignment.TRAILING,glPanel_visualizza.createSequentialGroup()
-										.addComponent(buttonBack,GroupLayout.PREFERRED_SIZE,62,Short.MAX_VALUE)
+										Alignment.TRAILING,glPanelVisualizza.createSequentialGroup()
+										.addComponent(btnTornaIndietro,GroupLayout.PREFERRED_SIZE,62,Short.MAX_VALUE)
 										.addGap(88)
-										.addComponent(labelTitle,GroupLayout.DEFAULT_SIZE,181,Short.MAX_VALUE)
+										.addComponent(labelTitoloOperazione,GroupLayout.DEFAULT_SIZE,181,Short.MAX_VALUE)
 										.addGap(171)
 										
 								)
@@ -116,18 +116,18 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 				
 		);
 		
-		glPanel_visualizza.setVerticalGroup(
-				glPanel_visualizza.createParallelGroup(Alignment.LEADING)
+		glPanelVisualizza.setVerticalGroup(
+				glPanelVisualizza.createParallelGroup(Alignment.LEADING)
 				.addGroup(
-						glPanel_visualizza.createSequentialGroup()
+						glPanelVisualizza.createSequentialGroup()
 						.addContainerGap()	
 						.addGroup(
-								glPanel_visualizza.createParallelGroup(Alignment.LEADING)
-								.addComponent(labelTitle)
-								.addComponent(buttonBack)
+								glPanelVisualizza.createParallelGroup(Alignment.LEADING)
+								.addComponent(labelTitoloOperazione)
+								.addComponent(btnTornaIndietro)
 						)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(tableScrollPane,GroupLayout.PREFERRED_SIZE,341,Short.MAX_VALUE)
+						.addComponent(scrollPaneTabella,GroupLayout.PREFERRED_SIZE,341,Short.MAX_VALUE)
 						.addGap(32)
 				)
 		);
@@ -145,10 +145,10 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	 * @param impiegato istanza contenente le informazioni dell' impiegato
 	 */
 	private void visualizzaVendite(Impiegato impiegato) {
-		btnShowSell.addActionListener(new ActionListener() {
+		btnMostraVendite.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent b) {		
-				btnShowSell.setVisible(false);
-				btnMakeSell.setVisible(false);
+				btnMostraVendite.setVisible(false);
+				btnEffettuaVendita.setVisible(false);
 				
 				setSchermataVisualizzaVendite();
 				
@@ -189,21 +189,21 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 			}
 		}
 		
-		tableSells.setModel(new DefaultTableModel(datiVendite,titoliColonne) {
-			Class [] columnTypes = new Class [] {String.class,String.class,String.class,Double.class,Double.class,String.class,String.class};
-			public Class getColumnClass(int columnIndex) {return columnTypes[columnIndex];};
+		tabellaVendite.setModel(new DefaultTableModel(datiVendite,titoliColonne) {
+			Class [] tipoColonne = new Class [] {String.class,String.class,String.class,Double.class,Double.class,String.class,String.class};
+			public Class getColumnClass(int indiceColonne) {return tipoColonne[indiceColonne];};
 		});
 	}
 	
 	private void tornaSchermataImpiegato() {
-		buttonBack.addActionListener(new ActionListener() {
+		btnTornaIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent b) {
-				tableScrollPane.setVisible(false);
-				buttonBack.setVisible(false);
-				labelTitle.setVisible(false);
+				scrollPaneTabella.setVisible(false);
+				btnTornaIndietro.setVisible(false);
+				labelTitoloOperazione.setVisible(false);
 				
-				btnShowSell.setVisible(true);
-				btnMakeSell.setVisible(true);
+				btnMostraVendite.setVisible(true);
+				btnEffettuaVendita.setVisible(true);
 				
 			}
 		}); 

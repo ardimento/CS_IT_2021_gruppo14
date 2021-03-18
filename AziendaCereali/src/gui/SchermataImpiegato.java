@@ -33,20 +33,20 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Pannelli utilizzati per la creazione e l'inserimento delle varie componenti grafiche per la realizzazione della schermata.
 	 */
-	private JPanel panelTop, panelDown, panelRight,panelLeft,panelCenterLeft;
-	protected JPanel panelCenterRight;
+	private JPanel panelSuperiore, panelInferiore, panelDestro,panelSinistro,panelInfoImpiegato;
+	protected JPanel panelOperazioni;
 	/**
 	 * Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
 	 */
-	private JLabel labelTitleSoftware, labelToday, labelRights,labelIconUser,labelDatiImpiegato, labelCode, labelQuanGiornaliera, labelQuanAnnua;
+	private JLabel labelTitloProgramma, labelDataOdierna, labelDirittiProgramma,labelIconaImpiegato,labelDatiImpiegato, labelCodice, labelQuanGiornaliera, labelQuanAnnua;
 	/**
 	 * Bottoni di interazione, con i quali si accede ad aree diverse del programma(schermata visualizza, crea vendita e ritorno al Login)
 	 */
-	protected JButton btnGoBack, btnShowSell, btnMakeSell;
+	protected JButton btnTornaAlLogin, btnMostraVendite, btnEffettuaVendita;
 	/**
 	 * Gruppi per gestire i layout delle componenti grafiche disposte nei vari pannelli(label, textbox ecc..)
 	 */
-	private GroupLayout glPanelDown,glPanelLeft,glPanelCenterRight,glPanelCenterLeft;
+	private GroupLayout glPanelInferiore,glPanelSinistro,glPanelOperazioni,glPanelInfoImpiegato;
 	
 	/**
 	 * Costruttore di schermata impiegato, crea nuovo frame, ed imposta le nuove componenti.
@@ -57,7 +57,7 @@ public class SchermataImpiegato extends JFrame{
 		this.frame = new JFrame();
 		this.impiegato = impiegato;
 		setSchermataImpiegato();
-		azioneBottoneIndietro(login);
+		tornaAlLogin(login);
 		setInfoImpiegato();	
 		setImmagini();
 		ModificaDimensioniDinamicamente();
@@ -83,77 +83,77 @@ public class SchermataImpiegato extends JFrame{
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(immagini.PathImmagini.IMMAGINE_ICONA_PROGRAMMA)));
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//---------------------------------------------------------------
-		panelTop = new JPanel();
-		panelTop.setBackground(new Color(244,164,96));
-		frame.getContentPane().add(panelTop, BorderLayout.NORTH);
-		labelTitleSoftware = new JLabel("Software Azienda Cereale");
-		panelTop.add(labelTitleSoftware);
+		panelSuperiore = new JPanel();
+		panelSuperiore.setBackground(new Color(244,164,96));
+		frame.getContentPane().add(panelSuperiore, BorderLayout.NORTH);
+		labelTitloProgramma = new JLabel("Software Azienda Cereale");
+		panelSuperiore.add(labelTitloProgramma);
 		
 		//---------------------------------------------------------------
-		panelDown = new JPanel();
-		panelDown.setBackground(new Color(244,164,96));
-		frame.getContentPane().add(panelDown, BorderLayout.SOUTH);
+		panelInferiore = new JPanel();
+		panelInferiore.setBackground(new Color(244,164,96));
+		frame.getContentPane().add(panelInferiore, BorderLayout.SOUTH);
 		
-		labelToday = new JLabel("Data :"+ searchDate());
+		labelDataOdierna = new JLabel("Data :"+ getDataOdierna());
 		
-		btnGoBack = new JButton("Logout");	
-		btnGoBack.setFont(new Font("Tahoma", Font.PLAIN, 16) );
-		btnGoBack.setForeground(Color.WHITE);
-		btnGoBack.setBackground(new Color(244,164,96));
-		btnGoBack.setBounds(-100,0,30,30);
+		btnTornaAlLogin = new JButton("Logout");	
+		btnTornaAlLogin.setFont(new Font("Tahoma", Font.PLAIN, 16) );
+		btnTornaAlLogin.setForeground(Color.WHITE);
+		btnTornaAlLogin.setBackground(new Color(244,164,96));
+		btnTornaAlLogin.setBounds(-100,0,30,30);
 		
-		labelRights = new JLabel ("    By Alemanno, Ben Sidi, Fortunato");
+		labelDirittiProgramma = new JLabel ("    By Alemanno, Ben Sidi, Fortunato");
 		
-		glPanelDown = new GroupLayout (panelDown);
-		setGlPanelDown();
-		panelDown.setLayout(glPanelDown);
+		glPanelInferiore = new GroupLayout (panelInferiore);
+		setGlPanelInferiore();
+		panelInferiore.setLayout(glPanelInferiore);
 		
 		//---------------------------------------------------------------
-		panelRight = new JPanel();
-		panelRight.setBackground(SystemColor.controlShadow);
-		frame.getContentPane().add(panelRight, BorderLayout.EAST);
+		panelDestro = new JPanel();
+		panelDestro.setBackground(SystemColor.controlShadow);
+		frame.getContentPane().add(panelDestro, BorderLayout.EAST);
 		
 		//---------------------------------------------------------------	
-		panelLeft = new JPanel();
-		panelLeft.setBackground(SystemColor.control);
-		frame.getContentPane().add(panelLeft, BorderLayout.CENTER);
+		panelSinistro = new JPanel();
+		panelSinistro.setBackground(SystemColor.control);
+		frame.getContentPane().add(panelSinistro, BorderLayout.CENTER);
 		
 		//---------------------------------------------------------------
-		panelCenterLeft = new JPanel();
-		panelCenterLeft.setBackground(SystemColor.scrollbar);
+		panelInfoImpiegato = new JPanel();
+		panelInfoImpiegato.setBackground(SystemColor.scrollbar);
 		
 		
-		labelIconUser = new JLabel();
-		labelIconUser.setHorizontalAlignment(SwingConstants.CENTER);
+		labelIconaImpiegato = new JLabel();
+		labelIconaImpiegato.setHorizontalAlignment(SwingConstants.CENTER);
 		labelDatiImpiegato = new JLabel("DATI IMPIEGATO :");
 		labelDatiImpiegato.setHorizontalAlignment(SwingConstants.CENTER);
-		labelCode = new JLabel();
+		labelCodice = new JLabel();
 		labelQuanGiornaliera = new JLabel();
 		labelQuanAnnua = new JLabel();
 
 		
-		glPanelCenterLeft = new GroupLayout (panelCenterLeft);
-		setGlPanelCenterLeft();
-		panelCenterLeft.setLayout(glPanelCenterLeft);
+		glPanelInfoImpiegato = new GroupLayout (panelInfoImpiegato);
+		setGlPanelInfoImpiegato();
+		panelInfoImpiegato.setLayout(glPanelInfoImpiegato);
 		
 		//---------------------------------------------------------------
-		panelCenterRight = new JPanel();
-		panelCenterRight.setBackground(new Color(245,222,179));
+		panelOperazioni = new JPanel();
+		panelOperazioni.setBackground(new Color(245,222,179));
 
-		glPanelLeft = new GroupLayout (panelLeft);
-		setGlPanelLeft();
-		btnMakeSell = new JButton("Effettua vendite");
-		btnMakeSell.setBackground(SystemColor.controlHighlight);
+		glPanelSinistro = new GroupLayout (panelSinistro);
+		setGlPanelSinistro();
+		btnEffettuaVendita = new JButton("Effettua vendite");
+		btnEffettuaVendita.setBackground(SystemColor.controlHighlight);
 		
-		btnShowSell = new JButton("Visualizza vendite effettuate");
-		btnShowSell.setBackground(SystemColor.controlHighlight);
+		btnMostraVendite = new JButton("Visualizza vendite effettuate");
+		btnMostraVendite.setBackground(SystemColor.controlHighlight);
 		
-		glPanelCenterRight = new GroupLayout(panelCenterRight);
-		setGlPanelCenterRight();
-		panelCenterRight.setLayout(glPanelCenterRight);
+		glPanelOperazioni = new GroupLayout(panelOperazioni);
+		setGlPanelOperazioni();
+		panelOperazioni.setLayout(glPanelOperazioni);
 
 		//---------------------------------------------------------------
-		panelLeft.setLayout(glPanelLeft);
+		panelSinistro.setLayout(glPanelSinistro);
 		
 
 	}
@@ -164,34 +164,34 @@ public class SchermataImpiegato extends JFrame{
 	 */
 	private void ModificaDimensioniDinamicamente () {
 		
-		panelLeft.addComponentListener(new ComponentAdapter() {
+		panelSinistro.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent componentEvent) {
 				int valoreCalcolato = frame.getWidth()/40;
 				Font nuovoFont = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
-				btnMakeSell.setFont(nuovoFont);
-				btnShowSell.setFont(nuovoFont);
+				btnEffettuaVendita.setFont(nuovoFont);
+				btnMostraVendite.setFont(nuovoFont);
 				
-				valoreCalcolato = labelCode.getWidth()/12;
+				valoreCalcolato = labelCodice.getWidth()/12;
 				nuovoFont = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
-				labelCode.setFont(nuovoFont);
+				labelCodice.setFont(nuovoFont);
 				labelDatiImpiegato.setFont(nuovoFont);
 				labelQuanGiornaliera.setFont(nuovoFont);
 				labelQuanAnnua.setFont(nuovoFont);
 					
 				
-				valoreCalcolato = labelIconUser.getWidth()/2;
-				Image immagine = setImage(PathImmagini.IMMAGINE_ICONA_UTENTE,valoreCalcolato, valoreCalcolato);
+				valoreCalcolato = labelIconaImpiegato.getWidth()/2;
+				Image immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_UTENTE,valoreCalcolato, valoreCalcolato);
 				if(immagine!=null)
-					labelIconUser.setIcon(new ImageIcon(immagine));
+					labelIconaImpiegato.setIcon(new ImageIcon(immagine));
 				
-				valoreCalcolato = btnMakeSell.getHeight()/2;;
-				immagine = setImage(PathImmagini.IMMAGINE_ICONA_VENDI, valoreCalcolato, valoreCalcolato);
+				valoreCalcolato = btnEffettuaVendita.getHeight()/2;;
+				immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VENDI, valoreCalcolato, valoreCalcolato);
 				if(immagine!=null)
-					btnMakeSell.setIcon(new ImageIcon(immagine));
+					btnEffettuaVendita.setIcon(new ImageIcon(immagine));
 				
-				immagine = setImage(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valoreCalcolato, valoreCalcolato);
+				immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valoreCalcolato, valoreCalcolato);
 				if(immagine!=null)
-					btnShowSell.setIcon(new ImageIcon(immagine));
+					btnMostraVendite.setIcon(new ImageIcon(immagine));
 			}
 		});
 	}
@@ -201,38 +201,38 @@ public class SchermataImpiegato extends JFrame{
 	 * Metodo che setta le informazioni mostrate a video dell'impiegato. 
 	 */
 	private void setInfoImpiegato() {
-		labelCode.setText("Codice Impiegato : "+impiegato.getCodiceImpiegato());
-		labelQuanGiornaliera.setText("Quantita' Giornaliera: "+impiegato.quantitaVendutaGiornaliera(searchDate()));
-		labelQuanAnnua.setText("Quantita' Annua: " + impiegato.quantitaVendutaAnnua(searchDate()));
+		labelCodice.setText("Codice Impiegato : "+impiegato.getCodiceImpiegato());
+		labelQuanGiornaliera.setText("Quantita' Giornaliera: "+impiegato.quantitaVendutaGiornaliera(getDataOdierna()));
+		labelQuanAnnua.setText("Quantita' Annua: " + impiegato.quantitaVendutaAnnua(getDataOdierna()));
 	}
 	
 	/**
 	 * Metodo che setta il layout di panelLeft
 	 */
-	private void setGlPanelLeft() {
-		glPanelLeft.setHorizontalGroup(
-				glPanelLeft.createParallelGroup(Alignment.CENTER)
+	private void setGlPanelSinistro() {
+		glPanelSinistro.setHorizontalGroup(
+				glPanelSinistro.createParallelGroup(Alignment.CENTER)
 				.addGroup( 
-					glPanelLeft.createSequentialGroup()
+						glPanelSinistro.createSequentialGroup()
 					.addGap(0)
-					.addComponent(panelCenterLeft,GroupLayout.DEFAULT_SIZE,177,400)
+					.addComponent(panelInfoImpiegato,GroupLayout.DEFAULT_SIZE,177,400)
 					.addGap(35)
-					.addComponent(panelCenterRight,GroupLayout.DEFAULT_SIZE,530,1300)
+					.addComponent(panelOperazioni,GroupLayout.DEFAULT_SIZE,530,1300)
 					.addGap(35)
 				)
 		);
 
-		glPanelLeft.setVerticalGroup(
-				glPanelLeft.createParallelGroup(Alignment.CENTER)
+		glPanelSinistro.setVerticalGroup(
+				glPanelSinistro.createParallelGroup(Alignment.CENTER)
 				.addGroup( 
-					glPanelLeft.createSequentialGroup()
-					.addComponent(panelCenterLeft,GroupLayout.PREFERRED_SIZE,400,Short.MAX_VALUE)
+						glPanelSinistro.createSequentialGroup()
+					.addComponent(panelInfoImpiegato,GroupLayout.PREFERRED_SIZE,400,Short.MAX_VALUE)
 					.addGap(0)
 				)
 				.addGroup( 
-					glPanelLeft.createSequentialGroup()
+						glPanelSinistro.createSequentialGroup()
 					.addGap(35)	
-					.addComponent(panelCenterRight,GroupLayout.PREFERRED_SIZE,400,700)
+					.addComponent(panelOperazioni,GroupLayout.PREFERRED_SIZE,400,700)
 					.addGap(35)
 				)
 		);
@@ -240,29 +240,29 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Metodo che setta il layout di panelCenterRight
 	 */
-	private void setGlPanelCenterRight() {
-		glPanelCenterRight.setHorizontalGroup( 
-				glPanelCenterRight.createParallelGroup(Alignment.CENTER)
+	private void setGlPanelOperazioni() {
+		glPanelOperazioni.setHorizontalGroup( 
+				glPanelOperazioni.createParallelGroup(Alignment.CENTER)
 				.addGroup(
-						Alignment.CENTER, glPanelCenterRight.createSequentialGroup() 
+						Alignment.CENTER, glPanelOperazioni.createSequentialGroup() 
 						.addGap(50)
 						.addGroup(
-							glPanelCenterRight.createParallelGroup(Alignment.CENTER)
-							.addComponent(btnMakeSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,100,Short.MAX_VALUE)
-							.addComponent(btnShowSell, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,100,Short.MAX_VALUE)
+								glPanelOperazioni.createParallelGroup(Alignment.CENTER)
+							.addComponent(btnEffettuaVendita, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,100,Short.MAX_VALUE)
+							.addComponent(btnMostraVendite, Alignment.CENTER,GroupLayout.DEFAULT_SIZE,100,Short.MAX_VALUE)
 						)
 						.addGap(50)
 				)
 		);
 		
-		glPanelCenterRight.setVerticalGroup( 
-				glPanelCenterRight.createParallelGroup(Alignment.CENTER)
+		glPanelOperazioni.setVerticalGroup( 
+				glPanelOperazioni.createParallelGroup(Alignment.CENTER)
 				.addGroup(
-						Alignment.CENTER, glPanelCenterRight.createSequentialGroup() 
+						Alignment.CENTER, glPanelOperazioni.createSequentialGroup() 
 						.addGap(50)
-						.addComponent(btnShowSell, GroupLayout.PREFERRED_SIZE,100,Short.MAX_VALUE)
+						.addComponent(btnMostraVendite, GroupLayout.PREFERRED_SIZE,100,Short.MAX_VALUE)
 						.addGap(22)
-						.addComponent(btnMakeSell, GroupLayout.PREFERRED_SIZE,100,Short.MAX_VALUE )
+						.addComponent(btnEffettuaVendita, GroupLayout.PREFERRED_SIZE,100,Short.MAX_VALUE )
 						.addGap(50)
 				)
 		);
@@ -270,18 +270,18 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Metodo che setta il layout di panelCenterLeft
 	 */
-	private void setGlPanelCenterLeft() {
+	private void setGlPanelInfoImpiegato() {
 		
-		glPanelCenterLeft.setHorizontalGroup( 
-				glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
+		glPanelInfoImpiegato.setHorizontalGroup( 
+				glPanelInfoImpiegato.createParallelGroup(Alignment.CENTER)
 				.addGroup(
-							glPanelCenterLeft.createSequentialGroup() 
+						glPanelInfoImpiegato.createSequentialGroup() 
 							.addContainerGap()
 							.addGroup(
-								glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
-								.addComponent(labelIconUser, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
+									glPanelInfoImpiegato.createParallelGroup(Alignment.CENTER)
+								.addComponent(labelIconaImpiegato, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
 								.addComponent(labelDatiImpiegato, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
-								.addComponent(labelCode, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
+								.addComponent(labelCodice, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
 								.addComponent(labelQuanGiornaliera, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
 								.addComponent(labelQuanAnnua, Alignment.CENTER,GroupLayout.PREFERRED_SIZE,200,Short.MAX_VALUE)
 							)
@@ -289,15 +289,15 @@ public class SchermataImpiegato extends JFrame{
 				)
 		);	
 		
-		glPanelCenterLeft.setVerticalGroup(
-				glPanelCenterLeft.createParallelGroup(Alignment.CENTER)
+		glPanelInfoImpiegato.setVerticalGroup(
+				glPanelInfoImpiegato.createParallelGroup(Alignment.CENTER)
 				.addGroup(
-						glPanelCenterLeft.createSequentialGroup()
+						glPanelInfoImpiegato.createSequentialGroup()
 						.addGap(25)
-						.addComponent(labelIconUser,GroupLayout.DEFAULT_SIZE,200,Short.MAX_VALUE)
+						.addComponent(labelIconaImpiegato,GroupLayout.DEFAULT_SIZE,200,Short.MAX_VALUE)
 						.addComponent(labelDatiImpiegato,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
 						.addGap(20)
-						.addComponent(labelCode,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
+						.addComponent(labelCodice,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(labelQuanGiornaliera,GroupLayout.DEFAULT_SIZE,30,Short.MAX_VALUE)
 						.addPreferredGap(ComponentPlacement.RELATED)
@@ -311,31 +311,31 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Metodo che setta il layout di panelDown
 	 */
-	private void setGlPanelDown() {
-		glPanelDown.setHorizontalGroup( 
-			glPanelDown.createParallelGroup(Alignment.LEADING)
+	private void setGlPanelInferiore() {
+		glPanelInferiore.setHorizontalGroup( 
+				glPanelInferiore.createParallelGroup(Alignment.LEADING)
 			.addGroup(
-						Alignment.TRAILING,glPanelDown.createSequentialGroup() 
+						Alignment.TRAILING,glPanelInferiore.createSequentialGroup() 
 						.addGap(37)
-						.addComponent(btnGoBack)
-						.addComponent(labelRights)
-						.addComponent(btnGoBack, GroupLayout.PREFERRED_SIZE,0,GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnTornaAlLogin)
+						.addComponent(labelDirittiProgramma)
+						.addComponent(btnTornaAlLogin, GroupLayout.PREFERRED_SIZE,0,GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED,522,Short.MAX_VALUE)
-						.addComponent(labelToday, GroupLayout.PREFERRED_SIZE,120,GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelDataOdierna, GroupLayout.PREFERRED_SIZE,120,GroupLayout.PREFERRED_SIZE)
 						.addGap(41)
 			)
 		);
 		
-		glPanelDown.setVerticalGroup( 
-			glPanelDown.createParallelGroup(Alignment.LEADING)
+		glPanelInferiore.setVerticalGroup( 
+				glPanelInferiore.createParallelGroup(Alignment.LEADING)
 			.addGroup(
-						glPanelDown.createSequentialGroup()
+					glPanelInferiore.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(glPanelDown.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnGoBack)
-						.addComponent(labelToday, GroupLayout.PREFERRED_SIZE,30,GroupLayout.PREFERRED_SIZE)
-						.addComponent(labelRights, GroupLayout.PREFERRED_SIZE,28,GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnGoBack, GroupLayout.PREFERRED_SIZE,0,GroupLayout.PREFERRED_SIZE)
+						.addGroup(glPanelInferiore.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnTornaAlLogin)
+						.addComponent(labelDataOdierna, GroupLayout.PREFERRED_SIZE,30,GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelDirittiProgramma, GroupLayout.PREFERRED_SIZE,28,GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnTornaAlLogin, GroupLayout.PREFERRED_SIZE,0,GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))					
 			
 		);		
@@ -349,25 +349,25 @@ public class SchermataImpiegato extends JFrame{
 		Image immagine = null;	
 		int valore;
 		
-		valore = btnGoBack.getWidth();
-		immagine = setImage(PathImmagini.IMMAGINE_BOTTONE_INDIETRO, valore, valore);
+		valore = btnTornaAlLogin.getWidth();
+		immagine = setImmagine(PathImmagini.IMMAGINE_BOTTONE_INDIETRO, valore, valore);
 		if(immagine!=null)
-			btnGoBack.setIcon(new ImageIcon(immagine));
+			btnTornaAlLogin.setIcon(new ImageIcon(immagine));
 		
 		valore = 100;
-		immagine = setImage(PathImmagini.IMMAGINE_ICONA_UTENTE, valore, valore);
+		immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_UTENTE, valore, valore);
 		if(immagine!=null)
-			labelIconUser.setIcon(new ImageIcon(immagine));
+			labelIconaImpiegato.setIcon(new ImageIcon(immagine));
 		
 		valore = 70;
-		immagine = setImage(PathImmagini.IMMAGINE_ICONA_VENDI, valore, valore);
+		immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VENDI, valore, valore);
 		if(immagine!=null)
-			btnMakeSell.setIcon(new ImageIcon(immagine));
+			btnEffettuaVendita.setIcon(new ImageIcon(immagine));
 		
 		valore = 70;
-		immagine = setImage(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valore, valore);
+		immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valore, valore);
 		if(immagine!=null)
-			btnShowSell.setIcon(new ImageIcon(immagine));
+			btnMostraVendite.setIcon(new ImageIcon(immagine));
 	}
 	/**
 	 * Metodo che ritorna l'immagine del path indicato, ridimensionata secondo le dimensini indicate come parametri 
@@ -380,7 +380,7 @@ public class SchermataImpiegato extends JFrame{
 	 * 
 	 * @return immagine scelta con le dimensioni volute (null in caso di eccezione)
 	 */
-	private Image setImage(String Path, int dimensione1, int dimensione2) {
+	private Image setImmagine(String Path, int dimensione1, int dimensione2) {
 		Image immagineModificata = null;
 		try {
 			Image immagine = ImageIO.read(getClass().getResource(Path));
@@ -399,8 +399,8 @@ public class SchermataImpiegato extends JFrame{
 	 * Rendiamo visibile il frame Login e distruggiamo dalla memoria il frame Schermata Impiegato dell'utente loggato.
 	 * @param login frame che viene richiamato 
 	 */
-	private void azioneBottoneIndietro (JFrame login ) {
-		btnGoBack.addActionListener(new ActionListener() {
+	private void tornaAlLogin (JFrame login ) {
+		btnTornaAlLogin.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e ) {
 				login.setVisible(true);
 				frame.dispose();
@@ -412,7 +412,7 @@ public class SchermataImpiegato extends JFrame{
 	 * Metodo che restituisce la data odierna come stringa.
 	 * @return dataString data odierna sottoforma di stringa.
 	 */
-	private String searchDate () {
+	private String getDataOdierna () {
 		LocalDate data = LocalDate.now();
 		String dataString = data.toString();
 	
