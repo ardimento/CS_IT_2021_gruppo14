@@ -39,7 +39,9 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	 * Bottone per ritornare alla schermata "base" dell'impiegato.(SchermataImpiegato) 
 	 */
 	private JButton buttonBack;
-	
+	/**
+	 * Gruppo per gestire il layout delle componenti grafiche relative alla visualizzazione delle vendite
+	 */
 	private GroupLayout glPanel_visualizza;
 	/**
 	 * Costruttore di SchermataVisuallizaVendite, 
@@ -50,13 +52,14 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	 */
 	public SchermataVisualizzaVendite(Impiegato impiegato, JFrame frame) {
 		super(impiegato, frame);
-		//setSchermataVisualizzaVendite();
 		visualizzaVendite(impiegato);
 		
 	}
 	
 	/**
-	 * Metodo che imposta le componenti grafiche della nostra interfaccia.
+	 * Metodo che imposta le componenti grafiche della nostra interfaccia di visualizzazione.
+	 * Aggiunge le componenti grafiche di visualizzazione e il loro layout 
+	 * nel pannello 'panelCenterRight' della superclasse ('SchermataImpiegato')
 	 */
 	private void setSchermataVisualizzaVendite() {
 		
@@ -79,13 +82,14 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		
 		
 		glPanel_visualizza = new GroupLayout(super.panelCenterRight);
-		setGlPanelCenterRight();
+		setGlPanel_visualizza();
 		super.panelCenterRight.setLayout(glPanel_visualizza);
 
-		
 		}
-
-	private  void setGlPanelCenterRight() {
+	/**
+	 * Metodo che setta il layout di panelCenterRight per l'operazione di visualizzazione
+	 */
+	private  void setGlPanel_visualizza() {
 		glPanel_visualizza.setHorizontalGroup(
 				glPanel_visualizza.createParallelGroup(Alignment.LEADING)
 				.addGroup(
@@ -117,7 +121,6 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 				.addGroup(
 						glPanel_visualizza.createSequentialGroup()
 						.addContainerGap()	
-				
 						.addGroup(
 								glPanel_visualizza.createParallelGroup(Alignment.LEADING)
 								.addComponent(labelTitle)
@@ -133,10 +136,13 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	
 	/**
 	 * Metodo che effetua l'operazione di visualizzazione delle vendite.
-	 * Si assegna al bottone 'btnShowSell' l'azione per visualizzare la schermata della vendita.
-	 * Rendiamo invisibili i bottoni azione della schermata "base" (escluso il bottone di logout)
-	 * Rendiamo visibili gli elementi grafici necessari per l'operazione di visualizzazione delle vendite.
-	 * Riempiamo la tabella delle vendite.
+	 * 
+	 * Si assegna al bottone 'btnShowSell' l'azione per :
+	 * Rendere invisibili i bottoni della schermata "base" (superclasse @see SchermataImpiegato) escluso il bottone di logout.
+	 * Rendere visibili gli elementi grafici necessari per l'operazione di visualizzazione delle vendite.
+	 * Riempire la tabella delle vendite.
+	 * 
+	 * @param impiegato istanza contenente le informazioni dell' impiegato
 	 */
 	private void visualizzaVendite(Impiegato impiegato) {
 		btnShowSell.addActionListener(new ActionListener() {
@@ -153,13 +159,30 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		}); 
 	}
 	
+	/**
+	 * Metodo che riempie la tabella con le vendite effettuate dall'impiegato.
+	 * 
+	 * 
+	  * @param impiegato istanza contenente le informazioni dell' impiegato
+	 */
 	private void riempiTabella(Impiegato impiegato) {
-		
+		/**
+		 * Array di nomi per le colonne della tabella
+		 */
 		String [] titoliColonne = new String [] {"Codice Vendita","Data Vendita","Cereale","Quantita'","Prezzo","Data Imbalaggio","Data Scadenza"};
+		/**
+		 * Matrice di oggetti 
+		 * L'elenco di vendite viene rappresentato sottoforma di una matrice di oggetti di tipo diverso.
+		 * (ogni componente della matrice avrà un proprio tipo, ovvero quello che gli è stato assegnato nella vendita).
+		 */
 		Object [] [] datiVendite = new Object [impiegato.getVendite().size()][titoliColonne.length];
 		int i = 0;
 		for(Iterator <VenditaInterfaccia> it = impiegato.getVendite().iterator(); it.hasNext();i++) {
-			VenditaInterfaccia vendita = it.next();
+			VenditaInterfaccia vendita = it.next();		
+			/**
+			 * Trasformo le informazioni della vendita in un array di oggetti
+			 * per poterle riportare nella matrice.
+			 */
 			Object array [] = vendita.arrayDiOggetti(); 
 			for (int j = 0; j< array.length; j++) {
 				datiVendite [i] [j] = array [j];

@@ -120,6 +120,10 @@ public class Vendita implements VenditaInterfaccia {
 		return true;
 	} 
 	
+	
+	/** {@inheritDoc} 
+	 * 
+	 */
 	@Override
 	public Object [] arrayDiOggetti () {
 		Object array [] = {
