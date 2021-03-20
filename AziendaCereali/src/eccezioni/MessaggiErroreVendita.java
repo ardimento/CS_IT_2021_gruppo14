@@ -30,6 +30,6 @@ public class MessaggiErroreVendita {
 	/**
 	 * messaggio di errore per il vincolo di quantita' inserita non valida da delegare ad una vendita.
 	 */
-	public final static String ERRORE_QUANTITA_NON_VALIDA = "Errore: vendita non inserita. \nQuantita non inserita";
+	public final static String ERRORE_QUANTITA_NON_VALIDA = "Errore: vendita non inserita. \nQuantita non valida";
 	
 }
