@@ -17,22 +17,56 @@ import cereale.NomeCereali;
 import eccezioni.EccezioniVendita;
 import eccezioni.MessaggiErroreVendita;
 import impiegato.Impiegato;
-
+/**
+ * Classe che gestisce graficamente il layout e le funzionalità aggiuntive
+ * specifiche della schermata per effettuare delle vendite.
+ * 
+ * @author Fortunato Giuseppe 724309
+ * @author Alemanno Giuseppe 716262
+ *
+ */
 public class SchermataEffettuaVendita extends SchermataImpiegato{
-	
+	/**
+	 * Pannello contenete gli elemeti grafici necessari per l'operazione. 
+	 */
 	private JPanel panelVendita;
+	/**
+	 * Bottoni di interazione 
+	 */
 	private JButton btnTornaIndietro, btnConferma, btnCancella;
+	/**
+	 * Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
+	 */
 	private JLabel labelTitoloOperazione, labelCodiceVendita, labelCereale, labelQuantita, labelData;
+	/**
+	 *  Elemento grafico della libreria jcalendar, utilizzato per l'inserimento della data da parte dell'impiegato.
+	 */
 	private JDateChooser calendario;
+	/**
+	 *  Elemento grafico a tendina, che consente la selezione del cereale da vendere.
+	 */
 	private JComboBox tendinaCereali;
+	/**
+	 * Aree utilizzate per l'acquisizione di testo.
+	 */
 	private JTextField tfCodice, tfQuantita;
+	/**
+	 *  Linee di separazione per gli altri elementi grafici. 
+	 */
 	private JSeparator separatore_1, separatore_2, separatore_3;
+	/**
+	 * Area testuale della libreria jcalendar, utilizzato per la visualizzazione della data inserita tramite il calendario di tipo JDateChooser.
+	 */
 	private JTextFieldDateEditor editor;
+	/**
+	 * Gruppo per gestire il layout delle componenti grafiche relative a tale classe.
+	 */
 	private GroupLayout glPanelVendita, glPanelCentroDX;
 
 	public SchermataEffettuaVendita(Impiegato impiegato, JFrame login) {
 		super(impiegato, login);
 		effettuaVendite(impiegato);
+		
 	}
 	
 	private void setSchermataEffettuaVendita() {
@@ -97,9 +131,47 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 				btnEffettuaVendita.setVisible(false);
 				
 				setSchermataEffettuaVendita();
+				tornaSchermataImpiegato();
+				azioneCancella();
+				gestisciInserimentoQuantita();
+				gestisciInserimentoData();
+				effettuaVendita(impiegato);
 				
 			}
 		});
+	}
+	
+	private void azioneCancella () {
+		btnCancella.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				cancella ();
+				
+			}
+
+		});
+	}
+	
+	private void cancella () {
+		tfCodice.setText("");
+		tfQuantita.setText("");
+		calendario.setDate(null);
+	}
+	
+	private void tornaSchermataImpiegato() {
+		btnTornaIndietro.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent b) {
+				panelVendita.setVisible(false);
+				btnTornaIndietro.setVisible(false);
+				labelTitoloOperazione.setVisible(false);
+				
+				btnMostraVendite.setVisible(true);
+				btnEffettuaVendita.setVisible(true);
+				
+				panelOperazioni.setLayout(glPanelOperazioni);
+				
+			}
+		}); 
 	}
 	
 	private void setGlPanelCentroDestra() {
@@ -285,6 +357,7 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 				}
 				else {
 					tfQuantita.setEditable(false);
+				
 				}
 			}
 		});

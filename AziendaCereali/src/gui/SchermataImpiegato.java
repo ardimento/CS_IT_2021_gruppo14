@@ -46,7 +46,9 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Gruppi per gestire i layout delle componenti grafiche disposte nei vari pannelli(label, textbox ecc..)
 	 */
-	private GroupLayout glPanelInferiore,glPanelSinistro,glPanelOperazioni,glPanelInfoImpiegato;
+	private GroupLayout glPanelInferiore,glPanelSinistro,glPanelInfoImpiegato;
+	protected GroupLayout glPanelOperazioni;
+	
 	
 	/**
 	 * Costruttore di schermata impiegato, crea nuovo frame, ed imposta le nuove componenti.

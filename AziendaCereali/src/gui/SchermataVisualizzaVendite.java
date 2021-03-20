@@ -16,7 +16,7 @@ import vendita.VenditaInterfaccia;
 
 /**
  * Classe che gestisce graficamente il layout e le funzionalità aggiuntive
- * specifiche della schermata di visualizzazione delle venidte.
+ * specifiche della schermata di visualizzazione delle vendite.
 
  * @author Fortunato Giuseppe 724309
  * @author Alemanno Giuseppe 716262
