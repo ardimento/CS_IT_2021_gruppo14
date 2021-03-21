@@ -46,7 +46,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	/**
 	 * Costruttore di SchermataVisuallizaVendite, 
 	 * partendo dal layout e le funzionalità base della schermata @see SchermataImpiegato
-	 * aggiunge e rende vidsibili gli elementi necessari all'operazione di visualizzazione delle vendite.
+	 * aggiunge e rende visibili gli elementi necessari all'operazione di visualizzazione delle vendite.
 	 * @param impiegato istanza contenente le informazioni dell' impiegato
 	 * @param frame frame della schermata Login, chiamata nel caso di un eventuale logout.
 	 */
@@ -137,7 +137,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	/**
 	 * Metodo che effetua l'operazione di visualizzazione delle vendite.
 	 * 
-	 * Si assegna al bottone 'btnShowSell' l'azione per :
+	 * Si assegna al bottone 'btnMostraVendite' l'azione per :
 	 * Rendere invisibili i bottoni della schermata "base" (superclasse @see SchermataImpiegato) escluso il bottone di logout.
 	 * Rendere visibili gli elementi grafici necessari per l'operazione di visualizzazione delle vendite.
 	 * Riempire la tabella delle vendite.
@@ -194,7 +194,11 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 			public Class getColumnClass(int indiceColonne) {return tipoColonne[indiceColonne];};
 		});
 	}
-	
+	/**
+	 * Metodo con il quale si assegna al bottone l'azione di tornare alla schermata base dell'impiegato.
+	 * Rendiamo invisibili le componenti grafiche dell'operazione
+	 *  e mostriamo i bottoni della schermata base.
+	 */
 	private void tornaSchermataImpiegato() {
 		btnTornaIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent b) {

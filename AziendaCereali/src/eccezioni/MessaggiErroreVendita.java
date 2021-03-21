@@ -28,8 +28,12 @@ public class MessaggiErroreVendita {
 	 */
 	public final static String ERRORE_QUANTITA_VUOTA = "Errore: vendita non inserita. \nQuantita non inserita";
 	/**
-	 * messaggio di errore per il vincolo di quantita' inserita non valida da delegare ad una vendita.
+	 * messaggio di errore per il vincolo di @See controllaInserimentiVendita (quantità non è un numero)
 	 */
 	public final static String ERRORE_QUANTITA_NON_VALIDA = "Errore: vendita non inserita. \nQuantita non valida";
+	/**
+	 * messaggio di errore per il vincolo di @See controllaInserimentiVendita (data mancante)
+	 */
+	public final static String ERRORE_DATA_VUOTA = "Errore: vendita non inserita. \nData non inserita";
 	
 }

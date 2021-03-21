@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,11 +32,11 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 	 */
 	private JPanel panelVendita;
 	/**
-	 * Bottoni di interazione 
+	 *  Bottoni di interazione 
 	 */
 	private JButton btnTornaIndietro, btnConferma, btnCancella;
 	/**
-	 * Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
+	 *  Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
 	 */
 	private JLabel labelTitoloOperazione, labelCodiceVendita, labelCereale, labelQuantita, labelData;
 	/**
@@ -47,7 +48,7 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 	 */
 	private JComboBox tendinaCereali;
 	/**
-	 * Aree utilizzate per l'acquisizione di testo.
+	 *  Aree utilizzate per l'acquisizione di testo.
 	 */
 	private JTextField tfCodice, tfQuantita;
 	/**
@@ -55,20 +56,32 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 	 */
 	private JSeparator separatore_1, separatore_2, separatore_3;
 	/**
-	 * Area testuale della libreria jcalendar, utilizzato per la visualizzazione della data inserita tramite il calendario di tipo JDateChooser.
+	 *  Area testuale della libreria jcalendar, utilizzato per la visualizzazione della data inserita tramite il calendario di tipo JDateChooser.
 	 */
 	private JTextFieldDateEditor editor;
 	/**
-	 * Gruppo per gestire il layout delle componenti grafiche relative a tale classe.
+	 *  Gruppi per gestire il layout delle componenti grafiche relative a tale classe.
 	 */
 	private GroupLayout glPanelVendita, glPanelCentroDX;
 
+	/**
+	 * Costruttore di SchermataEffettuaVendita, 
+	 * partendo dal layout e le funzionalità base della schermata @see SchermataImpiegato
+	 * aggiunge e rende visibili gli elementi necessari all'operazione di inserimento di una vendita.
+	 * @param impiegato istanza contenente le informazioni dell' impiegato
+	 * @param frame frame della schermata Login, chiamata nel caso di un eventuale logout.
+	 */
 	public SchermataEffettuaVendita(Impiegato impiegato, JFrame login) {
 		super(impiegato, login);
 		effettuaVendite(impiegato);
 		
 	}
 	
+	/**
+	 * Metodo che imposta le componenti grafiche della nostra interfaccia di inserimento vendite.
+	 * Aggiunge le componenti grafiche necessarie all'operazione e il loro layout 
+	 * nel pannello 'panelCenterRight' della superclasse ('SchermataImpiegato')
+	 */
 	private void setSchermataEffettuaVendita() {
 		
 		labelTitoloOperazione = new JLabel("Effettua Vendite :");
@@ -101,6 +114,7 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 		
 		btnConferma = new JButton("Aggiungi Vendita");
 		btnConferma.setBackground(new Color(244,164,96));
+		btnConferma.setForeground(Color.white);
 		
 		calendario = new JDateChooser();
 		
@@ -123,7 +137,16 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 		super.panelOperazioni.setLayout(glPanelCentroDX);
 		
 	}
-	
+	/**
+	 * Metodo che effetua l'operazione per inserire una vendita.
+	 * 
+	 * Si assegna al bottone 'btnEffettuaVendita' l'azione per :
+	 * Rendere invisibili i bottoni della schermata "base" (superclasse @see SchermataImpiegato) escluso il bottone di logout.
+	 * Rendere visibili gli elementi grafici necessari per l'operazione di inserimento di una vendita.
+	 * Riempire la tabella delle vendite.
+	 * 
+	 * @param impiegato istanza contenente le informazioni dell' impiegato
+	 */
 	private void effettuaVendite(Impiegato impiegato) {
 		btnEffettuaVendita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent r) {
@@ -136,28 +159,74 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 				gestisciInserimentoQuantita();
 				gestisciInserimentoData();
 				effettuaVendita(impiegato);
-				
+				ModificaDimensioniDinamicamenteVendita();
 			}
 		});
 	}
 	
+	/**
+	 * Metodo che modifica a runtime il font delle label 
+	 * 
+	 */
+	private void ModificaDimensioniDinamicamenteVendita () {
+		
+		panelVendita.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent componentEvent) {
+				int valoreCalcolato =0;
+				Font font1 = null,font2 = null;
+				if( (panelVendita.getHeight() > 500.00 )||(panelVendita.getWidth() >700.00) ) {
+					valoreCalcolato = panelVendita.getWidth()/35;
+					font1 = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+					valoreCalcolato = panelVendita.getWidth()/40;
+					font2= new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+				} else {
+					valoreCalcolato = panelVendita.getWidth()/25;
+					font1 = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+					valoreCalcolato = panelVendita.getWidth()/35;
+					font2= new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+				}
+
+					
+				labelTitoloOperazione.setFont(font1);
+				btnCancella.setFont(font1);
+				btnConferma.setFont(font1);
+				btnTornaIndietro.setFont(font1);
+				
+				labelCodiceVendita.setFont(font2);
+				labelCereale.setFont(font2);
+				labelQuantita.setFont(font2);
+				labelData.setFont(font2);
+				
+			}
+		});
+	}
+	/**
+	 * Metodo con il quale si assegna al bottone l'azione di cancellare i campi 
+	 * utilizzati per l'acquisizione dei dati relativi all'inseriemto di una vendita. 
+	 */
 	private void azioneCancella () {
 		btnCancella.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				cancella ();
-				
+				cancella();	
 			}
 
 		});
-	}
-	
+	}	
+	/**
+	 * Metodo che cancella i dati nei campi  di acquisizione. 
+	 */
 	private void cancella () {
 		tfCodice.setText("");
 		tfQuantita.setText("");
 		calendario.setDate(null);
 	}
 	
+	/**
+	 * Metodo con il quale si assegna al bottone l'azione di tornare alla schermata base dell'impiegato.
+	 * Rendiamo invisibili le componenti grafiche dell'operazione
+	 *  e mostriamo i bottoni della schermata base.
+	 */
 	private void tornaSchermataImpiegato() {
 		btnTornaIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent b) {
@@ -174,6 +243,9 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 		}); 
 	}
 	
+	/**
+	 * Metodo che setta il layout di panelCentroDestra per l'operazione di inserimento di una vendita.
+	 */
 	private void setGlPanelCentroDestra() {
 		
 		glPanelCentroDX.setHorizontalGroup(
@@ -190,7 +262,7 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 								)
 								.addGroup(
 										Alignment.TRAILING,glPanelCentroDX.createSequentialGroup()
-										.addComponent(btnTornaIndietro, GroupLayout.PREFERRED_SIZE,62, Short.MAX_VALUE)
+										.addComponent(btnTornaIndietro, GroupLayout.DEFAULT_SIZE,62, Short.MAX_VALUE)
 										.addGap(88)
 										.addComponent(labelTitoloOperazione, GroupLayout.DEFAULT_SIZE,181,Short.MAX_VALUE)
 										.addGap(171)
@@ -216,7 +288,9 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 		);
 		
 	}
-	
+	/**
+	 * Metodo che setta il layout di panelVendita per l'operazione di inserimento di una vendita.
+	 */
 	public void setGlPanelVendita() {
 		
 		glPanelVendita.setHorizontalGroup(
@@ -238,11 +312,11 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 										glPanelVendita.createParallelGroup(Alignment.LEADING)
 										.addGroup(
 												glPanelVendita.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(btnCancella,Alignment.LEADING,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+												.addComponent(btnCancella,Alignment.LEADING,GroupLayout.DEFAULT_SIZE,138,Short.MAX_VALUE)
 												.addComponent(labelData,Alignment.LEADING,GroupLayout.DEFAULT_SIZE,138,Short.MAX_VALUE)
 										)
-										.addComponent(labelCereale,GroupLayout.PREFERRED_SIZE,139,GroupLayout.PREFERRED_SIZE)
-										.addComponent(labelQuantita,GroupLayout.PREFERRED_SIZE,137,GroupLayout.PREFERRED_SIZE)
+										.addComponent(labelCereale,GroupLayout.PREFERRED_SIZE,138,Short.MAX_VALUE)
+										.addComponent(labelQuantita,GroupLayout.PREFERRED_SIZE,138,Short.MAX_VALUE)
 								)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addGroup(
@@ -250,7 +324,7 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 										.addGroup(
 												glPanelVendita.createSequentialGroup()
 												.addGap(0)
-												.addComponent(btnConferma,GroupLayout.PREFERRED_SIZE,135,GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnConferma,GroupLayout.PREFERRED_SIZE,135,Short.MAX_VALUE)
 												.addGap(20)
 										)
 										.addGroup(
@@ -282,7 +356,7 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 					)
 					.addGroup(
 							glPanelVendita.createSequentialGroup()
-							.addComponent(labelCodiceVendita, GroupLayout.PREFERRED_SIZE,139,GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelCodiceVendita, GroupLayout.PREFERRED_SIZE,139,Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(tfCodice,GroupLayout.DEFAULT_SIZE,314,Short.MAX_VALUE)
 							.addContainerGap()
@@ -299,32 +373,32 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 				.addContainerGap()
 				.addGroup(
 						glPanelVendita.createParallelGroup(Alignment.TRAILING)
-						.addComponent(labelCodiceVendita,GroupLayout.DEFAULT_SIZE,46,46)
-						.addComponent(tfCodice,GroupLayout.PREFERRED_SIZE,46,46)
+						.addComponent(labelCodiceVendita,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
+						.addComponent(tfCodice,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
 				)
 				.addPreferredGap(ComponentPlacement.RELATED)
-				.addComponent(separatore_1,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.PREFERRED_SIZE)
+				.addComponent(separatore_1,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE)//PREFERED_SIZE
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(
 						glPanelVendita.createParallelGroup(Alignment.TRAILING)
-						.addComponent(tendinaCereali,GroupLayout.DEFAULT_SIZE,46,46)
+						.addComponent(tendinaCereali,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
 						.addComponent(labelCereale)
 				)
 				.addGap(8)
-				.addComponent(separatore_3,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(separatore_3,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(
 						glPanelVendita.createParallelGroup(Alignment.TRAILING)
-						.addComponent(labelQuantita,GroupLayout.PREFERRED_SIZE,46,46)
-						.addComponent(tfQuantita,GroupLayout.PREFERRED_SIZE,46,46)
+						.addComponent(labelQuantita,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
+						.addComponent(tfQuantita,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
 				)
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addComponent(separatore_2,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(separatore_2,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(
 						glPanelVendita.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelData,GroupLayout.PREFERRED_SIZE,46,46 )
-						.addComponent(calendario, GroupLayout.PREFERRED_SIZE,46,46)
+						.addComponent(labelData,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE )
+						.addComponent(calendario, GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
 				)
 				.addGap(26)
 				.addGroup(
@@ -339,6 +413,12 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 		
 	}
 	
+	/**
+	 * Metodo  che gestisce l'acquisizione della data di vendita.
+	 * La data selezionata dall'impiegato nel calendario viene visualizzata 
+	 * testualmente nella JTextFieldDateEditor editor
+	 * 
+	 */
 	public void gestisciInserimentoData() {
 		editor = (JTextFieldDateEditor) calendario.getDateEditor();
 		editor.setEditable(false);
@@ -348,7 +428,11 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 			}
 		});
 	}
-	
+	/**
+	 * Metodo  che gestisce l'acquisizione della quantità 
+	 * Consente la scrittura all'interno della JTextField 
+	 * solo se l'impiegato inserisce da tastiera un numero o un punto.
+	 */
 	public void gestisciInserimentoQuantita() {
 		tfQuantita.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent ke) {
@@ -363,6 +447,10 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 		});
 	}
 	
+	/**
+	 * Metodo con il quale si assegna al bottone l'azione di inserimento della vendita  
+	 * Cattura l'eccezioni previste in caso di errori sui campi di acquisizione o sull'operazione di inserimento.
+	 */
 	public void effettuaVendita(Impiegato impiegato) {
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent o) {
@@ -374,7 +462,13 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 			}
 		});
 	}
-	
+	/**
+	 * Metodo che controlla i campi di acquisizione e i vincoli necessari per effettuare la vendita.
+	 * Lancia dei messaggi popup per notificare l'impiegato di :
+	 * - eventuali errori nella compilazione dei campi.
+	 * - esito dell'inserimento della vendita (in caso di esito negativo viene spiegato il fattore scaturante)
+	 * 
+	 */
 	public void controllaInserimentiVendita(Impiegato impiegato) throws EccezioniVendita {
 		String cereale = tendinaCereali.getSelectedItem().toString();
 		String quantita = tfQuantita.getText();
@@ -418,6 +512,19 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 					
 				}
 	
+			}
+			catch (Exception e) {
+				JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_DATA_VUOTA);
+				throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_DATA_VUOTA, new EccezioniVendita());
+			}
+			
+			try {
+				System.out.println(impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data));
+				JOptionPane.showMessageDialog(rootPane, "Vendita effettuata");
+				cancella ();
+			} 
+			catch (EccezioniVendita e){
+				JOptionPane.showMessageDialog(rootPane, e.getMessage());
 			}
 			
 		}
