@@ -39,6 +39,18 @@ public class Avena extends AbstractCereale {
 		}
 	}
 	/**
+	 * Metodo che si limita a creare una nuova istanza di "Avena" con i valori dei parametri presi dai dati presenti sul DataBase per 
+	 * caricare i dati all'avvio del Sistema.
+	 * @param proprietaNutritive Stringa che raccoglie l'elenco delle proprietà nutritive del prodotto "Avena"
+	 * @param quantitaCereale	valore Double che indica la quantità del cereale venduto in Kilogrammi
+	 * 
+	 * @post istanzazione di un oggetto di tipo Avena
+	 */
+	public Avena(String proprietaNutritive, Double quantitaCereale) {
+		super(proprietaNutritive, GIORNI_FRESCHEZZA, PREZZO, NOME_CLASSE);
+		
+	}
+	/**
 	 * Override del metodo "isCerealeVendibile" della classe astratta @see AbstractCereale che effettua il controllo sul vincolo
 	 * del peso giornaliero massimo legato all'avena.
 	 * 
