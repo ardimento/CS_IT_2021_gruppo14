@@ -87,7 +87,7 @@ public class Vendita implements VenditaInterfaccia {
 		this.dataVendita = dataVendita;
 		this.dataImballaggio = dataImballaggio;
 		this.dataScadenza = dataScadenza;
-		this.cerealeInVendita = CerealeFactory.creatoreCereale(cerealeScelto,quantitaCereale, prezzoVendita);
+		this.cerealeInVendita = CerealeFactory.creatoreCereale(cerealeScelto,quantitaCereale);
 		this.quantitaCereale = quantitaCereale;
 		this.prezzoVendita = prezzoVendita;
 	}
