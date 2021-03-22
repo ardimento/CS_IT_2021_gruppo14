@@ -16,7 +16,7 @@ public class CerealeFactory {
 		}
 		return cerealeDaIstanziare;
 	}
-	
+	 
 	/**
 	 * Metodo Statico che permette di essere richiamato per la creazione di un Cereale, tramite il parametro stringa "cereale" che fa da selettore
 	 * per il giusto tipo di prodotto da creare.
