@@ -66,6 +66,32 @@ public class Vendita implements VenditaInterfaccia {
 	}
 	
 	/**
+	 * Costruttore di vendita riservato all'istanzazione di una vendita caricata dal database
+	 * 
+	 * @param quantitaCereale valore double che indica in kg il peso del prodotto venduto
+	 * @param codVendita Stringa di caratteri alfanumerico che identifica univocamente la vendita effettuata con successo
+	 * @param cerealeScelto Stringa di caratteri che rappresenta il cereale venduto
+	 * @param dataVendita Stringa che indica la data di vendita, il formato è rappresentato in forma YYYY-MM-GG
+	 * @param quantitaVenduta somma delle quantità vendute dal venditore che sta creando la vendita
+	 * @param dataImballaggio data in cui è stato effettuato l'imballaggio del prodotto
+	 * @param dataScadenza stringa che rappresenta la data in cui il prodotto perde la sua freschezza
+	 * @param prezzoVendita valore double che indica il prodotto tra la quantita del prodotto venduto per il prezzo unitario del prodotto
+	 * 
+	 * @post creazione di un oggetto di tipo Vendita
+	 * 
+	 */
+	
+	public Vendita(String codVendita, String cerealeScelto, String dataVendita, String dataImballaggio, String dataScadenza, double quantitaCereale, double prezzoVendita) {
+	
+		this.codVendita = codVendita;
+		this.dataVendita = dataVendita;
+		this.dataImballaggio = dataImballaggio;
+		this.dataScadenza = dataScadenza;
+		this.cerealeInVendita = CerealeFactory.creatoreCereale(cerealeScelto,quantitaCereale, prezzoVendita);
+		this.quantitaCereale = quantitaCereale;
+		this.prezzoVendita = prezzoVendita;
+	}
+	/**
 	 * Metodo che richiama il cereale coinvolto nella vendita @see cerealeInVendita e richiama la funzione implementata
 	 * dall'interfaccia @see Cereale che permette di restituire la stringa di caratteri
 	 * rappresentante l'elenco delle proprietà nutritive del cereale in oggetto
@@ -73,7 +99,7 @@ public class Vendita implements VenditaInterfaccia {
 	@Override
 	public String getProprietaNutritive() {
 		// TODO Auto-generated method stub
-		return cerealeInVendita.getProprietaNutritive();
+		return cerealeInVendita.getProprietaNutritive(); 
 	}
 	/**
 	 * restituisce il valore della quantita di prodotto venduta in oggetto preso dall'attributo @see quantitaCereale
