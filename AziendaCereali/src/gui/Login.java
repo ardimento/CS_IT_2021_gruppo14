@@ -50,6 +50,7 @@ public class Login extends JFrame{
 		setLogin();
 		setImmagineDiLogin();
 		azioneBottone(impiegati);
+		azioneTastiera(impiegati);
 	}
 	
 	
@@ -152,21 +153,59 @@ public class Login extends JFrame{
 	private void azioneBottone(Map<String, Impiegato> impiegati) {
 		btnAccesso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				chiamaSchermataImpiegato(impiegati);
+			}
+		});
+	}
+	/**
+	 * Metodo che esegue l'azione cdi verifica del codice inserito 
+	 * nel momento che l'utente durante l'inserimento del codice, preme invio.
+	 * Il metodo rende anche invisibile l'esito della verifica quando l'impiegato si appresta a scrivere.
+	 *  @param impiegati collezione di impiegati.
+	 */
+	private void azioneTastiera(Map<String, Impiegato> impiegati) {
+		tfCodice.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent tastoPremuto) {
+				labelAccesso.setVisible(false);
+				if(tastoPremuto.getKeyCode() == KeyEvent.VK_ENTER)
+					chiamaSchermataImpiegato(impiegati);
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
 				
-				String codiceUtente = tfCodice.getText();
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
 				
-				if(impiegati.containsKey(codiceUtente)) {
-					login.setVisible(false);
-					JOptionPane.showMessageDialog(rootPane, "Accesso Eseguito");
-					SchermataEffettuaVendita imp = new SchermataEffettuaVendita(impiegati.get(codiceUtente),login);
-				}
-				else {
-					labelAccesso.setVisible(true);
-					labelAccesso.setForeground(Color.RED);
-					labelAccesso.setText("ACCESSO NEGATO");
-				}
 			}
 		});
 	}
 	
+	/**
+	 * Metodo che esegue la verifica del codice inserito nella JTextField 
+	 * Nel caso in cui il codice è corretto (appartiene ad un impiegato), viene visualizzato un esito e la chiamata
+	 * alla schermata grafica dell'impiegato corrispondente.
+	 * Nel caso in cui il codice è errato, viene reso visibile un esito negativo.
+	 * @param impiegati collezione di impiegati.
+	 */
+	private void chiamaSchermataImpiegato(Map<String, Impiegato> impiegati) {
+		String codiceUtente = tfCodice.getText();
+		
+		if(impiegati.containsKey(codiceUtente)) {
+			login.setVisible(false);
+			JOptionPane.showMessageDialog(rootPane, "Accesso Eseguito");
+			SchermataEffettuaVendita imp = new SchermataEffettuaVendita(impiegati.get(codiceUtente),login);
+		}
+		else {
+			labelAccesso.setVisible(true);
+			labelAccesso.setForeground(Color.RED);
+			labelAccesso.setText("ACCESSO NEGATO");
+		}
+	}
 }
