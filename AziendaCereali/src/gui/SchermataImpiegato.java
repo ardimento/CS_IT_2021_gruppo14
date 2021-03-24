@@ -40,9 +40,13 @@ public class SchermataImpiegato extends JFrame{
 	 */
 	private JLabel labelTitloProgramma, labelDataOdierna, labelDirittiProgramma,labelIconaImpiegato,labelDatiImpiegato, labelCodice, labelQuanGiornaliera, labelQuanAnnua;
 	/**
+	 * Label che rappresenta il nome dell'operazione che si sta effettuando
+	 */
+	protected JLabel labelTitoloOperazione;
+	/**
 	 * Bottoni di interazione, con i quali si accede ad aree diverse del programma(schermata visualizza, crea vendita e ritorno al Login)
 	 */
-	protected JButton btnTornaAlLogin, btnMostraVendite, btnEffettuaVendita;
+	protected JButton btnTornaAlLogin, btnMostraVendite, btnEffettuaVendita,btnTornaIndietro;
 	/**
 	 * Gruppi per gestire i layout delle componenti grafiche disposte nei vari pannelli(label, textbox ecc..)
 	 */
@@ -419,6 +423,38 @@ public class SchermataImpiegato extends JFrame{
 		String dataString = data.toString();
 	
 		return dataString;
+	}
+	
+	/**
+	 * Metodo con il quale si assegna al bottone l'azione di tornare alla schermata base dell'impiegato.
+	 * Rendiamo invisibili le componenti grafiche dell'operazione
+	 *  e mostriamo i bottoni della schermata base.
+	 */
+	protected void tornaSchermataImpiegato() {
+		btnTornaIndietro.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent b) {
+				
+				btnMostraVendite.setVisible(true);
+				btnEffettuaVendita.setVisible(true);
+				
+				
+				btnTornaIndietro.setVisible(false);
+				labelTitoloOperazione.setVisible(false);
+				rendiInvisibiliComponentiSchermata();
+				
+			}
+
+		}); 
+	}
+	
+	/**
+	 *  Metodo che rende invisibili le componenti aggiuntive delle schermate figlie 
+	 *  di 'SchermataImpiegato'.
+	 *  Il metodo è vuoto perché verrà riscritto nelle figlie con al suo interno le
+	 *  componenti aggiuntive da dover rendere invisibili. 
+	 */
+    protected void rendiInvisibiliComponentiSchermata() {
+
 	}
 	
 }

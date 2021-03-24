@@ -32,14 +32,6 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	 */
 	private JScrollPane scrollPaneTabella;
 	/**
-	 * Label che rappresenta il nome dell'operazione che si sta effettuando
-	 */
-	private JLabel labelTitoloOperazione;
-	/**
-	 * Bottone per ritornare alla schermata "base" dell'impiegato.(SchermataImpiegato) 
-	 */
-	private JButton btnTornaIndietro;
-	/**
 	 * Gruppo per gestire il layout delle componenti grafiche relative alla visualizzazione delle vendite
 	 */
 	private GroupLayout glPanelVisualizza;
@@ -151,9 +143,9 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 				btnEffettuaVendita.setVisible(false);
 				
 				setSchermataVisualizzaVendite();
-				
-				riempiTabella(impiegato);
 				tornaSchermataImpiegato();
+				riempiTabella(impiegato);
+				
 			}
 		
 		}); 
@@ -194,23 +186,13 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 			public Class getColumnClass(int indiceColonne) {return tipoColonne[indiceColonne];};
 		});
 	}
+	
 	/**
-	 * Metodo con il quale si assegna al bottone l'azione di tornare alla schermata base dell'impiegato.
-	 * Rendiamo invisibili le componenti grafiche dell'operazione
-	 *  e mostriamo i bottoni della schermata base.
+	 * {@inheritDoc}
 	 */
-	private void tornaSchermataImpiegato() {
-		btnTornaIndietro.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent b) {
-				scrollPaneTabella.setVisible(false);
-				btnTornaIndietro.setVisible(false);
-				labelTitoloOperazione.setVisible(false);
-				
-				btnMostraVendite.setVisible(true);
-				btnEffettuaVendita.setVisible(true);
-				
-			}
-		}); 
+	@Override
+	protected  void rendiInvisibiliComponentiSchermata() {
+		scrollPaneTabella.setVisible(false);
 	}
 	
 }

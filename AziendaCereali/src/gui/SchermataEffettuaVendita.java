@@ -34,11 +34,11 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 	/**
 	 *  Bottoni di interazione 
 	 */
-	private JButton btnTornaIndietro, btnConferma, btnCancella;
+	private JButton btnConferma, btnCancella;
 	/**
 	 *  Label, aree di testo precompilate, usate come visualizzazione testuale all'interno della schermata grafica.
 	 */
-	private JLabel labelTitoloOperazione, labelCodiceVendita, labelCereale, labelQuantita, labelData;
+	private JLabel labelCodiceVendita, labelCereale, labelQuantita, labelData;
 	/**
 	 *  Elemento grafico della libreria jcalendar, utilizzato per l'inserimento della data da parte dell'impiegato.
 	 */
@@ -154,12 +154,12 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 				btnEffettuaVendita.setVisible(false);
 				
 				setSchermataEffettuaVendita();
-				tornaSchermataImpiegato();
 				azioneCancella();
 				gestisciInserimentoQuantita();
 				gestisciInserimentoData();
 				effettuaVendita(impiegato);
 				ModificaDimensioniDinamicamenteVendita();
+				tornaSchermataImpiegato();
 			}
 		});
 	}
@@ -223,24 +223,12 @@ public class SchermataEffettuaVendita extends SchermataImpiegato{
 	}
 	
 	/**
-	 * Metodo con il quale si assegna al bottone l'azione di tornare alla schermata base dell'impiegato.
-	 * Rendiamo invisibili le componenti grafiche dell'operazione
-	 *  e mostriamo i bottoni della schermata base.
+	 * {@inheritDoc}
 	 */
-	private void tornaSchermataImpiegato() {
-		btnTornaIndietro.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent b) {
-				panelVendita.setVisible(false);
-				btnTornaIndietro.setVisible(false);
-				labelTitoloOperazione.setVisible(false);
-				
-				btnMostraVendite.setVisible(true);
-				btnEffettuaVendita.setVisible(true);
-				
-				panelOperazioni.setLayout(glPanelOperazioni);
-				
-			}
-		}); 
+	@Override
+	protected void rendiInvisibiliComponentiSchermata() {
+		panelVendita.setVisible(false);
+		panelOperazioni.setLayout(glPanelOperazioni);
 	}
 	
 	/**
