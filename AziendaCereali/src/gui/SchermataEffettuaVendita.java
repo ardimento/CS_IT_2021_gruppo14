@@ -26,7 +26,7 @@ import impiegato.Impiegato;
  * @author Alemanno Giuseppe 716262
  *
  */
-public class SchermataEffettuaVendita extends SchermataImpiegato{
+public class SchermataEffettuaVendita extends SchermataVisualizzaVendite{
 	/**
 	 * Pannello contenete gli elemeti grafici necessari per l'operazione. 
 	 */
