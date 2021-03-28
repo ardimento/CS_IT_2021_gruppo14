@@ -30,7 +30,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	/**
 	 * Pannello che consente lo scroll del suo contenuto 
 	 */
-	private JScrollPane scrollPaneTabella;
+	protected JScrollPane scrollPaneTabella;
 	/**
 	 * Gruppo per gestire il layout delle componenti grafiche relative alla visualizzazione delle vendite
 	 */
@@ -187,12 +187,5 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		});
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected  void rendiInvisibiliComponentiSchermata() {
-		scrollPaneTabella.setVisible(false);
-	}
 	
 }

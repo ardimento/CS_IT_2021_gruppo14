@@ -26,7 +26,7 @@ import impiegato.Impiegato;
  * @author Alemanno Giuseppe 716262
  *
  */
-public class SchermataEffettuaVendita extends SchermataImpiegato {
+public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	/**
 	 * Pannello contenete gli elemeti grafici necessari per l'operazione. 
 	 */
@@ -227,7 +227,10 @@ public class SchermataEffettuaVendita extends SchermataImpiegato {
 	 */
 	@Override
 	protected void rendiInvisibiliComponentiSchermata() {
-		panelVendita.setVisible(false);
+		if(panelVendita!=null)
+			panelVendita.setVisible(false);
+		if(scrollPaneTabella!=null)
+			scrollPaneTabella.setVisible(false);
 		panelOperazioni.setLayout(glPanelOperazioni);
 	}
 	
