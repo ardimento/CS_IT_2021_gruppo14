@@ -62,6 +62,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		
 		tabellaVendite.setBounds(0,0,2000,200);
 		tabellaVendite.setMaximumSize(new Dimension(2000,200));
+		tabellaVendite.setEnabled(false);
 		
 		scrollPaneTabella = new JScrollPane(tabellaVendite);
 		scrollPaneTabella.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -79,7 +80,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 
 		}
 	/**
-	 * Metodo che setta il layout di panelCenterRight per l'operazione di visualizzazione
+	 * Metodo che setta il layout di panelCentroDestra per l'operazione di visualizzazione
 	 */
 	private  void setGlPanelVisualizza() {
 		glPanelVisualizza.setHorizontalGroup(
@@ -96,7 +97,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 								)
 								.addGroup(
 										Alignment.TRAILING,glPanelVisualizza.createSequentialGroup()
-										.addComponent(btnTornaIndietro,GroupLayout.PREFERRED_SIZE,62,Short.MAX_VALUE)
+										.addComponent(btnTornaIndietro,GroupLayout.DEFAULT_SIZE,62,Short.MAX_VALUE)
 										.addGap(88)
 										.addComponent(labelTitoloOperazione,GroupLayout.DEFAULT_SIZE,181,Short.MAX_VALUE)
 										.addGap(171)
@@ -143,6 +144,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 				btnEffettuaVendita.setVisible(false);
 				
 				setSchermataVisualizzaVendite();
+				ModificaDimensioniDinamicamenteVendite();
 				tornaSchermataImpiegato();
 				riempiTabella(impiegato);
 				
@@ -150,7 +152,37 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		
 		}); 
 	}
-	
+	/**
+	 * Metodo che modifica a runtime :
+	 * il font delle scritte delle label e della tabella
+	 * la dimensione delle righe della tabella
+	 * 
+	 */
+	private void ModificaDimensioniDinamicamenteVendite () {
+		scrollPaneTabella.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent componentEvent) {
+				int valoreCalcolato =0;
+				Font font1 = null,font2 = null;
+				if( (scrollPaneTabella.getHeight() > 500.00 )||(scrollPaneTabella.getWidth() >700.00) ) {
+					valoreCalcolato = scrollPaneTabella.getWidth()/35;
+					font1 = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+					valoreCalcolato = scrollPaneTabella.getWidth()/40;
+					font2= new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+				} else {
+					valoreCalcolato = scrollPaneTabella.getWidth()/25;
+					font1 = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+					valoreCalcolato = scrollPaneTabella.getWidth()/35;
+					font2= new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+				}
+				labelTitoloOperazione.setFont(font1);
+				btnTornaIndietro.setFont(font1);
+				
+				tabellaVendite.setRowHeight(scrollPaneTabella.getHeight()/tabellaVendite.getRowCount());
+				tabellaVendite.setFont(font2);
+				
+			}
+		});
+	}
 	/**
 	 * Metodo che riempie la tabella con le vendite effettuate dall'impiegato.
 	 * 
