@@ -83,7 +83,7 @@ public class SchermataImpiegato extends JFrame{
 		frame.setTitle("Azienda Cereali");
 		frame.getContentPane().setBackground(new Color(244,164,96));
 		frame.getContentPane().setLayout(new BorderLayout(0,0));
-		frame.setMinimumSize(new Dimension(800,600));
+		frame.setMinimumSize(new Dimension(850,600));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBackground(SystemColor.window);
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(immagini.PathImmagini.IMMAGINE_ICONA_PROGRAMMA)));
