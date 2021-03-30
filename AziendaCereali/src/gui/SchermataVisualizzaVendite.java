@@ -1,16 +1,14 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.*;
 import java.util.Iterator;
-
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
+
 import impiegato.Impiegato;
 import vendita.VenditaInterfaccia;
 
@@ -60,10 +58,6 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		
 		tabellaVendite = new JTable();
 		
-		tabellaVendite.setBounds(0,0,2000,200);
-		tabellaVendite.setMaximumSize(new Dimension(2000,200));
-		tabellaVendite.setEnabled(false);
-		
 		scrollPaneTabella = new JScrollPane(tabellaVendite);
 		scrollPaneTabella.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPaneTabella.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -78,7 +72,26 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		setGlPanelVisualizza();
 		super.panelOperazioni.setLayout(glPanelVisualizza);
 
+	}
+	/**
+	 *  Metodo che setta il layout della tabella 
+	 *  Per funzionare correttamnte bisogna richiamare 
+	 *  tale metodo dopo aver inserito i valori nella tabella.
+	 */
+	private void setTabella() {
+		
+		tabellaVendite.setBounds(0,0,2000,200);
+		tabellaVendite.setMaximumSize(new Dimension(2000,200));
+		tabellaVendite.setEnabled(false);
+		tabellaVendite.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		DefaultTableCellRenderer renderer = new  DefaultTableCellRenderer();
+		renderer.setHorizontalAlignment(JLabel.LEFT);
+		for(int i = 0; i < tabellaVendite.getColumnCount(); i++ ) {
+			tabellaVendite.getColumnModel().getColumn(i).setCellRenderer(renderer);
+			tabellaVendite.getColumnModel().getColumn(i).setMinWidth(110);
 		}
+		
+	}
 	/**
 	 * Metodo che setta il layout di panelCentroDestra per l'operazione di visualizzazione
 	 */
@@ -147,6 +160,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 				ModificaDimensioniDinamicamenteVendite();
 				tornaSchermataImpiegato();
 				riempiTabella(impiegato);
+				setTabella();			
 				
 			}
 		
@@ -154,8 +168,8 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	}
 	/**
 	 * Metodo che modifica a runtime :
-	 * il font delle scritte delle label e della tabella
-	 * la dimensione delle righe della tabella
+	 * il font delle delle label e della tabella
+	 * la dimensione delle righe e delle colonne della tabella 
 	 * 
 	 */
 	private void ModificaDimensioniDinamicamenteVendite () {
@@ -163,11 +177,12 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 			public void componentResized(ComponentEvent componentEvent) {
 				int valoreCalcolato =0;
 				Font font1 = null,font2 = null;
-				if( (scrollPaneTabella.getHeight() > 500.00 )||(scrollPaneTabella.getWidth() >700.00) ) {
+				if( (scrollPaneTabella.getHeight() > 500.0000 )||(scrollPaneTabella.getWidth() >700.00) ) {
 					valoreCalcolato = scrollPaneTabella.getWidth()/35;
 					font1 = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
 					valoreCalcolato = scrollPaneTabella.getWidth()/40;
 					font2= new Font("Tahoma", Font.PLAIN, valoreCalcolato);
+					
 				} else {
 					valoreCalcolato = scrollPaneTabella.getWidth()/25;
 					font1 = new Font("Tahoma", Font.PLAIN, valoreCalcolato);
@@ -177,8 +192,15 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 				labelTitoloOperazione.setFont(font1);
 				btnTornaIndietro.setFont(font1);
 				
-				tabellaVendite.setRowHeight(scrollPaneTabella.getHeight()/tabellaVendite.getRowCount());
+				tabellaVendite.setRowHeight(scrollPaneTabella.getHeight()/5);
 				tabellaVendite.setFont(font2);
+				tabellaVendite.getTableHeader().setFont(font2);
+				
+				valoreCalcolato = scrollPaneTabella.getWidth()/tabellaVendite.getColumnCount();
+				
+				for(int i=0; i<tabellaVendite.getColumnCount();i++) {
+					tabellaVendite.getColumnModel().getColumn(i).setPreferredWidth(valoreCalcolato);
+				}
 				
 			}
 		});
@@ -193,7 +215,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		/**
 		 * Array di nomi per le colonne della tabella
 		 */
-		String [] titoliColonne = new String [] {"Codice Vendita","Data Vendita","Cereale","Quantita'","Prezzo","Data Imbalaggio","Data Scadenza"};
+		String [] titoliColonne = new String [] {"Codice","Data Vendita","Cereale","Quantita'","Prezzo","Imbalaggio","Scadenza"};
 		/**
 		 * Matrice di oggetti 
 		 * L'elenco di vendite viene rappresentato sottoforma di una matrice di oggetti di tipo diverso.
