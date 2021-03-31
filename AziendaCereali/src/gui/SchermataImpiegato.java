@@ -5,6 +5,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import eccezioni.EccezioniVendita;
+import eccezioni.MessaggiErroreVendita;
 import immagini.PathImmagini;
 import impiegato.Impiegato;
 
@@ -184,20 +186,23 @@ public class SchermataImpiegato extends JFrame{
 				labelQuanGiornaliera.setFont(nuovoFont);
 				labelQuanAnnua.setFont(nuovoFont);
 					
-				
-				valoreCalcolato = labelIconaImpiegato.getWidth()/2;
-				Image immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_UTENTE,valoreCalcolato, valoreCalcolato);
-				if(immagine!=null)
-					labelIconaImpiegato.setIcon(new ImageIcon(immagine));
-				
-				valoreCalcolato = btnEffettuaVendita.getHeight()/2;;
-				immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VENDI, valoreCalcolato, valoreCalcolato);
-				if(immagine!=null)
-					btnEffettuaVendita.setIcon(new ImageIcon(immagine));
-				
-				immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valoreCalcolato, valoreCalcolato);
-				if(immagine!=null)
-					btnMostraVendite.setIcon(new ImageIcon(immagine));
+				try {	
+					valoreCalcolato = labelIconaImpiegato.getWidth()/2;
+					Image immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_UTENTE,valoreCalcolato, valoreCalcolato);
+					if(immagine!=null)
+						labelIconaImpiegato.setIcon(new ImageIcon(immagine));
+					
+					valoreCalcolato = btnEffettuaVendita.getHeight()/2;;
+					immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VENDI, valoreCalcolato, valoreCalcolato);
+					if(immagine!=null)
+						btnEffettuaVendita.setIcon(new ImageIcon(immagine));
+					
+					immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valoreCalcolato, valoreCalcolato);
+					if(immagine!=null)
+						btnMostraVendite.setIcon(new ImageIcon(immagine));
+				} catch(EccezioniVendita e) {
+					//qui non è necessario che si abbia un qualche tipo di avviso
+				}
 			}
 		});
 	}
@@ -354,26 +359,32 @@ public class SchermataImpiegato extends JFrame{
 	private void setImmagini() {	
 		Image immagine = null;	
 		int valore;
-		
-		valore = btnTornaAlLogin.getWidth();
-		immagine = setImmagine(PathImmagini.IMMAGINE_BOTTONE_INDIETRO, valore, valore);
-		if(immagine!=null)
-			btnTornaAlLogin.setIcon(new ImageIcon(immagine));
-		
-		valore = 100;
-		immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_UTENTE, valore, valore);
-		if(immagine!=null)
-			labelIconaImpiegato.setIcon(new ImageIcon(immagine));
-		
-		valore = 70;
-		immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VENDI, valore, valore);
-		if(immagine!=null)
-			btnEffettuaVendita.setIcon(new ImageIcon(immagine));
-		
-		valore = 70;
-		immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valore, valore);
-		if(immagine!=null)
-			btnMostraVendite.setIcon(new ImageIcon(immagine));
+		try {	
+			valore = btnTornaAlLogin.getWidth();
+			immagine = setImmagine(PathImmagini.IMMAGINE_BOTTONE_INDIETRO, valore, valore);
+			if(immagine!=null)
+				btnTornaAlLogin.setIcon(new ImageIcon(immagine));
+			
+			valore = 100;
+			immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_UTENTE, valore, valore);
+			if(immagine!=null)
+				labelIconaImpiegato.setIcon(new ImageIcon(immagine));
+			
+			valore = 70;
+			immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VENDI, valore, valore);
+			if(immagine!=null)
+				btnEffettuaVendita.setIcon(new ImageIcon(immagine));
+			
+			valore = 70;
+			immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valore, valore);
+			if(immagine!=null)
+				btnMostraVendite.setIcon(new ImageIcon(immagine));
+			
+		} catch(EccezioniVendita e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_IMMAGINE);
+		}
+	
 	}
 	/**
 	 * Metodo che ritorna l'immagine del path indicato, ridimensionata secondo le dimensini indicate come parametri 
@@ -385,15 +396,16 @@ public class SchermataImpiegato extends JFrame{
 	 * @param dimensione1 altezza   dell'immagine
 	 * 
 	 * @return immagine scelta con le dimensioni volute (null in caso di eccezione)
+	 * @throws EccezioniVendita 
 	 */
-	private Image setImmagine(String Path, int dimensione1, int dimensione2) {
+	private Image setImmagine(String Path, int dimensione1, int dimensione2) throws EccezioniVendita {
 		Image immagineModificata = null;
 		try {
 			Image immagine = ImageIO.read(getClass().getResource(Path));
 			immagineModificata = immagine.getScaledInstance(dimensione1, dimensione2, Image.SCALE_SMOOTH);
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Non è stato possibile caricare l'immagine "+ Path, "Errore", JOptionPane.ERROR_MESSAGE);
+			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_IMMAGINE, new EccezioniVendita());
 		}
 		return immagineModificata;
 		

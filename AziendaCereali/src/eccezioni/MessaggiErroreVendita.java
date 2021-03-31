@@ -35,5 +35,9 @@ public class MessaggiErroreVendita {
 	 * messaggio di errore per il vincolo di @See controllaInserimentiVendita (data mancante)
 	 */
 	public final static String ERRORE_DATA_VUOTA = "Errore: vendita non inserita. \nData non inserita";
+	/**
+	 * messaggio di errore per il vincolo di @See setImmagine (immagine non impostata)
+	 */
+	public final static String ERRORE_IMMAGINE = "Errore: una o più immagini non sono state caricate.";
 	
 }
