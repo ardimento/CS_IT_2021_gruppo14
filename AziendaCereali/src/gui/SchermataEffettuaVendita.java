@@ -286,120 +286,120 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 		
 		glPanelVendita.setHorizontalGroup(
 			
-			glPanelVendita.createParallelGroup(Alignment.LEADING)
+			glPanelVendita.createSequentialGroup()
+			.addContainerGap()
 			.addGroup(
-				glPanelVendita.createSequentialGroup()
-				.addContainerGap()
+				glPanelVendita.createParallelGroup(Alignment.LEADING)
 				.addGroup(
+					Alignment.TRAILING,glPanelVendita.createSequentialGroup()
+					.addGroup(
 						glPanelVendita.createParallelGroup(Alignment.LEADING)
 						.addGroup(
+							glPanelVendita.createParallelGroup(Alignment.TRAILING)
+							.addComponent(labelCodiceVendita, GroupLayout.PREFERRED_SIZE,139,Short.MAX_VALUE)
+							.addComponent(labelCereale,GroupLayout.PREFERRED_SIZE,138,Short.MAX_VALUE)
+							.addComponent(labelQuantita,GroupLayout.PREFERRED_SIZE,138,Short.MAX_VALUE)
+							.addComponent(labelData,Alignment.LEADING,GroupLayout.DEFAULT_SIZE,138,Short.MAX_VALUE)
+							.addComponent(btnCancella,Alignment.LEADING,GroupLayout.DEFAULT_SIZE,138,Short.MAX_VALUE)
+						)			
+					)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(
+						glPanelVendita.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
 								glPanelVendita.createSequentialGroup()
-								.addComponent(separatore_1, GroupLayout.DEFAULT_SIZE,457,Short.MAX_VALUE)
+								.addComponent(tfCodice,GroupLayout.DEFAULT_SIZE,314,Short.MAX_VALUE)
 								.addContainerGap()
 						)
 						.addGroup(
-								Alignment.TRAILING,glPanelVendita.createSequentialGroup()
-								.addGroup(
-										glPanelVendita.createParallelGroup(Alignment.LEADING)
-										.addGroup(
-												glPanelVendita.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(btnCancella,Alignment.LEADING,GroupLayout.DEFAULT_SIZE,138,Short.MAX_VALUE)
-												.addComponent(labelData,Alignment.LEADING,GroupLayout.DEFAULT_SIZE,138,Short.MAX_VALUE)
-										)
-										.addComponent(labelCereale,GroupLayout.PREFERRED_SIZE,138,Short.MAX_VALUE)
-										.addComponent(labelQuantita,GroupLayout.PREFERRED_SIZE,138,Short.MAX_VALUE)
-								)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(
-										glPanelVendita.createParallelGroup(Alignment.TRAILING)
-										.addGroup(
-												glPanelVendita.createSequentialGroup()
-												.addGap(0)
-												.addComponent(btnConferma,GroupLayout.PREFERRED_SIZE,135,Short.MAX_VALUE)
-												.addGap(20)
-										)
-										.addGroup(
-												glPanelVendita.createSequentialGroup()
-												.addComponent(calendario,GroupLayout.DEFAULT_SIZE,315,Short.MAX_VALUE)
-												.addContainerGap()
-										)
-										.addGroup(
-												glPanelVendita.createSequentialGroup()
-												.addComponent(tfQuantita,GroupLayout.DEFAULT_SIZE,316,Short.MAX_VALUE)
-												.addContainerGap()
-										)
-										.addGroup(
-												glPanelVendita.createSequentialGroup()
-												.addComponent(tendinaCereali,0,314,Short.MAX_VALUE)
-												.addContainerGap()
-										)
-								)
-					)
-					.addGroup(
-							Alignment.TRAILING,glPanelVendita.createSequentialGroup()
-							.addComponent(separatore_3,GroupLayout.DEFAULT_SIZE,456,Short.MAX_VALUE)
-							.addGap(11)
-					)
-					.addGroup(
-							Alignment.TRAILING,glPanelVendita.createSequentialGroup()
-							.addComponent(separatore_2,GroupLayout.DEFAULT_SIZE,457,Short.MAX_VALUE)
-							.addContainerGap()
-					)
-					.addGroup(
-							glPanelVendita.createSequentialGroup()
-							.addComponent(labelCodiceVendita, GroupLayout.PREFERRED_SIZE,139,Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tfCodice,GroupLayout.DEFAULT_SIZE,314,Short.MAX_VALUE)
-							.addContainerGap()
+								glPanelVendita.createSequentialGroup()
+								.addComponent(tendinaCereali,0,314,Short.MAX_VALUE)
+								.addContainerGap()
+						)
+						.addGroup(
+								glPanelVendita.createSequentialGroup()
+								.addComponent(tfQuantita,GroupLayout.DEFAULT_SIZE,314,Short.MAX_VALUE)
+								.addContainerGap()
+						)
+						.addGroup(
+								glPanelVendita.createSequentialGroup()
+								.addComponent(calendario,GroupLayout.DEFAULT_SIZE,314,Short.MAX_VALUE)
+								.addContainerGap()
+						)
+						.addGroup(
+								glPanelVendita.createSequentialGroup()
+								.addComponent(btnConferma,GroupLayout.PREFERRED_SIZE,314,Short.MAX_VALUE)
+								.addContainerGap()
+						)
 					)
 				)
+				.addGroup(
+						glPanelVendita.createSequentialGroup()
+						.addComponent(separatore_1, GroupLayout.DEFAULT_SIZE,457,Short.MAX_VALUE)
+						.addContainerGap()
+				)
+				.addGroup(
+						glPanelVendita.createSequentialGroup()
+						.addComponent(separatore_2,GroupLayout.DEFAULT_SIZE,457,Short.MAX_VALUE)
+						.addContainerGap()
+				)
+				.addGroup(
+						glPanelVendita.createSequentialGroup()
+						.addComponent(separatore_3,GroupLayout.DEFAULT_SIZE,456,Short.MAX_VALUE)
+						.addContainerGap()
+				)
 			)
+			
 		);
 		
 		glPanelVendita.setVerticalGroup(
 			
-			glPanelVendita.createParallelGroup(Alignment.LEADING)
+			glPanelVendita.createSequentialGroup()
+			.addContainerGap()
 			.addGroup(
-				glPanelVendita.createSequentialGroup()
-				.addContainerGap()
-				.addGroup(
-						glPanelVendita.createParallelGroup(Alignment.TRAILING)
-						.addComponent(labelCodiceVendita,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
-						.addComponent(tfCodice,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
-				)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addComponent(separatore_1,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE)//PREFERED_SIZE
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(
-						glPanelVendita.createParallelGroup(Alignment.TRAILING)
-						.addComponent(tendinaCereali,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
-						.addComponent(labelCereale)
-				)
-				.addGap(8)
-				.addComponent(separatore_3,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(
-						glPanelVendita.createParallelGroup(Alignment.TRAILING)
-						.addComponent(labelQuantita,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
-						.addComponent(tfQuantita,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
-				)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addComponent(separatore_2,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(
-						glPanelVendita.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelData,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE )
-						.addComponent(calendario, GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
-				)
-				.addGap(26)
-				.addGroup(
-						glPanelVendita.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCancella, GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)
-						.addComponent(btnConferma,GroupLayout.DEFAULT_SIZE,46,Short.MAX_VALUE)	
-				)
-				.addContainerGap()
-			)						
-						
+					glPanelVendita.createParallelGroup(Alignment.TRAILING)
+					.addComponent(labelCodiceVendita,GroupLayout.DEFAULT_SIZE,46,90)
+					.addComponent(tfCodice,GroupLayout.DEFAULT_SIZE,46,90)
+			)
+			
+			.addGap(5)
+			.addComponent(separatore_1,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.PREFERRED_SIZE)
+			.addGap(5)
+			
+			.addGroup(
+					glPanelVendita.createParallelGroup(Alignment.TRAILING)
+					.addComponent(labelCereale,GroupLayout.DEFAULT_SIZE,46,90)
+					.addComponent(tendinaCereali,GroupLayout.DEFAULT_SIZE,46,90)
+			)
+				
+			.addGap(5)
+			.addComponent(separatore_3,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.PREFERRED_SIZE)
+			.addGap(5)
+				
+			.addGroup(
+					glPanelVendita.createParallelGroup(Alignment.TRAILING)
+					.addComponent(labelQuantita,GroupLayout.DEFAULT_SIZE,46,90)
+					.addComponent(tfQuantita,GroupLayout.DEFAULT_SIZE,46,90)
+			)
+				
+			.addGap(5)
+			.addComponent(separatore_2,GroupLayout.DEFAULT_SIZE,GroupLayout.DEFAULT_SIZE,GroupLayout.PREFERRED_SIZE)
+			.addGap(5)
+				
+			.addGroup(
+					glPanelVendita.createParallelGroup(Alignment.TRAILING)
+					.addComponent(labelData,GroupLayout.DEFAULT_SIZE,46,90)
+					.addComponent(calendario, GroupLayout.DEFAULT_SIZE,46,90)
+			)
+				
+			.addGap(10, 20, 100)
+			.addGroup(
+					glPanelVendita.createParallelGroup(Alignment.BASELINE)
+					.addComponent(btnCancella, GroupLayout.DEFAULT_SIZE,46,90)
+					.addComponent(btnConferma,GroupLayout.DEFAULT_SIZE,46,90)	
+			)
+			.addGap(5)
+	
 		);
 		
 	}
