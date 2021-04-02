@@ -196,6 +196,10 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				labelCereale.setFont(font2);
 				labelQuantita.setFont(font2);
 				labelData.setFont(font2);
+				tendinaCereali.setFont(font2);
+				tfCodice.setFont(font2);
+				tfQuantita.setFont(font2);
+				calendario.setFont(font2);
 				
 			}
 		});
@@ -220,6 +224,7 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 		tfCodice.setText("");
 		tfQuantita.setText("");
 		calendario.setDate(null);
+		tfQuantita.setBackground(Color.white);
 	}
 	
 	/**
@@ -429,12 +434,21 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 			public void keyPressed(KeyEvent ke) {
 				if(ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE || ke.getKeyChar() == KeyEvent.VK_PERIOD) {
 					tfQuantita.setEditable(true);
+					
 				}
 				else {
 					tfQuantita.setEditable(false);
+					tfQuantita.setBackground(Color.red);
 				
 				}
 			}
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				tfQuantita.setBackground(Color.white);
+			}
+			
+			
 		});
 	}
 	
