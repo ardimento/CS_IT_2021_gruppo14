@@ -164,25 +164,13 @@ public class Login extends JFrame{
 	 *  @param impiegati collezione di impiegati.
 	 */
 	private void azioneTastiera(Map<String, Impiegato> impiegati) {
-		tfCodice.addKeyListener(new KeyListener() {
+		tfCodice.addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyPressed(KeyEvent tastoPremuto) {
 				labelAccesso.setVisible(false);
 				if(tastoPremuto.getKeyCode() == KeyEvent.VK_ENTER)
 					chiamaSchermataImpiegato(impiegati);
-			}
-
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 		});
 	}
