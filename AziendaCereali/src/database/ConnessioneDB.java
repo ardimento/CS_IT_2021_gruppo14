@@ -25,8 +25,8 @@ import vendita.VenditaInterfaccia;
 public class ConnessioneDB {
 	private String nomeDB = "aziendaagricola";
 	private String user ="admin";
-	private String pass = "admin";
-	private String host = "localhost";
+	private String pass = "S3rv3ed4t4b4s3";
+	private String host = "database-aziendaagricola.ctwio3xvhbrt.us-east-2.rds.amazonaws.com";
 	private int port = 3306;
 	private String url = "jbdc:mysql://" + host + ":" + port + "/" + nomeDB + "?servrTimezone=UTC";
 	 
@@ -104,7 +104,6 @@ public class ConnessioneDB {
 				PreparedStatement pstm = connettore.prepareStatement("SELECT * FROM impiegato");
 				ResultSet result = pstm.executeQuery();
 				while(result.next()) {
-					i = new Impiegato(result.getString(1), result.getDouble(2));
 					impiegati.put(i.getCodiceImpiegato(), i);
 				}
 				pstm.close();
