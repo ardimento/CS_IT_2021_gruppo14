@@ -5,8 +5,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import eccezioni.EccezioniVendita;
-import eccezioni.MessaggiErroreVendita;
+import gui.eccezioniGui.EccezioniGUI;
+import gui.eccezioniGui.MessaggiGUI;
 import immagini.PathImmagini;
 import impiegato.Impiegato;
 
@@ -200,7 +200,7 @@ public class SchermataImpiegato extends JFrame{
 					immagine = setImmagine(PathImmagini.IMMAGINE_ICONA_VISUALIZZA_VENDITE, valoreCalcolato, valoreCalcolato);
 					if(immagine!=null)
 						btnMostraVendite.setIcon(new ImageIcon(immagine));
-				} catch(EccezioniVendita e) {
+				} catch(EccezioniGUI e) {
 					//qui non è necessario che si abbia un qualche tipo di avviso
 				}
 			}
@@ -380,9 +380,9 @@ public class SchermataImpiegato extends JFrame{
 			if(immagine!=null)
 				btnMostraVendite.setIcon(new ImageIcon(immagine));
 			
-		} catch(EccezioniVendita e) {
+		} catch(EccezioniGUI e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_IMMAGINE);
+			JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_IMMAGINE);
 		}
 	
 	}
@@ -396,16 +396,16 @@ public class SchermataImpiegato extends JFrame{
 	 * @param dimensione1 altezza   dell'immagine
 	 * 
 	 * @return immagine scelta con le dimensioni volute (null in caso di eccezione)
-	 * @throws EccezioniVendita 
+	 * @throws EccezioniGUI eccezione lanciata in caso di problemi nel ridimensionamento o caricamento dell'immagine
 	 */
-	private Image setImmagine(String Path, int dimensione1, int dimensione2) throws EccezioniVendita {
+	private Image setImmagine(String Path, int dimensione1, int dimensione2) throws EccezioniGUI{
 		Image immagineModificata = null;
 		try {
 			Image immagine = ImageIO.read(getClass().getResource(Path));
 			immagineModificata = immagine.getScaledInstance(dimensione1, dimensione2, Image.SCALE_SMOOTH);
 			
 		} catch (Exception e) {
-			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_IMMAGINE, new EccezioniVendita());
+			throw new EccezioniGUI(MessaggiGUI.ERRORE_IMMAGINE, new EccezioniGUI());
 		}
 		return immagineModificata;
 		

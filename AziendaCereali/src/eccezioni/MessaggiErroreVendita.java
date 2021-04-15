@@ -19,25 +19,5 @@ public class MessaggiErroreVendita {
 	 * messaggio di errore per il vincolo di codice già utilizzato da delegare ad una vendita.
 	 */
 	public final static String ERRORE_CODICE_ESISTENTE = "Errore: vendita non inserita. \nCodice inserito gia' in uso";
-	/**
-	 * messaggio di errore per il vincolo di codice vuoto (non inserito) da delegare ad una vendita.
-	 */
-	public final static String ERRORE_CODICE_VUOTO = "Errore: vendita non inserita. \nCodice non inserito";
-	/**
-	 * messaggio di errore per il vincolo di quantita' vuota (non inserita) da delegare ad una vendita.
-	 */
-	public final static String ERRORE_QUANTITA_VUOTA = "Errore: vendita non inserita. \nQuantita non inserita";
-	/**
-	 * messaggio di errore per il vincolo di @See controllaInserimentiVendita (quantità non è un numero)
-	 */
-	public final static String ERRORE_QUANTITA_NON_VALIDA = "Errore: vendita non inserita. \nQuantita non valida";
-	/**
-	 * messaggio di errore per il vincolo di @See controllaInserimentiVendita (data mancante)
-	 */
-	public final static String ERRORE_DATA_VUOTA = "Errore: vendita non inserita. \nData non inserita";
-	/**
-	 * messaggio di errore per il vincolo di @See setImmagine (immagine non impostata)
-	 */
-	public final static String ERRORE_IMMAGINE = "Errore: una o più immagini non sono state caricate.";
 	
 }

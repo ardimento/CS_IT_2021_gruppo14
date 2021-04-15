@@ -17,6 +17,8 @@ import com.toedter.calendar.*;
 import cereale.NomeCereali;
 import eccezioni.EccezioniVendita;
 import eccezioni.MessaggiErroreVendita;
+import gui.eccezioniGui.EccezioniGUI;
+import gui.eccezioniGui.MessaggiGUI;
 import impiegato.Impiegato;
 /**
  * Classe che gestisce graficamente il layout e le funzionalità aggiuntive
@@ -461,7 +463,10 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 			public void actionPerformed(ActionEvent o) {
 				try {
 					controllaInserimentiVendita(impiegato);
-				} catch(EccezioniVendita e) {
+				} catch(EccezioniGUI e) {
+					e.printStackTrace();
+				} catch (EccezioniVendita e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -472,9 +477,11 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	 * Lancia dei messaggi popup per notificare l'impiegato di :
 	 * - eventuali errori nella compilazione dei campi.
 	 * - esito dell'inserimento della vendita (in caso di esito negativo viene spiegato il fattore scaturante)
+	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
+	 * @throws EccezioniGUI 	eccezione riguardante aspetti relativi alla mancata correttezza dei parametri necessari per la vendita
 	 * 
 	 */
-	public void controllaInserimentiVendita(Impiegato impiegato) throws EccezioniVendita {
+	public void controllaInserimentiVendita(Impiegato impiegato) throws EccezioniVendita, EccezioniGUI {
 		String cereale = tendinaCereali.getSelectedItem().toString();
 		String quantita = tfQuantita.getText();
 		
@@ -492,8 +499,8 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 		}
 		else if(codiceVendita.equals("")) {
 			
-			JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_CODICE_VUOTO);
-			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_CODICE_VUOTO, new EccezioniVendita());
+			JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_CODICE_VUOTO);
+			throw new EccezioniGUI(MessaggiGUI.ERRORE_CODICE_VUOTO, new EccezioniGUI());
 			
 		} else {
 			
@@ -506,26 +513,26 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				
 				if(quantita.equals("")) {
 					
-					JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_QUANTITA_VUOTA);
-					throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_QUANTITA_VUOTA, new EccezioniVendita());
+					JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_QUANTITA_VUOTA);
+					throw new EccezioniGUI(MessaggiGUI.ERRORE_QUANTITA_VUOTA, new EccezioniGUI());
 					
 				}
 				else {
 					
-					JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_QUANTITA_NON_VALIDA);
-					throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_QUANTITA_NON_VALIDA, new EccezioniVendita());
+					JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_QUANTITA_NON_VALIDA);
+					throw new EccezioniGUI(MessaggiGUI.ERRORE_QUANTITA_NON_VALIDA, new EccezioniGUI());
 					
 				}
 	
 			}
 			catch (Exception e) {
-				JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_DATA_VUOTA);
-				throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_DATA_VUOTA, new EccezioniVendita());
+				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_DATA_VUOTA);
+				throw new EccezioniGUI(MessaggiGUI.ERRORE_DATA_VUOTA, new EccezioniGUI());
 			}
 			
 			try {
 				System.out.println(impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data));
-				JOptionPane.showMessageDialog(rootPane, "Vendita effettuata");
+				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_EFFETTUATA);
 				cancella ();
 			} 
 			catch (EccezioniVendita e){

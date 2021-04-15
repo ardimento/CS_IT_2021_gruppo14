@@ -8,6 +8,7 @@ import java.util.Set;
 import cereale.Avena;
 import eccezioni.EccezioniVendita;
 import eccezioni.MessaggiErroreVendita;
+import gui.eccezioniGui.EccezioniGUI;
 import vendita.Vendita;
 import vendita.VenditaInterfaccia;
 
@@ -101,6 +102,7 @@ public class Impiegato {
 	 * @param codVendita valore alfanumerico che rapresenta il codice identificativo della vendita (precondizione : sia univoco )
 	 * @param cerealeScelto valore che rappresenta il cereale che si vuole vendere (precondizione : tale stringa sia = all'attributo 'NOME_CLASSE' di un cereale esistente)
 	 * @param data valore alfanumerico che rappresenta la data in cui si è effettuata tale vendita (precondizione : la data sia nel formato AAAA-MM-GG)
+	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
 	 * @return restituisce true se si è verificata la condizione per cui la vendita non deve essere creata, false altrimenti.
 	 */
 	public boolean creaVendita(double quantitaCereale, String codVendita, String cerealeScelto, String data) throws EccezioniVendita {
