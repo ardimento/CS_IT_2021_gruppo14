@@ -493,13 +493,13 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 		
 		if(impiegato.cercaVendita(codiceVendita)) {
 			
-			JOptionPane.showMessageDialog(rootPane, MessaggiErroreVendita.ERRORE_CODICE_ESISTENTE);
+			JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_NON_EFFETTUATA + MessaggiErroreVendita.ERRORE_CODICE_ESISTENTE);
 			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_CODICE_ESISTENTE, new EccezioniVendita());
 			
 		}
 		else if(codiceVendita.equals("")) {
 			
-			JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_CODICE_VUOTO);
+			JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_NON_EFFETTUATA + MessaggiGUI.ERRORE_CODICE_VUOTO);
 			throw new EccezioniGUI(MessaggiGUI.ERRORE_CODICE_VUOTO, new EccezioniGUI());
 			
 		} else {
@@ -513,20 +513,20 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				
 				if(quantita.equals("")) {
 					
-					JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_QUANTITA_VUOTA);
+					JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_NON_EFFETTUATA + MessaggiGUI.ERRORE_QUANTITA_VUOTA);
 					throw new EccezioniGUI(MessaggiGUI.ERRORE_QUANTITA_VUOTA, new EccezioniGUI());
 					
 				}
 				else {
 					
-					JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_QUANTITA_NON_VALIDA);
+					JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_NON_EFFETTUATA + MessaggiGUI.ERRORE_QUANTITA_NON_VALIDA);
 					throw new EccezioniGUI(MessaggiGUI.ERRORE_QUANTITA_NON_VALIDA, new EccezioniGUI());
 					
 				}
 	
 			}
 			catch (Exception e) {
-				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.ERRORE_DATA_VUOTA);
+				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_NON_EFFETTUATA + MessaggiGUI.ERRORE_DATA_VUOTA);
 				throw new EccezioniGUI(MessaggiGUI.ERRORE_DATA_VUOTA, new EccezioniGUI());
 			}
 			

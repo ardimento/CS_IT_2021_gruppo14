@@ -10,14 +10,14 @@ public class MessaggiErroreVendita {
 	/**
 	 * messaggio di errore per il vincolo di vendita giornaliera del prodotto che è legato al vincolo in questione.
 	 */
-	public final static String ERRORE_QUANTITA_GIORNALIERA = "Errore : vendita non inserita \nla quantita' del prodotto in vendita comporta il superamento della quantita' vendibile giornalmente dell'impiegato";
+	public final static String ERRORE_QUANTITA_GIORNALIERA = "Errore : la quantita' del prodotto in vendita comporta il superamento della quantita' vendibile giornalmente dell'impiegato";
 	/**
 	 * messaggio di errore per il vincolo di vendita annuale del prodotto che è legato al vincolo in questione
 	 */
-	public final static String ERRORE_QUANTITA_ANNUALE = "Errore : vendita non inserita \nla quantita' del prodotto in vendita comporta il superamento della quantita' vendibile annualmente dell'impiegato";
+	public final static String ERRORE_QUANTITA_ANNUALE = "Errore : la quantita' del prodotto in vendita comporta il superamento della quantita' vendibile annualmente dell'impiegato";
 	/**
 	 * messaggio di errore per il vincolo di codice già utilizzato da delegare ad una vendita.
 	 */
-	public final static String ERRORE_CODICE_ESISTENTE = "Errore: vendita non inserita. \nCodice inserito gia' in uso";
+	public final static String ERRORE_CODICE_ESISTENTE = "Errore: Codice inserito gia' in uso";
 	
 }
