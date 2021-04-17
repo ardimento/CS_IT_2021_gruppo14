@@ -86,13 +86,10 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	 */
 	private void setSchermataEffettuaVendita() {
 		
-		labelTitoloOperazione = new JLabel("Effettua Vendite :");
-		labelTitoloOperazione.setFont(new Font ("Tahoma",Font.PLAIN,20));
+		labelTitoloOperazione.setVisible(true);
+		labelTitoloOperazione.setText("Effettua Vendite :");
 		
-		btnTornaIndietro = new JButton("Indietro");
-		btnTornaIndietro.setFont(new Font ("Tahoma",Font.PLAIN,16));
-		btnTornaIndietro.setForeground(Color.white);
-		btnTornaIndietro.setBackground(new Color(244,164,96));
+		btnTornaIndietro.setVisible(true);
 		
 		panelVendita = new JPanel();
 		
@@ -113,10 +110,12 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 		
 		btnCancella = new JButton("Cancella");
 		btnCancella.setBackground(new Color(211,211,211));
+		btnCancella.setFocusPainted(false);
 		
 		btnConferma = new JButton("Aggiungi Vendita");
 		btnConferma.setBackground(new Color(244,164,96));
 		btnConferma.setForeground(Color.white);
+		btnConferma.setFocusPainted(false);
 		
 		calendario = new JDateChooser();
 		
@@ -154,6 +153,9 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 			public void actionPerformed(ActionEvent r) {
 				btnMostraVendite.setVisible(false);
 				btnEffettuaVendita.setVisible(false);
+				
+				labelTitoloOperazione.setVisible(true);
+				btnTornaIndietro.setVisible(true);
 				
 				setSchermataEffettuaVendita();
 				azioneCancella();

@@ -109,6 +109,7 @@ public class SchermataImpiegato extends JFrame{
 		btnTornaAlLogin.setForeground(Color.WHITE);
 		btnTornaAlLogin.setBackground(new Color(244,164,96));
 		btnTornaAlLogin.setBounds(-100,0,30,30);
+		btnTornaAlLogin.setFocusPainted(false);
 		
 		labelDirittiProgramma = new JLabel ("    By Alemanno, Ben Sidi, Fortunato");
 		
@@ -152,9 +153,11 @@ public class SchermataImpiegato extends JFrame{
 		setGlPanelSinistro();
 		btnEffettuaVendita = new JButton("Effettua vendite");
 		btnEffettuaVendita.setBackground(SystemColor.controlHighlight);
+		btnEffettuaVendita.setFocusPainted(false);
 		
 		btnMostraVendite = new JButton("Visualizza vendite effettuate");
 		btnMostraVendite.setBackground(SystemColor.controlHighlight);
+		btnMostraVendite.setFocusPainted(false);
 		
 		glPanelOperazioni = new GroupLayout(panelOperazioni);
 		setGlPanelOperazioni();
@@ -163,7 +166,16 @@ public class SchermataImpiegato extends JFrame{
 		//---------------------------------------------------------------
 		panelSinistro.setLayout(glPanelSinistro);
 		
-
+		labelTitoloOperazione = new JLabel("");
+		labelTitoloOperazione.setFont(new Font ("Tahoma",Font.PLAIN,20));
+		labelTitoloOperazione.setVisible(false);
+		
+		btnTornaIndietro = new JButton("Indietro");
+		btnTornaIndietro.setFont(new Font ("Tahoma",Font.PLAIN,16));
+		btnTornaIndietro.setForeground(Color.white);
+		btnTornaIndietro.setBackground(new Color(244,164,96));
+		btnTornaIndietro.setFocusPainted(false);
+		btnTornaIndietro.setVisible(false);
 	}
 	
 	/**

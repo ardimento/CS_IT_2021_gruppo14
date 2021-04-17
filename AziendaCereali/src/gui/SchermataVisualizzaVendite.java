@@ -53,8 +53,8 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	 */
 	private void setSchermataVisualizzaVendite() {
 		
-		labelTitoloOperazione = new JLabel("Visualizza vendite :");
-		labelTitoloOperazione.setFont(new Font ("Tahoma",Font.PLAIN,20));
+		
+		labelTitoloOperazione.setText("Visualizza vendite :");
 		
 		tabellaVendite = new JTable();
 		
@@ -62,10 +62,6 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		scrollPaneTabella.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPaneTabella.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		btnTornaIndietro = new JButton("Indietro");
-		btnTornaIndietro.setFont(new Font ("Tahoma",Font.PLAIN,16));
-		btnTornaIndietro.setForeground(Color.white);
-		btnTornaIndietro.setBackground(new Color(244,164,96));
 		
 		
 		glPanelVisualizza = new GroupLayout(super.panelOperazioni);
@@ -155,6 +151,9 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 			public void actionPerformed (ActionEvent b) {		
 				btnMostraVendite.setVisible(false);
 				btnEffettuaVendita.setVisible(false);
+				
+				labelTitoloOperazione.setVisible(true);
+				btnTornaIndietro.setVisible(true);
 				
 				setSchermataVisualizzaVendite();
 				ModificaDimensioniDinamicamenteVendite();

@@ -139,6 +139,7 @@ public class Login extends JFrame{
 		btnAccesso.setFont(new Font("Tahoma",Font.PLAIN,24));
 		btnAccesso.setForeground(SystemColor.window);
 		btnAccesso.setBackground(new Color(244,164,96));
+		btnAccesso.setFocusPainted(false);
 		panelForm.add(btnAccesso);
 		
 	}
