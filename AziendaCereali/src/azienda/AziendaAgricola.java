@@ -1,12 +1,15 @@
 package azienda;
+import database.ConnessioneDB;
 import java.awt.EventQueue;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
+import database.ConnessioneDB;
 import eccezioni.EccezioniVendita;
 import gui.Login;
 import impiegato.*;
@@ -76,7 +79,11 @@ public class AziendaAgricola {
 		
 		AziendaAgricola azienda = new AziendaAgricola("Azienda Agricola");
 		
-		Vendita v1 = new Vendita(28, "0001", "avena", "2021-03-02",0.0);
+		/*
+		 * 
+		 * test
+		 * 
+		 * Vendita v1 = new Vendita(28, "0001", "avena", "2021-03-02",0.0);
 		Vendita v2 = new Vendita(18, "0002", "avena", "2021-03-01",0.0);
 		Set<VenditaInterfaccia> vendite = new HashSet<VenditaInterfaccia>();
 		vendite.add(v1);
@@ -88,8 +95,21 @@ public class AziendaAgricola {
 		
 		System.out.println(vendite.toString());
 		System.out.println(impiegato.toString());
+		*/
 		
+		ConnessioneDB con = ConnessioneDB.creaConnessione();
+		con.connettiDB();
+		con.caricaDatiImpiegati(azienda.getImpiegati());
 		
+		java.util.Iterator<Entry<String,Impiegato>> iterator = azienda.impiegati.entrySet().iterator();
+		
+		while(iterator.hasNext()) {
+			Entry<String,Impiegato> entry = iterator.next();
+			Impiegato i = entry.getValue();
+			con.caricaDativendita(i.getVendite(), i);
+			System.out.println(i);
+		}
+		con.chiudiConnessioneDB();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try{
