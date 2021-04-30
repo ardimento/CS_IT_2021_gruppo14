@@ -26,6 +26,22 @@ public class Impiegato {
 	/** collezione di vendite (di cereali) effettuate dall'impiegato */
 	private Set <VenditaInterfaccia> vendite = new HashSet<VenditaInterfaccia>();
 	
+	/**
+	 * Costruttore della classe 
+	 * 
+	 * consente di istanziare un impiegato con tutti i suoi attributi di istanza 
+	 * passando i valori da inserire come parametri di input.
+	 * 
+	 * @param codiceImpiegato valore alfanumerico che rappresenta il codice dell'impiegato (precondizione: il codice sia univoco) 
+	 * @param pesoAnnuoMassimo valore double che rappresenta la massima quantità (in peso)  di Cereali vendibili dall'impiegato in un anno
+	 */
+	public Impiegato(String codiceImpiegato, double pesoAnnuoMassimo) {
+		super();
+		this.codiceImpiegato = codiceImpiegato;
+		this.pesoAnnuoMassimo = pesoAnnuoMassimo;
+	}
+
+	
 	
 	/**
 	 * Costruttore della classe 

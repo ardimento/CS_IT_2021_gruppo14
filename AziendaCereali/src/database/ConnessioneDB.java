@@ -17,23 +17,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Set;
-
 import eccezioni.EccezioniVendita;
 import impiegato.Impiegato;
+import vendita.Vendita;
 import vendita.VenditaInterfaccia;
 
 public class ConnessioneDB {
 	private String nomeDB = "aziendaagricola";
 	private String user ="admin";
-	private String pass = "S3rv3ed4t4b4s3";
+	private String pass = "S3rv3rd4t4b4s3";
 	private String host = "database-aziendaagricola.ctwio3xvhbrt.us-east-2.rds.amazonaws.com";
 	private int port = 3306;
-	private String url = "jbdc:mysql://" + host + ":" + port + "/" + nomeDB + "?servrTimezone=UTC";
-	 
+	private String url = "jbdc:mysql://" + host + ":" + port + "/" + nomeDB + "?serverTimezone=UTC";
+
 	private static ConnessioneDB connessioneDB;
 	
 	private Connection connettore;
-	
 	
 	private ConnessioneDB() {}
 	
@@ -80,12 +79,11 @@ public class ConnessioneDB {
 	public boolean chiudiConnessioneDB() {
 		if(connettore != null) {
 			try {
-				connettore.close();
-				connettore = null;
-				return true;
+				connettore.close();	
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}
+			return true;
 		}
 		return false;
 	}
@@ -104,6 +102,7 @@ public class ConnessioneDB {
 				PreparedStatement pstm = connettore.prepareStatement("SELECT * FROM impiegato");
 				ResultSet result = pstm.executeQuery();
 				while(result.next()) {
+					i = new Impiegato(result.getString(1), result.getDouble(2));
 					impiegati.put(i.getCodiceImpiegato(), i);
 				}
 				pstm.close();
@@ -133,8 +132,7 @@ public class ConnessioneDB {
 					PreparedStatement pstm = connettore.prepareStatement("Select * From vendita WHERE impiegato = " + i.getCodiceImpiegato() + ";");
 					ResultSet result = pstm.executeQuery();
 					while(result.next()) {
-						v = new Vendita(result.getString(1), result.getString(3), result.getString(4), result.getString(5), result.getString(6)
-										result.getDouble(7));
+						v = new Vendita(result.getString(1), result.getString(2) , result.getString(3), result.getString(4), result.getString(5), result.getDouble(6),result.getDouble(7));
 						vendite.add(v);
 						pstm.close();
 						result.close();
