@@ -135,9 +135,9 @@ public class Impiegato {
 		} else {
 			somma = quantitaVendutaGiornaliera (data);
 			somma = somma + quantitaCereale;
-			if(somma <= 0) {//<-- DA COMPLETARE
+			
 				vendite.add(new  Vendita(quantitaCereale, codVendita, cerealeScelto, data, quantitaVendutaGiornaliera(data)));
-			}
+			
 			
 		}
 		

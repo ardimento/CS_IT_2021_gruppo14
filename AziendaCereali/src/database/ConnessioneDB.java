@@ -24,11 +24,11 @@ import vendita.VenditaInterfaccia;
 
 public class ConnessioneDB {
 	private String nomeDB = "aziendaagricola";
-	private String user ="admin";
+	private String user = "admin";
 	private String pass = "S3rv3rd4t4b4s3";
 	private String host = "database-aziendaagricola.ctwio3xvhbrt.us-east-2.rds.amazonaws.com";
 	private int port = 3306;
-	private String url = "jbdc:mysql://" + host + ":" + port + "/" + nomeDB + "?serverTimezone=UTC";
+	private String url = "jdbc:mysql://" + host + ":" + port + "/" + nomeDB + "?serverTimezone=UTC";
 
 	private static ConnessioneDB connessioneDB;
 	
@@ -132,12 +132,13 @@ public class ConnessioneDB {
 					PreparedStatement pstm = connettore.prepareStatement("Select * From vendita WHERE impiegato = " + i.getCodiceImpiegato() + ";");
 					ResultSet result = pstm.executeQuery();
 					while(result.next()) {
-						v = new Vendita(result.getString(1), result.getString(2) , result.getString(3), result.getString(4), result.getString(5), result.getDouble(6),result.getDouble(7));
+						v = new Vendita(result.getString(1), result.getString(3), result.getString(4), result.getString(5), result.getString(6),result.getDouble(7),result.getDouble(8));
 						vendite.add(v);
-						pstm.close();
-						result.close();
-						return true;
+						System.out.println(v);
 					}
+					pstm.close();
+					result.close();
+					return true;
 				}catch(SQLException e) {
 					e.printStackTrace();
 				}
