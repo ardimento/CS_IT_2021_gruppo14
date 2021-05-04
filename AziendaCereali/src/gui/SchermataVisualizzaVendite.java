@@ -35,10 +35,12 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	private GroupLayout glPanelVisualizza;
 	/**
 	 * Costruttore di SchermataVisuallizaVendite, 
-	 * partendo dal layout e le funzionalità base della schermata @see SchermataImpiegato
+	 * partendo dal layout e le funzionalità base della schermata 'SchermataImpiegato'
 	 * aggiunge e rende visibili gli elementi necessari all'operazione di visualizzazione delle vendite.
 	 * @param impiegato istanza contenente le informazioni dell' impiegato
 	 * @param frame frame della schermata Login, chiamata nel caso di un eventuale logout.
+	 * 
+	 * @see gui.SchermataImpiegato
 	 */
 	public SchermataVisualizzaVendite(Impiegato impiegato, JFrame frame) {
 		super(impiegato, frame);
@@ -49,7 +51,10 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	/**
 	 * Metodo che imposta le componenti grafiche della nostra interfaccia di visualizzazione.
 	 * Aggiunge le componenti grafiche di visualizzazione e il loro layout 
-	 * nel pannello 'panelCenterRight' della superclasse ('SchermataImpiegato')
+	 * nel pannello 'panelOperazioni' della superclasse ('SchermataImpiegato')
+	 * 
+	 * @see gui.SchermataImpiegato#panelOperazioni
+	 * @see gui.SchermataImpiegato
 	 */
 	private void setSchermataVisualizzaVendite() {
 		
@@ -89,7 +94,9 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 		
 	}
 	/**
-	 * Metodo che setta il layout di panelCentroDestra per l'operazione di visualizzazione
+	 * Metodo che setta il layout di 'panelOperazioni' per l'operazione di visualizzazione
+	 * 
+	 * @see gui.SchermataImpiegato#panelOperazioni
 	 */
 	private  void setGlPanelVisualizza() {
 		glPanelVisualizza.setHorizontalGroup(
@@ -145,6 +152,9 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	 * Riempire la tabella delle vendite.
 	 * 
 	 * @param impiegato istanza contenente le informazioni dell' impiegato
+	 * 
+	 * @see gui.SchermataImpiegato#btnMostraVendite
+	 * @see gui.SchermataImpiegato
 	 */
 	private void visualizzaVendite(Impiegato impiegato) {
 		btnMostraVendite.addActionListener(new ActionListener() {
@@ -207,8 +217,7 @@ public class SchermataVisualizzaVendite extends SchermataImpiegato {
 	/**
 	 * Metodo che riempie la tabella con le vendite effettuate dall'impiegato.
 	 * 
-	 * 
-	  * @param impiegato istanza contenente le informazioni dell' impiegato
+	 * @param impiegato istanza contenente le informazioni dell' impiegato
 	 */
 	private void riempiTabella(Impiegato impiegato) {
 		/**

@@ -68,10 +68,12 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 
 	/**
 	 * Costruttore di SchermataEffettuaVendita, 
-	 * partendo dal layout e le funzionalità base della schermata @see SchermataImpiegato
+	 * partendo dal layout e le funzionalità base della schermata 'SchermataImpiegato'
 	 * aggiunge e rende visibili gli elementi necessari all'operazione di inserimento di una vendita.
 	 * @param impiegato istanza contenente le informazioni dell' impiegato
-	 * @param frame frame della schermata Login, chiamata nel caso di un eventuale logout.
+	 * @param login frame della schermata Login, chiamata nel caso di un eventuale logout.
+	 * 
+	 * @see gui.SchermataImpiegato
 	 */
 	public SchermataEffettuaVendita(Impiegato impiegato, JFrame login) {
 		super(impiegato, login);
@@ -82,7 +84,10 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	/**
 	 * Metodo che imposta le componenti grafiche della nostra interfaccia di inserimento vendite.
 	 * Aggiunge le componenti grafiche necessarie all'operazione e il loro layout 
-	 * nel pannello 'panelCenterRight' della superclasse ('SchermataImpiegato')
+	 * nel pannello 'panelOperazioni' della superclasse ('SchermataImpiegato')
+	 * 
+	 * @see SchermataImpiegato#panelOperazioni
+	 * @see gui.SchermataImpiegato
 	 */
 	private void setSchermataEffettuaVendita() {
 		
@@ -142,11 +147,14 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	 * Metodo che effetua l'operazione per inserire una vendita.
 	 * 
 	 * Si assegna al bottone 'btnEffettuaVendita' l'azione per :
-	 * Rendere invisibili i bottoni della schermata "base" (superclasse @see SchermataImpiegato) escluso il bottone di logout.
+	 * Rendere invisibili i bottoni della schermata "base" (superclasse 'SchermataImpiegato') escluso il bottone di logout.
 	 * Rendere visibili gli elementi grafici necessari per l'operazione di inserimento di una vendita.
 	 * Riempire la tabella delle vendite.
 	 * 
 	 * @param impiegato istanza contenente le informazioni dell' impiegato
+	 * 
+	 * @see gui.SchermataImpiegato#btnEffettuaVendita
+	 * @see gui.SchermataImpiegato
 	 */
 	private void effettuaVendite(Impiegato impiegato) {
 		btnEffettuaVendita.addActionListener(new ActionListener() {
@@ -244,7 +252,9 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	}
 	
 	/**
-	 * Metodo che setta il layout di panelCentroDestra per l'operazione di inserimento di una vendita.
+	 * Metodo che setta il layout di 'panelOperazioni' per l'operazione di inserimento di una vendita.
+	 * 
+	 * @see gui.SchermataImpiegato#panelOperazioni
 	 */
 	private void setGlPanelCentroDestra() {
 		
@@ -289,7 +299,8 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 		
 	}
 	/**
-	 * Metodo che setta il layout di panelVendita per l'operazione di inserimento di una vendita.
+	 * Metodo che setta il layout di 'panelVendita' per l'operazione di inserimento di una vendita.
+	 * @see SchermataEffettuaVendita#panelVendita
 	 */
 	public void setGlPanelVendita() {
 		
@@ -459,6 +470,8 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	/**
 	 * Metodo con il quale si assegna al bottone l'azione di inserimento della vendita  
 	 * Cattura l'eccezioni previste in caso di errori sui campi di acquisizione o sull'operazione di inserimento.
+	 * 
+	 * @param impiegato impiegato che intende effettuare la venidta
 	 */
 	public void effettuaVendita(Impiegato impiegato) {
 		btnConferma.addActionListener(new ActionListener() {
@@ -479,6 +492,9 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	 * Lancia dei messaggi popup per notificare l'impiegato di :
 	 * - eventuali errori nella compilazione dei campi.
 	 * - esito dell'inserimento della vendita (in caso di esito negativo viene spiegato il fattore scaturante)
+	 * 
+	 * @param impiegato impiegato che intende effettuare la venidta
+	 * 
 	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
 	 * @throws EccezioniGUI 	eccezione riguardante aspetti relativi alla mancata correttezza dei parametri necessari per la vendita
 	 * 
@@ -531,9 +547,8 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_NON_EFFETTUATA + MessaggiGUI.ERRORE_DATA_VUOTA);
 				throw new EccezioniGUI(MessaggiGUI.ERRORE_DATA_VUOTA, new EccezioniGUI());
 			}
-			
 			try {
-				System.out.println(impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data));
+				impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data);
 				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_EFFETTUATA);
 				cancella ();
 			} 

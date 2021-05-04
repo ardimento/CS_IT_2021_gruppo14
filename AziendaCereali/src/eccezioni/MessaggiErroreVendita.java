@@ -19,5 +19,9 @@ public class MessaggiErroreVendita {
 	 * messaggio di errore per il vincolo di codice già utilizzato da delegare ad una vendita.
 	 */
 	public final static String ERRORE_CODICE_ESISTENTE = "Errore: Codice inserito gia' in uso";
+	/**
+	 * messaggio di errore per il vincolo di quantità pari a 0.
+	 */
+	public final static String ERRORE_QUANTITA_NULLA= "Errore : la quantita' del prodotto in vendita deve essere superiore a 0";
 	
 }

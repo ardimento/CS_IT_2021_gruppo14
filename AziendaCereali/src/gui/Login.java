@@ -40,9 +40,9 @@ public class Login extends JFrame{
 	/**
 	 * Costruttore della classe grafica Login. Questa classe serve ad eseguire l'accesso alle aree di lavoro
 	 * degli impiegati.
-	 * Questo costruttore fa uso del parametro Map<String, Impiegato> impiegati per controllare se effettivamente
-	 * l'utente che cerca di accedere è un impiegato o meno.
-	 * @param impiegati
+	 * Questo costruttore fa uso del parametro di tipo Map per controllare se effettivamente
+	 * l'utente che cerca di accedere è un impiegato o meno della collezione di impiegati dell'azienda.
+	 * @param impiegati collezione di impiegati 
 	 */
 	public Login (Map<String, Impiegato> impiegati) {
 		super();

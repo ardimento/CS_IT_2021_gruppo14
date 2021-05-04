@@ -1,11 +1,9 @@
 package gui.eccezioniGui;
 /**
- * 
- * @author Alemanno Giuseppe 716262
- *
  *	Classe utilizzata per lanciare eccezioni che riguardano la GUI
  *  e più in particolare l'acquisizione delle informazioni per effettuare la vendita. 
  *
+ * @author Alemanno Giuseppe 716262
  */
 public class EccezioniGUI extends Exception {
 	

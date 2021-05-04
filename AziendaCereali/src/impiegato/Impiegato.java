@@ -14,6 +14,7 @@ import vendita.VenditaInterfaccia;
 
 /**
  * Classe Impiegato che rappresenta lo stato e il comportamento che un impiegato generico possiede.
+ * 
  * @author Giuseppe Alemanno 716262
  *
  */
@@ -21,7 +22,7 @@ public class Impiegato {
 	
 	/** valore che indica il codice identificativo di un impiegato */
 	private String codiceImpiegato  = "";
-	/** valore che rappresenta la massima quantità (in peso) di Cereali vendibili dall'impiegato in un anno*/
+	/** valore che rappresenta la massima quantità (in Kilogrammi) di Cereali vendibili dall'impiegato in un anno*/
 	private double pesoAnnuoMassimo = 0.0;
 	/** collezione di vendite (di cereali) effettuate dall'impiegato */
 	private Set <VenditaInterfaccia> vendite = new HashSet<VenditaInterfaccia>();
@@ -31,9 +32,15 @@ public class Impiegato {
 	 * 
 	 * consente di istanziare un impiegato con tutti i suoi attributi di istanza 
 	 * passando i valori da inserire come parametri di input.
+	 *
+	 * Precondizione:   il codiceImpiegato non sia già in utilizzo
+	 * Precondizione:   la quantità annua sia un valore positvo
 	 * 
 	 * @param codiceImpiegato valore alfanumerico che rappresenta il codice dell'impiegato (precondizione: il codice sia univoco) 
-	 * @param pesoAnnuoMassimo valore double che rappresenta la massima quantità (in peso)  di Cereali vendibili dall'impiegato in un anno
+	 * @param pesoAnnuoMassimo valore double che rappresenta la massima quantità (in Kilogrammi) di Cereali vendibili dall'impiegato in un anno
+	 * 
+	 * @author Alemanno Giuseppe 716262
+	 *  
 	 */
 	public Impiegato(String codiceImpiegato, double pesoAnnuoMassimo) {
 		super();
@@ -44,15 +51,21 @@ public class Impiegato {
 	
 	
 	/**
-	 * Costruttore della classe 
+	 * Costruttore della classe
 	 * 
 	 * consente di istanziare un impiegato con tutti i suoi attributi di istanza 
 	 * passando i valori da inserire come parametri di input.
 	 * 
+	 * Precondizione:   il codiceImpiegato non sia già in utilizzo
+	 * Precondizione:   la quantità annua sia un valore positvo 
+	 * Precondizione:   le vendite presenti rispettino tutti i vincoli ad esse applicabili secondo le scelte progettuali imposte
+	 * 
 	 * @param codiceImpiegato valore alfanumerico che rappresenta il codice dell'impiegato (precondizione: il codice sia univoco) 
-	 * @param pesoAnnuoMassimo valore double che rappresenta la massima quantità (in peso)  di Cereali vendibili dall'impiegato in un anno
-	 * @param vendite collezione di vendite compiute dall'impiegato (precondizione : le vendite presenti rispettino tutti i vincoli ad esse applicabili secondo le scelte progettuali imposte)
-	 *
+	 * @param pesoAnnuoMassimo valore double che rappresenta la massima quantità (in Kilogrammi)  di Cereali vendibili dall'impiegato in un anno
+	 * @param vendite collezione di vendite compiute dall'impiegato 
+	 * 
+	 * @author Alemanno Giuseppe 716262
+	 * 
 	 */
 	public Impiegato(String codiceImpiegato, double pesoAnnuoMassimo, Set<VenditaInterfaccia> vendite) {
 		super();
@@ -63,8 +76,11 @@ public class Impiegato {
 
 
 	/**
-	 * Restituisce la collezioni di vendite effettuate dall'impiegato 
+	 * Restituisce la collezioni di vendite effettuate dall'impiegato
+	 * 
 	 * @return la collezione di vendite 
+	 * 
+	 * @author Alemanno Giuseppe 716262
 	 */
 	public Set<VenditaInterfaccia> getVendite() {
 		return vendite;
@@ -73,7 +89,10 @@ public class Impiegato {
 
 	/**
 	 * Restituisce il codice identificativo dell'impiegato
+	 * 
 	 * @return il codice identificativo dell'impiegato
+	 * 
+	 * @author Alemanno Giuseppe 716262
 	 */
 	public String getCodiceImpiegato() {
 		return codiceImpiegato;
@@ -81,8 +100,11 @@ public class Impiegato {
 
 	
 	/**
-	 * Restituisce la massima quantità (in peso)  di Cereali vendibili dall'impiegato in un anno
-	 * @return la massima quantità (in peso)  di Cereali vendibili dall'impiegato in un anno
+	 * Restituisce la massima quantità (in kilogrammi) di Cereali vendibili dall'impiegato in un anno
+	 * 
+	 * @return la massima quantità (in kilogrammi) di Cereali vendibili dall'impiegato in un anno
+	 * 
+	 * @author Alemanno Giuseppe 716262
 	 */
 	public double getPesoAnnuoMassimo() {
 		return pesoAnnuoMassimo;
@@ -92,17 +114,22 @@ public class Impiegato {
 	/**
 	 * Ricerca se è già presente una vendita con il codice passato come parametro.
 	 * 
-	 * Grazie alla ridefinizione dei metodi @see Vendita#hashCode()  e  @see Vendita#equals() 
+	 * Grazie alla ridefinizione dei metodi hashCode() e equals() 
 	 * un oggetto vendita risulta confrontabile con un altro, per mezzo del codice che lo identifica.
 	 * Perciò per mezzo del codice, viene creata una vendita puramente finalizzata ad essere ricercata tra la collezione di vendite effettive.
 	 * 
-	 * @param codiceVenditaDaCercare
+	 * @param codiceVenditaDaCercare codice della venidta da ricercare
 	 * @return restituisce true se viene trovata una vendita con il codice indicato, false altrimenti.
+	 * 
 	 * @throws EccezioniVendita lanciata se i vincoli riguardante la vendita dei vari cereali dell'azienda non sono rispettati
 	 * 
+	 * @author Alemanno Giuseppe 716262 
+	 *
+	 * @see Vendita#hashCode() 
+	 * @see Vendita#equals(Object)
 	 */
 	public boolean cercaVendita(String codiceVenditaDaCercare) throws EccezioniVendita {
-		VenditaInterfaccia venditaDaCercare = new Vendita(0.0, codiceVenditaDaCercare, "avena", "2000-12-12",0.0); //da rivedere ...
+		VenditaInterfaccia venditaDaCercare = new Vendita(1.0, codiceVenditaDaCercare, "avena", "2000-12-12",0.0);
 		boolean esito = false;
 		if (getVendite().contains(venditaDaCercare)) 
 			esito = true; 
@@ -112,24 +139,34 @@ public class Impiegato {
 	/**
 	 * Effettua l'aggiunta di una vendita all'impiegato. 
 	 * 
-	 * Questo solo se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti tramite il metodo @seequantitaVendutaAnnua durante l'anno e durante la giornata tramite il metodo @seequantitaVendutaGiornaliera.
+	 * Questo solo se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti tramite il metodo 'quantitaVendutaAnnua' durante l'anno 
+	 * e durante la giornata tramite il metodo 'quantitaVendutaGiornaliera'.
+	 * 
+	 * Precondizione : 'quantitaCereale' sia > 0
+	 * Precondizione : 'codVendita' sia univoco
+	 * Precondizione : 'cerealeScelto' sia = all'attributo 'NOME_CLASSE' di un cereale esistente
+	 * Precondizione : 'data' sia nel formato AAAA-MM-GG
+	 * 
+	 * Postcondizione : Viene registrata la vendita oppure lanciata una eccezione
 	 * 
 	 * @param quantitaCereale valore double che rappresenta la quantità di cereale che si vuole vendere
-	 * @param codVendita valore alfanumerico che rapresenta il codice identificativo della vendita (precondizione : sia univoco )
-	 * @param cerealeScelto valore che rappresenta il cereale che si vuole vendere (precondizione : tale stringa sia = all'attributo 'NOME_CLASSE' di un cereale esistente)
-	 * @param data valore alfanumerico che rappresenta la data in cui si è effettuata tale vendita (precondizione : la data sia nel formato AAAA-MM-GG)
+	 * @param codVendita valore alfanumerico che rapresenta il codice identificativo della vendita 
+	 * @param cerealeScelto valore che rappresenta il cereale che si vuole vendere 
+	 * @param data valore alfanumerico che rappresenta la data in cui si è effettuata tale vendita 
+	 * 
 	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
-	 * @return restituisce true se si è verificata la condizione per cui la vendita non deve essere creata, false altrimenti.
+	 * 
+	 * @see quantitaVendutaAnnua
+	 * @see quantitaVendutaGiornaliera
 	 */
-	public boolean creaVendita(double quantitaCereale, String codVendita, String cerealeScelto, String data) throws EccezioniVendita {
-		boolean esito = false; //ok
+	public void creaVendita(double quantitaCereale, String codVendita, String cerealeScelto, String data) throws EccezioniVendita {
+
 		double somma = 0.0;
 		
 		somma = quantitaVendutaAnnua(data);
 		somma = somma + quantitaCereale;
 		
 		if ( somma > pesoAnnuoMassimo) {
-			esito = true;
 			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_QUANTITA_ANNUALE, new EccezioniVendita());
 			
 		} else {
@@ -137,18 +174,16 @@ public class Impiegato {
 			somma = somma + quantitaCereale;
 			
 				vendite.add(new  Vendita(quantitaCereale, codVendita, cerealeScelto, data, quantitaVendutaGiornaliera(data)));
-			
-			
 		}
-		
-		return esito;
-		
+
 	}
 
 	/**
 	 * Restituisce la quantità di cereali venduti dall'impiegato in una certo anno tramite il passaggio di una data come parametro.
 	 * 
-	 * @param dataVendita valore alfanumerico che rappresenta la data presa in considerazione (precondizione : la data sia nel formato AAAA-MM-GG)
+	 * Precondizione : 'dataVendita' sia nel formato AAAA-MM-GG
+	 * 
+	 * @param dataVendita valore alfanumerico che rappresenta la data presa in considerazione
 	 * @return restituisce la quantità di cereali venduti dall'impiegato nell'anno della data passata.
 	 */
 	public double quantitaVendutaAnnua (String dataVendita) {
@@ -171,7 +206,9 @@ public class Impiegato {
 	/**
 	 * Restituisce la quantità di cereali venduti dall'impiegato in una data indicata come parametro.
 	 * 
-	 * @param dataVendita valore alfanumerico che rappresenta la data presa in considerazione (precondizione : la data sia nel formato AAAA-MM-GG)
+	 * Precondizione : 'dataVendita' sia nel formato AAAA-MM-GG
+	 * 
+	 * @param dataVendita valore alfanumerico che rappresenta la data presa in considerazione
 	 * @return restituisce la quantità di cereali venduti dall'impiegato nella data passata.
 	 */
 	public double quantitaVendutaGiornaliera (String dataVendita) {

@@ -1,5 +1,6 @@
 /**
- * Riunisce in se le classi correlate al concetto di cereale. 
+ * Riunisce in sé le classi correlate al concetto di cereale. 
+ * 
  * @author Giuseppe Alemanno 716262
  *
  */

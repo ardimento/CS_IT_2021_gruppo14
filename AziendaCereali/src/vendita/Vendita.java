@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import cereale.Cereale;
 import cereale.CerealeFactory;
 import eccezioni.EccezioniVendita;
+import eccezioni.MessaggiErroreVendita;
+import gui.eccezioniGui.EccezioniGUI;
+import gui.eccezioniGui.MessaggiGUI;
 
 public class Vendita implements VenditaInterfaccia {
 	/** valore che indica la quantità in kg di cereali che è stata venduta*/
@@ -52,15 +55,20 @@ public class Vendita implements VenditaInterfaccia {
 	public Vendita(double quantitaCereale, String codVendita, String cerealeScelto, String data, double quantitaVenduta) throws EccezioniVendita {
 		
 		this.cerealeInVendita = CerealeFactory.creatoreCereale(cerealeScelto, quantitaCereale, quantitaVenduta);
+		
+		if(quantitaCereale == 0) 
+			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_QUANTITA_NULLA, new EccezioniVendita());
+
+
 		this.quantitaCereale = quantitaCereale;
 		LocalDate dataOdierna = LocalDate.parse(data);
 		LocalDate dataImballaggio = dataOdierna.minusDays(1);
 		LocalDate dataScadenza = dataImballaggio.plusDays(cerealeInVendita.getTempoFreschezza());
-		
+			
 		this.dataVendita = dataOdierna.toString();
 		this.dataImballaggio = dataImballaggio.toString();
 		this.dataScadenza = dataScadenza.toString();
-		
+			
 		this.prezzoVendita = cerealeInVendita.getPrezzo() * quantitaCereale;
 		this.codVendita = codVendita;
 	}
@@ -76,18 +84,23 @@ public class Vendita implements VenditaInterfaccia {
 	 * @param dataImballaggio data in cui è stato effettuato l'imballaggio del prodotto
 	 * @param dataScadenza stringa che rappresenta la data in cui il prodotto perde la sua freschezza
 	 * @param prezzoVendita valore double che indica il prodotto tra la quantita del prodotto venduto per il prezzo unitario del prodotto
+	 * @throws EccezioniVendita 
 	 * 
 	 * @post creazione di un oggetto di tipo Vendita
 	 * 
 	 */
 	
-	public Vendita(String codVendita, String cerealeScelto, String dataVendita, String dataImballaggio, String dataScadenza, double quantitaCereale, double prezzoVendita) {
+	public Vendita(String codVendita, String cerealeScelto, String dataVendita, String dataImballaggio, String dataScadenza, double quantitaCereale, double prezzoVendita) throws EccezioniVendita {
 	
 		this.codVendita = codVendita;
 		this.dataVendita = dataVendita;
 		this.dataImballaggio = dataImballaggio;
 		this.dataScadenza = dataScadenza;
 		this.cerealeInVendita = CerealeFactory.creatoreCereale(cerealeScelto,quantitaCereale);
+		
+		if(quantitaCereale == 0)
+			throw new EccezioniVendita(MessaggiErroreVendita.ERRORE_QUANTITA_NULLA, new EccezioniVendita());
+		
 		this.quantitaCereale = quantitaCereale;
 		this.prezzoVendita = prezzoVendita;
 	}

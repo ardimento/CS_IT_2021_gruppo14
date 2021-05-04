@@ -213,7 +213,7 @@ public class SchermataImpiegato extends JFrame{
 					if(immagine!=null)
 						btnMostraVendite.setIcon(new ImageIcon(immagine));
 				} catch(EccezioniGUI e) {
-					//qui non è necessario che si abbia un qualche tipo di avviso
+					
 				}
 			}
 		});
@@ -230,7 +230,9 @@ public class SchermataImpiegato extends JFrame{
 	}
 	
 	/**
-	 * Metodo che setta il layout di panelLeft
+	 * Metodo che setta il layout di 'panelSinistro'
+	 * 
+	 * @see gui.SchermataImpiegato#panelSinistro
 	 */
 	private void setGlPanelSinistro() {
 		glPanelSinistro.setHorizontalGroup(
@@ -261,7 +263,9 @@ public class SchermataImpiegato extends JFrame{
 		);
 	}
 	/**
-	 * Metodo che setta il layout di panelCenterRight
+	 * Metodo che setta il layout di 'panelOperazioni'
+	 * 
+	 * @see SchermataImpiegato#panelOperazioni
 	 */
 	private void setGlPanelOperazioni() {
 		glPanelOperazioni.setHorizontalGroup( 
@@ -291,7 +295,9 @@ public class SchermataImpiegato extends JFrame{
 		);
 	}
 	/**
-	 * Metodo che setta il layout di panelCenterLeft
+	 * Metodo che setta il layout di 'panelInfoImpiegato'
+	 *
+	 * @see SchermataImpiegato#panelInfoImpiegato
 	 */
 	private void setGlPanelInfoImpiegato() {
 		
@@ -332,7 +338,9 @@ public class SchermataImpiegato extends JFrame{
 		);
 	}
 	/**
-	 * Metodo che setta il layout di panelDown
+	 * Metodo che setta il layout di 'panelInferiore'
+	 *
+	 * @see SchermataImpiegato#panelInferiore
 	 */
 	private void setGlPanelInferiore() {
 		glPanelInferiore.setHorizontalGroup( 
@@ -367,6 +375,9 @@ public class SchermataImpiegato extends JFrame{
 	
 	/**
 	 * Metodo che aggiunge le immagini alla schermata 
+	 * 
+	 * @see immagini.PathImmagini
+	 * @see gui.eccezioniGui.MessaggiGUI
 	 */
 	private void setImmagini() {	
 		Image immagine = null;	
@@ -476,6 +487,8 @@ public class SchermataImpiegato extends JFrame{
 	 *  di 'SchermataImpiegato'.
 	 *  Il metodo è vuoto perché verrà riscritto nelle figlie con al suo interno le
 	 *  componenti aggiuntive da dover rendere invisibili. 
+	 *  
+	 *  @see gui.SchermataImpiegato
 	 */
     protected void rendiInvisibiliComponentiSchermata() {
 
