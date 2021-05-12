@@ -39,7 +39,7 @@ public class ConnessioneDB {
 	
 	/**
 	 * metodo che permette di instanziare il singolo oggetto della classe ConnessioneDB
-	 * @pre non devono esistere altri oggetti istanziati della classe ConnessioneDB
+	 * precondizione: non devono esistere altri oggetti istanziati della classe ConnessioneDB
 	 * @return un oggetto di tipo connessioneDB
 	 */
 	public static ConnessioneDB creaConnessione() {
@@ -51,7 +51,7 @@ public class ConnessioneDB {
 	
 	/**
 	 * permette di connettere l'applicativo al database attraverso l'attributo @seeurl
-	 * @pre per poter aprire la connessione con il database bisogna essere certi che questa sia chiusa.
+	 * precondizione: per poter aprire la connessione con il database bisogna essere certi che questa sia chiusa.
 	 * 
 	 * @return true se la connessione è stata aperta con successo, false se non è stato possibile aprire la connessione
 	 */
@@ -72,7 +72,7 @@ public class ConnessioneDB {
 	
 	/**
 	 * permette di chiudere la connessione al database precedentemente aperta
-	 * @pre la connessione al database deve essere aperta per poterla chiuderla
+	 * precondizione: la connessione al database deve essere aperta per poterla chiuderla
 	 * 
 	 * @return true se la connessione è stata chiusa con successo, false se non è stato possibile chiudere la connessione
 	 */
@@ -117,9 +117,10 @@ public class ConnessioneDB {
 	
 	/**
 	 * carica dal database i dati di tutte le vendita di ogni impiegato tramite il suo id
-	 * @pre l'applicativo deve essere connesso al database tramite il metodo @seeConnettiDB
+	 * precondizione: l'applicativo deve essere connesso al database tramite il metodo (vedi ConnettiDB)
 	 * @param vendite contenitore di istanze di vendite legate all'impiegato
-	 * @param impiegato istanza di un impiegato associato alle vendite da caricare
+	 * @param i istanza di un impiegato associato alle vendite da caricare
+	 * @throws EccezioniVendita del caricamento della vendita
 	 * @return True se il caricamento dal database delle vendite dell'impiegato specificato siano caricate con successo, False il caricamento delle vendita dal database è fallito
 	 */
 	public boolean caricaDativendita(Set<VenditaInterfaccia> vendite, Impiegato i) throws EccezioniVendita{
@@ -151,8 +152,8 @@ public class ConnessioneDB {
 	 * inserisce nel database un impiegato correttamente istanziato inviando al database i suoi dati correlati
 	 * @param id stringa di caratteri alfanumerici che identifica univocamente un impiegato dell'azienda
 	 * @param quantitaMaxAnnua quantità massima di cereali espressa in kg che un impiegato puo vendere annualmente
-	 * @pre la connessione al database deve essere aperta precedentemente la chiamata a questo metodo attraverso il metodo @see connettiDB
-	 * @post i dati passati come parametro verranno salvati sul database connesso in precedenza
+	 * precondizione: la connessione al database deve essere aperta precedentemente la chiamata a questo metodo attraverso il metodo @see connettiDB
+	 * postcondizione: i dati passati come parametro verranno salvati sul database connesso in precedenza
 	 * @return True se l'inserimento dei dati è avvenuta con successo, False se l'inserimento dei dati e fallita.
 	 */
 	public boolean inserimentoImpiegato(String id, Double quantitaMaxAnnua) {
@@ -174,8 +175,8 @@ public class ConnessioneDB {
 	
 	/**
 	 * inserisce una nuova vendita nel database
-	 * @pre la connessione al database deve essere attivata tramite il metodo @seeconnettiDB
-	 * @post i dati passati come parametro verranno salvati sul database connesso in precedenza
+	 * precondizione: la connessione al database deve essere attivata tramite il metodo @seeconnettiDB
+	 * postcondizione: i dati passati come parametro verranno salvati sul database connesso in precedenza
 	 * @param codVendita Stringa alfanumerica che identifica univocamente la vendita
 	 * @param codImpiegato Stringa alfanumerica che identifica univocamente l'impiegato che ha effettuato la vendita
 	 * @param cereale Stringa che indica il cereale messo in vendita
