@@ -142,7 +142,7 @@ public class Impiegato {
 	 * Questo solo se l'impegato non ha raggiunto (o con tale vendita supera) la quantità massima di cereali venduti tramite il metodo 'quantitaVendutaAnnua' durante l'anno 
 	 * e durante la giornata tramite il metodo 'quantitaVendutaGiornaliera'.
 	 * 
-	 * Precondizione : 'quantitaCereale' sia > 0
+	 * Precondizione : 'quantitaCereale' sia maggiore di 0
 	 * Precondizione : 'codVendita' sia univoco
 	 * Precondizione : 'cerealeScelto' sia = all'attributo 'NOME_CLASSE' di un cereale esistente
 	 * Precondizione : 'data' sia nel formato AAAA-MM-GG
@@ -225,8 +225,49 @@ public class Impiegato {
 		return quantita;
 		
 	}
+	
+	/**
+	 * 
+	 * @param codiceVendita valore alfanumerico che rapresenta il codice identificativo della vendita 
+	 * @return la vendita ricercata se trovata altrimenti null 
+	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
+	 */
+	private VenditaInterfaccia getVendita(String codiceVendita) throws EccezioniVendita {
+		VenditaInterfaccia venditaDaCercare = new Vendita(1.0, codiceVendita, "avena", "2000-12-12",0.0);
+		boolean esito=false;
+		Iterator<VenditaInterfaccia> iterator = vendite.iterator();
+		while (iterator.hasNext()) {
+			VenditaInterfaccia vendita = iterator.next();
+			if(vendita.equals(venditaDaCercare)) {
+				return vendita;
+			}
+		}
+		return null;
+	}
 
-
+	/**
+	 * Ritorna la data di imballaggio di una specifica vendita indicata tramite codice
+	 * @param codiceVendita valore alfanumerico che rapresenta il codice identificativo della vendita 
+	 * @return la data di imballaggio del cereale in vendita
+	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
+	 */
+	public String getVenditaDataImballaggio(String codiceVendita) throws EccezioniVendita {
+		if(getVendita(codiceVendita)!=null) 
+			return getVendita(codiceVendita).getDataImbalaggio();
+		return null;
+	}
+	
+	/**
+	 * Ritorna la data di scadenza di una specifica vendita indicata tramite codice
+	 * @param codiceVendita valore alfanumerico che rapresenta il codice identificativo della vendita 
+	 * @return la data di scadenza del cereale in vendita
+	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
+	 */
+	public String getVenditaDataScadenza(String codiceVendita) throws EccezioniVendita {
+		if(getVendita(codiceVendita)!=null) 
+			return getVendita(codiceVendita).getDataScadenza();
+		return null;
+	}
 	
 	
 }

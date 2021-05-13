@@ -18,4 +18,8 @@ public interface VenditaInterfaccia {
 	public String getDataVendita();
 	/** restituisce le informazioni della vendita sottoforma di un array di oggetti */
 	public Object [] arrayDiOggetti ();
+	/** restrituisce una stringa con la data dell'imballaggio nel formato YYYY-MM-GG*/
+	public String getDataImbalaggio();
+	/** restrituisce una stringa con la data della scadenza nel formato YYYY-MM-GG*/
+	public String getDataScadenza();
 }

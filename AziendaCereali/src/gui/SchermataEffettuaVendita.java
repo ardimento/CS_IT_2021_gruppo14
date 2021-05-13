@@ -15,6 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import com.toedter.calendar.*;
 
 import cereale.NomeCereali;
+import database.ConnessioneDB;
 import eccezioni.EccezioniVendita;
 import eccezioni.MessaggiErroreVendita;
 import gui.eccezioniGui.EccezioniGUI;
@@ -550,9 +551,13 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 			try {
 				impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data);
 				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_EFFETTUATA);
-				cancella ();
-				//impiegato
-				//inserimentoVendita(codiceVendita, impiegato.getCodiceImpiegato(), cereale, data, dataImballaggio , dataScadenza, quantitaVera);
+				cancella ();		
+			
+				ConnessioneDB con = ConnessioneDB.creaConnessione();
+				con.connettiDB();
+				con.inserimentoVendita(codiceVendita, impiegato.getCodiceImpiegato(), cereale, data, impiegato.getVenditaDataImballaggio(codiceVendita) , impiegato.getVenditaDataScadenza(codiceVendita), quantitaVera);
+				con.chiudiConnessioneDB();
+				
 			} 
 			catch (EccezioniVendita e){
 				JOptionPane.showMessageDialog(rootPane, e.getMessage());

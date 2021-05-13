@@ -176,5 +176,24 @@ public class Vendita implements VenditaInterfaccia {
 		};
 		return array;
 	}
+
+	/**
+	 * restituisce la stringa che rappresenta la data di imballaggio del cereale venduto.
+	 * il formato della data è YYYY-MM-GG
+	 * 
+	 */
+	@Override
+	public String getDataImbalaggio() {
+		return dataImballaggio;
+	}
+	/**
+	 * restituisce la stringa che rappresenta la data di scadenza del cereale venduto.
+	 * il formato della data è YYYY-MM-GG
+	 * 
+	 */
+	@Override
+	public String getDataScadenza() {
+		return dataScadenza;
+	}
 	
 }

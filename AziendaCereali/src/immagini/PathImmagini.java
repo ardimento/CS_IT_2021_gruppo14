@@ -14,13 +14,13 @@ package immagini;
 public class PathImmagini {
 
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata nella schermata Login 
-	*	@see Login
+	*	@see gui.Login
 	*/
 	public final static String IMMAGINE_LOGIN = "/immagini/immagine2.jpg";
 	
 	/** valore alfanumerico che rappresenta il path dell'immagine utilizzata come icona nella finestra del programma 
 	 * 
-	 * @see SchermataImpiegato#setImmagini()
+	 * @see gui.SchermataImpiegato#setImmagini()
 	 */
 	public final static String IMMAGINE_ICONA_PROGRAMMA = "/immagini/iconaFinestra.png";
 	
