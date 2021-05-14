@@ -552,12 +552,12 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data);
 				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_EFFETTUATA);
 				cancella ();		
-			
+				super.setInfoImpiegato();
 				ConnessioneDB con = ConnessioneDB.creaConnessione();
 				con.connettiDB();
 				con.inserimentoVendita(codiceVendita, impiegato.getCodiceImpiegato(), cereale, data, impiegato.getVenditaDataImballaggio(codiceVendita) , impiegato.getVenditaDataScadenza(codiceVendita), quantitaVera);
 				con.chiudiConnessioneDB();
-				
+			
 			} 
 			catch (EccezioniVendita e){
 				JOptionPane.showMessageDialog(rootPane, e.getMessage());

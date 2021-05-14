@@ -223,7 +223,7 @@ public class SchermataImpiegato extends JFrame{
 	/**
 	 * Metodo che setta le informazioni mostrate a video dell'impiegato. 
 	 */
-	private void setInfoImpiegato() {
+	protected void setInfoImpiegato() {
 		labelCodice.setText("Codice Impiegato : "+impiegato.getCodiceImpiegato());
 		labelQuanGiornaliera.setText("Quantita' Giornaliera: "+impiegato.quantitaVendutaGiornaliera(getDataOdierna()));
 		labelQuanAnnua.setText("Quantita' Annua: " + impiegato.quantitaVendutaAnnua(getDataOdierna()));
