@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -18,6 +19,7 @@ import cereale.NomeCereali;
 import database.ConnessioneDB;
 import eccezioni.EccezioniVendita;
 import eccezioni.MessaggiErroreVendita;
+import eccezioniDatabase.EccezioniDB;
 import gui.eccezioniGui.EccezioniGUI;
 import gui.eccezioniGui.MessaggiGUI;
 import impiegato.Impiegato;
@@ -493,16 +495,32 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 						setInfoImpiegato();
 			
 						ConnessioneDB con = ConnessioneDB.creaConnessione();
-						con.connettiDB();
-						con.inserimentoVendita(
-													codiceVendita, 
-													impiegato.getCodiceImpiegato(), 
-													cereale, 
-													data, 
-													impiegato.getVenditaDataImballaggio(codiceVendita) , 
-													impiegato.getVenditaDataScadenza(codiceVendita), 
-													quantitaVera, impiegato.getPrezzoVendita(codiceVendita)
-											  );
+						try {
+							con.connettiDB();
+						} catch (EccezioniDB e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							//ALLERT ERRORE APERTURA CONNESSIONE
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							//ALERT ERRORE APERTURA CONNESSIONE
+						}
+						try {
+							con.inserimentoVendita(
+														codiceVendita, 
+														impiegato.getCodiceImpiegato(), 
+														cereale, 
+														data, 
+														impiegato.getVenditaDataImballaggio(codiceVendita) , 
+														impiegato.getVenditaDataScadenza(codiceVendita), 
+														quantitaVera, impiegato.getPrezzoVendita(codiceVendita)
+												  );
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							//ALERT ERRORE INSERIMENTO DATI VENDITA
+						}
 								
 					} 
 					
@@ -511,8 +529,20 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				} catch (EccezioniVendita e) {
 					JOptionPane.showMessageDialog(rootPane, e.getMessage());
 				} finally {
-					//ConnessioneDB con = ConnessioneDB.creaConnessione();
-					//con.chiudiConnessioneDB();
+					
+					//chiude la connessione-------------------------------------
+					ConnessioneDB con = ConnessioneDB.creaConnessione();
+					try {
+						con.chiudiConnessioneDB();
+					} catch (EccezioniDB e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						//ALERT ERRORE CHIUSURA CONNESSIONE
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						//ALERT ERRORE CHIUSURA CONNESSIONE
+					}
 				}
 			}
 		});

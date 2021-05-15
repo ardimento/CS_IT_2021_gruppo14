@@ -1,6 +1,7 @@
 package azienda;
 import database.ConnessioneDB;
 import java.awt.EventQueue;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 import database.ConnessioneDB;
 import eccezioni.EccezioniVendita;
+import eccezioniDatabase.EccezioniDB;
 import gui.Login;
 import impiegato.*;
 import vendita.Vendita;
@@ -81,15 +83,35 @@ public class AziendaAgricola {
 		AziendaAgricola azienda = new AziendaAgricola("Azienda Agricola");
 
 			ConnessioneDB con = ConnessioneDB.creaConnessione();
-			con.connettiDB();
-			con.caricaDatiImpiegati(azienda.getImpiegati());
+			try {
+				con.connettiDB();
+			} catch (EccezioniDB | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				//ALERT "CONNESSIONE NON RIUSCITA"
+			}
+			try {
+				con.caricaDatiImpiegati(azienda.getImpiegati());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				//ALERT PER IL NON CARICAMENTO DEI DATI DAL DATABASE
+			}
 			
+			
+			//QUESTO è PER TESTARE LE ISTANZE DEGLI IMPIEGATI? PERCHè SE COSI FOSSE VA CANCELLATO
 			java.util.Iterator<Entry<String,Impiegato>> iterator = azienda.impiegati.entrySet().iterator();
 			
 			while(iterator.hasNext()) {
 				Entry<String,Impiegato> entry = iterator.next();
 				Impiegato i = entry.getValue();
-				con.caricaDativendita(i.getVendite(), i);
+				try {
+					con.caricaDativendita(i.getVendite(), i);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					//ALERT PER IL NON CARICAMENTO DEI DATI DAL DATABASE
+				}
 				System.out.println(i);
 			}
 			

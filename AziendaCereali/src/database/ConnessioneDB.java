@@ -10,6 +10,7 @@
  */
 package database;
 
+import eccezioni.MessaggiErroreVendita;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +19,8 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Set;
 import eccezioni.EccezioniVendita;
+import eccezioniDatabase.EccezioniDB;
+import eccezioniDatabase.MessaggiErroreDatabase;
 import impiegato.Impiegato;
 import vendita.Vendita;
 import vendita.VenditaInterfaccia;
@@ -55,19 +58,18 @@ public class ConnessioneDB {
 	 * 
 	 * @return true se la connessione è stata aperta con successo, false se non è stato possibile aprire la connessione
 	 */
-	public boolean connettiDB() {
+	public boolean connettiDB() throws EccezioniDB, SQLException{
 		if(connettore==null) {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				connettore = DriverManager.getConnection(url, user, pass);
 				return true;
-			}catch(SQLException e) {
-				e.printStackTrace();
 			}catch(ClassNotFoundException e1) {
 				e1.printStackTrace();
 			}
 		}
-		return false;
+		throw new EccezioniDB(MessaggiErroreDatabase.ERRORE_APERTURA_DB, new EccezioniDB());
+
 	}
 	
 	/**
@@ -76,16 +78,12 @@ public class ConnessioneDB {
 	 * 
 	 * @return true se la connessione è stata chiusa con successo, false se non è stato possibile chiudere la connessione
 	 */
-	public boolean chiudiConnessioneDB() {
+	public boolean chiudiConnessioneDB() throws EccezioniDB, SQLException{
 		if(connettore != null) {
-			try {
 				connettore.close();	
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
 			return true;
 		}
-		return false;
+		throw new EccezioniDB(MessaggiErroreDatabase.ERRORE_CHIUSURA_DB , new EccezioniDB());
 	}
 	
 	/**
@@ -94,11 +92,11 @@ public class ConnessioneDB {
 	 * @return True se il caricamento dei dati degli impiegati è avvenuto con successo, False se il caricamento dei dati non è fallito.
 	 */
 	
-	public boolean caricaDatiImpiegati(Map<String, Impiegato> impiegati) {
+	public boolean caricaDatiImpiegati(Map<String, Impiegato> impiegati) throws SQLException {
 		
 		Impiegato i;
 		if(connettore != null) {
-			try {
+
 				PreparedStatement pstm = connettore.prepareStatement("SELECT * FROM impiegato");
 				ResultSet result = pstm.executeQuery();
 				while(result.next()) {
@@ -108,9 +106,7 @@ public class ConnessioneDB {
 				pstm.close();
 				result.close();
 				return true;
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
+
 		}
 		return true;
 	}
@@ -123,13 +119,13 @@ public class ConnessioneDB {
 	 * @throws EccezioniVendita del caricamento della vendita
 	 * @return True se il caricamento dal database delle vendite dell'impiegato specificato siano caricate con successo, False il caricamento delle vendita dal database è fallito
 	 */
-	public boolean caricaDativendita(Set<VenditaInterfaccia> vendite, Impiegato i) throws EccezioniVendita{
+	public boolean caricaDativendita(Set<VenditaInterfaccia> vendite, Impiegato i) throws EccezioniVendita, SQLException{
 		
 		VenditaInterfaccia v;
 		//l'oggetto impiegato passato per argomento deve correttamente istanziato
 		if(i!=null) {
 			if(connettore != null) {
-				try {
+
 					PreparedStatement pstm = connettore.prepareStatement("Select * From vendita WHERE impiegato = " + i.getCodiceImpiegato() + ";");
 					ResultSet result = pstm.executeQuery();
 					while(result.next()) {
@@ -140,9 +136,6 @@ public class ConnessioneDB {
 					pstm.close();
 					result.close();
 					return true;
-				}catch(SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		return false;
@@ -156,18 +149,16 @@ public class ConnessioneDB {
 	 * postcondizione: i dati passati come parametro verranno salvati sul database connesso in precedenza
 	 * @return True se l'inserimento dei dati è avvenuta con successo, False se l'inserimento dei dati e fallita.
 	 */
-	public boolean inserimentoImpiegato(String id, Double quantitaMaxAnnua) {
+	public boolean inserimentoImpiegato(String id, Double quantitaMaxAnnua) throws SQLException {
 		if(connettore != null) {
-			try {
+
 				PreparedStatement pstm = connettore.prepareStatement("INSERT INTO Impiegati VALUES(? ?)");
 				pstm.setString(1, id);
 				pstm.setDouble(2, quantitaMaxAnnua);
 				pstm.executeQuery();
 				pstm.close();
 				return true;
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
+
 		}
 		return false;
 	}
@@ -186,10 +177,10 @@ public class ConnessioneDB {
 	 * @param quantitaCereale valore Double che indica la quantità in kg del cereale venduto in una singola vendita
 	 * @return True se l'inserimento della vendita viene effettuata con successo, False se l'inserimento della vendita fallisce.
 	 */
-	//AGGIUNGERE PREZZO VENDITA QUI E AGGIUNGERE LA COLONNA SUL DATABASE IN "VENDITA"
-	public boolean inserimentoVendita(String codVendita, String codImpiegato, String cereale, String dataVendita, String dataImballaggio, String dataScadenza, Double quantitaCereale, Double prezzoVendita) {
+
+	public boolean inserimentoVendita(String codVendita, String codImpiegato, String cereale, String dataVendita, String dataImballaggio, String dataScadenza, Double quantitaCereale, Double prezzoVendita) throws SQLException {
 		if(connettore != null) {
-			try {
+
 				PreparedStatement pstm = connettore.prepareStatement("INSERT INTO vendita VALUES(?,?,?,?,?,?,?,? );");
 				pstm.setString(1, codVendita);
 				pstm.setString(2, codImpiegato);
@@ -199,13 +190,10 @@ public class ConnessioneDB {
 				pstm.setString(6, dataScadenza);
 				pstm.setDouble(7, quantitaCereale);
 				pstm.setDouble(8, prezzoVendita);
-				System.out.println(pstm);
 				pstm.execute();
 				pstm.close();
 				return true;
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
+
 		}
 		return false;
 	}
