@@ -494,7 +494,15 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 			
 						ConnessioneDB con = ConnessioneDB.creaConnessione();
 						con.connettiDB();
-						con.inserimentoVendita(codiceVendita, impiegato.getCodiceImpiegato(), cereale, data, impiegato.getVenditaDataImballaggio(codiceVendita) , impiegato.getVenditaDataScadenza(codiceVendita), quantitaVera);
+						con.inserimentoVendita(
+													codiceVendita, 
+													impiegato.getCodiceImpiegato(), 
+													cereale, 
+													data, 
+													impiegato.getVenditaDataImballaggio(codiceVendita) , 
+													impiegato.getVenditaDataScadenza(codiceVendita), 
+													quantitaVera, impiegato.getPrezzoVendita(codiceVendita)
+											  );
 						con.chiudiConnessioneDB();
 								
 					} 

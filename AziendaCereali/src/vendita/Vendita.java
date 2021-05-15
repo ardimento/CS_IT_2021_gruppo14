@@ -195,5 +195,14 @@ public class Vendita implements VenditaInterfaccia {
 	public String getDataScadenza() {
 		return dataScadenza;
 	}
+	/**
+	 * restrituisce il prezzo della vendita.
+	 * 
+	 */
+	@Override
+	public Double getPrezzoVendita() {
+		// TODO Auto-generated method stub
+		return prezzoVendita;
+	}
 	
 }

@@ -22,4 +22,6 @@ public interface VenditaInterfaccia {
 	public String getDataImbalaggio();
 	/** restrituisce una stringa con la data della scadenza nel formato YYYY-MM-GG*/
 	public String getDataScadenza();
+	/** restrituisce un Double con il prezzo della vendita*/
+	public Double getPrezzoVendita();
 }

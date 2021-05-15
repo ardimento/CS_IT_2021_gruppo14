@@ -269,5 +269,16 @@ public class Impiegato {
 		return null;
 	}
 	
+	/**
+	 * Ritorna il prezzo di una specifica vendita indicata tramite codice
+	 * @param codiceVendita valore alfanumerico che rapresenta il codice identificativo della vendita 
+	 * @return il prezzo della vendita 
+	 * @throws EccezioniVendita eccezione riguardante aspetti relativi alla vendita
+	 */
+	public Double getPrezzoVendita(String codiceVendita) throws EccezioniVendita {
+		if(getVendita(codiceVendita)!=null) 
+			return getVendita(codiceVendita).getPrezzoVendita();
+		return null;
+	}
 	
 }

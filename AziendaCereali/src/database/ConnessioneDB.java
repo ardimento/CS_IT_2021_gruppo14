@@ -187,10 +187,10 @@ public class ConnessioneDB {
 	 * @return True se l'inserimento della vendita viene effettuata con successo, False se l'inserimento della vendita fallisce.
 	 */
 	//AGGIUNGERE PREZZO VENDITA QUI E AGGIUNGERE LA COLONNA SUL DATABASE IN "VENDITA"
-	public boolean inserimentoVendita(String codVendita, String codImpiegato, String cereale, String dataVendita, String dataImballaggio, String dataScadenza, Double quantitaCereale) {
+	public boolean inserimentoVendita(String codVendita, String codImpiegato, String cereale, String dataVendita, String dataImballaggio, String dataScadenza, Double quantitaCereale, Double prezzoVendita) {
 		if(connettore != null) {
 			try {
-				PreparedStatement pstm = connettore.prepareStatement("INSERT INTO vendita VALUES(? ? ? ? ? ? ?);");
+				PreparedStatement pstm = connettore.prepareStatement("INSERT INTO vendita VALUES(?,?,?,?,?,?,?,? );");
 				pstm.setString(1, codVendita);
 				pstm.setString(2, codImpiegato);
 				pstm.setString(3, cereale);
@@ -198,6 +198,8 @@ public class ConnessioneDB {
 				pstm.setString(5, dataImballaggio);
 				pstm.setString(6, dataScadenza);
 				pstm.setDouble(7, quantitaCereale);
+				pstm.setDouble(8, prezzoVendita);
+				System.out.println(pstm);
 				pstm.execute();
 				pstm.close();
 				return true;
