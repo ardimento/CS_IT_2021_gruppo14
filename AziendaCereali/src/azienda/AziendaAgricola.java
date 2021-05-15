@@ -92,7 +92,7 @@ public class AziendaAgricola {
 			con.caricaDativendita(i.getVendite(), i);
 			System.out.println(i);
 		}
-		con.chiudiConnessioneDB();
+		//con.chiudiConnessioneDB();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -104,6 +104,7 @@ public class AziendaAgricola {
 				}			
 			}
 		});
+		
 		
 	}
 	

@@ -477,13 +477,32 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	public void effettuaVendita(Impiegato impiegato) {
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent o) {
+				
 				try {
-					controllaInserimentiVendita(impiegato);
+					if(controllaInserimentiVendita(impiegato)) {
+						
+						Double quantitaVera = Double.parseDouble(tfQuantita.getText());
+						String codiceVendita=tfCodice.getText();
+						String cereale = tendinaCereali.getSelectedItem().toString();
+						DateFormat dateformatYYYYMMDD = new SimpleDateFormat("yyy-MM-dd");
+						String data = new String ( dateformatYYYYMMDD.format(calendario.getDate()) );
+						
+						impiegato.creaVendita(quantitaVera, codiceVendita,cereale, data);
+						JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_EFFETTUATA);
+						cancella ();		
+						setInfoImpiegato();
+			
+						ConnessioneDB con = ConnessioneDB.creaConnessione();
+						con.connettiDB();
+						con.inserimentoVendita(codiceVendita, impiegato.getCodiceImpiegato(), cereale, data, impiegato.getVenditaDataImballaggio(codiceVendita) , impiegato.getVenditaDataScadenza(codiceVendita), quantitaVera);
+						con.chiudiConnessioneDB();
+								
+					} 
+					
 				} catch(EccezioniGUI e) {
 					e.printStackTrace();
 				} catch (EccezioniVendita e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(rootPane, e.getMessage());
 				}
 			}
 		});
@@ -500,15 +519,15 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 	 * @throws EccezioniGUI 	eccezione riguardante aspetti relativi alla mancata correttezza dei parametri necessari per la vendita
 	 * 
 	 */
-	public void controllaInserimentiVendita(Impiegato impiegato) throws EccezioniVendita, EccezioniGUI {
+	public boolean controllaInserimentiVendita(Impiegato impiegato) throws EccezioniVendita, EccezioniGUI {
+		
 		String cereale = tendinaCereali.getSelectedItem().toString();
 		String quantita = tfQuantita.getText();
-		
 		DateFormat dateformatYYYYMMDD = new SimpleDateFormat("yyy-MM-dd");
 		String data = "";
-		
 		String codiceVendita = tfCodice.getText();
 		Double quantitaVera = null;
+		boolean esito= false;
 		
 		if(impiegato.cercaVendita(codiceVendita)) {
 			
@@ -548,6 +567,8 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_NON_EFFETTUATA + MessaggiGUI.ERRORE_DATA_VUOTA);
 				throw new EccezioniGUI(MessaggiGUI.ERRORE_DATA_VUOTA, new EccezioniGUI());
 			}
+			esito=true;
+			/*
 			try {
 				impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data);
 				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_EFFETTUATA);
@@ -562,9 +583,12 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 			catch (EccezioniVendita e){
 				JOptionPane.showMessageDialog(rootPane, e.getMessage());
 			}
-			
+			*/
 		}
+		return esito;
 	}
+	
+	
 	
 	
 	
