@@ -79,21 +79,22 @@ public class AziendaAgricola {
 	public static void main(String[] args) throws EccezioniVendita {
 		
 		AziendaAgricola azienda = new AziendaAgricola("Azienda Agricola");
-		
-		ConnessioneDB con = ConnessioneDB.creaConnessione();
-		con.connettiDB();
-		con.caricaDatiImpiegati(azienda.getImpiegati());
-		
-		java.util.Iterator<Entry<String,Impiegato>> iterator = azienda.impiegati.entrySet().iterator();
-		
-		while(iterator.hasNext()) {
-			Entry<String,Impiegato> entry = iterator.next();
-			Impiegato i = entry.getValue();
-			con.caricaDativendita(i.getVendite(), i);
-			System.out.println(i);
-		}
-		//con.chiudiConnessioneDB();
-		
+
+			ConnessioneDB con = ConnessioneDB.creaConnessione();
+			con.connettiDB();
+			con.caricaDatiImpiegati(azienda.getImpiegati());
+			
+			java.util.Iterator<Entry<String,Impiegato>> iterator = azienda.impiegati.entrySet().iterator();
+			
+			while(iterator.hasNext()) {
+				Entry<String,Impiegato> entry = iterator.next();
+				Impiegato i = entry.getValue();
+				con.caricaDativendita(i.getVendite(), i);
+				System.out.println(i);
+			}
+			
+
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try{
@@ -101,9 +102,12 @@ public class AziendaAgricola {
 				}
 				catch(Exception e) {
 					e.printStackTrace();
-				}			
+				}		
 			}
 		});
+		
+
+		
 		
 		
 	}

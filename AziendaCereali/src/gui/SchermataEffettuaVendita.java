@@ -503,7 +503,6 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 													impiegato.getVenditaDataScadenza(codiceVendita), 
 													quantitaVera, impiegato.getPrezzoVendita(codiceVendita)
 											  );
-						con.chiudiConnessioneDB();
 								
 					} 
 					
@@ -511,6 +510,9 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 					e.printStackTrace();
 				} catch (EccezioniVendita e) {
 					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				} finally {
+					//ConnessioneDB con = ConnessioneDB.creaConnessione();
+					//con.chiudiConnessioneDB();
 				}
 			}
 		});
