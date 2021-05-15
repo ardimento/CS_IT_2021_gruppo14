@@ -53,16 +53,17 @@ public class ConnessioneDB {
 	}
 	
 	/**
-	 * permette di connettere l'applicativo al database attraverso l'attributo @seeurl
+	 * permette di connettere l'applicativo al database
 	 * precondizione: per poter aprire la connessione con il database bisogna essere certi che questa sia chiusa.
 	 * 
 	 * @return true se la connessione è stata aperta con successo, false se non è stato possibile aprire la connessione
 	 */
 	public boolean connettiDB() throws EccezioniDB, SQLException{
-		if(connettore==null) {
+		if(connettore==null || connettore.isClosed()) {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				connettore = DriverManager.getConnection(url, user, pass);
+				
 				return true;
 			}catch(ClassNotFoundException e1) {
 				e1.printStackTrace();
