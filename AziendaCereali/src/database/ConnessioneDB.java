@@ -190,7 +190,7 @@ public class ConnessioneDB {
 	public boolean inserimentoVendita(String codVendita, String codImpiegato, String cereale, String dataVendita, String dataImballaggio, String dataScadenza, Double quantitaCereale) {
 		if(connettore != null) {
 			try {
-				PreparedStatement pstm = connettore.prepareStatement("INSERT INTO Impiegati VALUES(? ? ? ? ? ? ?);");
+				PreparedStatement pstm = connettore.prepareStatement("INSERT INTO vendita VALUES(? ? ? ? ? ? ?);");
 				pstm.setString(1, codVendita);
 				pstm.setString(2, codImpiegato);
 				pstm.setString(3, cereale);
