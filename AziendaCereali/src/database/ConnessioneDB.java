@@ -198,6 +198,7 @@ public class ConnessioneDB {
 				pstm.setString(5, dataImballaggio);
 				pstm.setString(6, dataScadenza);
 				pstm.setDouble(7, quantitaCereale);
+				pstm.execute();
 				pstm.close();
 				return true;
 			}catch(SQLException e) {
