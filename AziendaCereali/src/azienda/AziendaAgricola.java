@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 import database.ConnessioneDB;
@@ -39,6 +40,8 @@ public class AziendaAgricola {
 	 */
 	private static Map<String,Impiegato> impiegati = new HashMap<String, Impiegato>(NumeroImpiegatiMax);
 	
+	static JOptionPane schermataAvviso;
+	
 	/**
 	 * Costruttore della classe AziendaAgricola. Questo costruttore fa uso di un parametro, impostato come default.
 	 * Questa decisione è stata presa per associare un nome significativo al main principale.
@@ -58,6 +61,7 @@ public class AziendaAgricola {
 	
 	/**
 	 * Metodo con il quale si crea il nome dell'azienda. Creato per eventuali modifiche future.
+	 * @param nomeAzienda
 	 */
 	public void setNomeAzienda(String nomeAzienda) {
 		this.nomeAzienda = nomeAzienda;
@@ -75,7 +79,7 @@ public class AziendaAgricola {
 	/**
 	 * Main del programma. Qui avviene l'avvio del programma. Tale main realizza in primis la realizzazione dell'azienda
 	 * ed in un secondo momento andrà a fare uso di tutte le funzionalità del programma.
-	 * Per ora si è pensato di creare semplicemente dei test, per testare l'effettiva funzionalità del programma.
+	 * 
 	 * @throws EccezioniVendita 
 	 */
 	public static void main(String[] args) throws EccezioniVendita {
@@ -88,18 +92,15 @@ public class AziendaAgricola {
 			} catch (EccezioniDB | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				//ALERT "CONNESSIONE NON RIUSCITA"
+				schermataAvviso = new JOptionPane("Connessione al server fallita");
 			}
 			try {
 				con.caricaDatiImpiegati(azienda.getImpiegati());
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				//ALERT PER IL NON CARICAMENTO DEI DATI DAL DATABASE
 			}
 			
-			
-			//QUESTO è PER TESTARE LE ISTANZE DEGLI IMPIEGATI? PERCHè SE COSI FOSSE VA CANCELLATO
 			java.util.Iterator<Entry<String,Impiegato>> iterator = azienda.impiegati.entrySet().iterator();
 			
 			while(iterator.hasNext()) {
@@ -110,7 +111,6 @@ public class AziendaAgricola {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					//ALERT PER IL NON CARICAMENTO DEI DATI DAL DATABASE
 				}
 				System.out.println(i);
 			}
@@ -137,7 +137,7 @@ public class AziendaAgricola {
 	/**
 	 * Metodo con il quale controlliamo se il codice inserito è presente tra gli impiegati.
 	 * @param codice 
-	 * @return true, se il codice è presente all'interno degli impiegati, altrimenti false.
+	 * @return esito true, se il codice è presente all'interno degli impiegati, altrimenti false.
 	 */
 	public boolean accessoImpiegato(String codice) {
 		

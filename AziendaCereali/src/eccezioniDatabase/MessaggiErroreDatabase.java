@@ -16,6 +16,10 @@ public class MessaggiErroreDatabase {
 	 * messaggio di errore sulla chiusura della connessione con il database
 	 */
 	public final static String ERRORE_CHIUSURA_DB = "Errore : chiusura connessione non riuscita";
+	/**
+	 * messaggio di segnalazione di mancato memorizzazione dei dati nel DB
+	 */
+	public final static String ERRORE_CARICAMENTO_DATI_DB = "Errore: Dati della vendita non inseriti nel sistema";
 
 	
 }

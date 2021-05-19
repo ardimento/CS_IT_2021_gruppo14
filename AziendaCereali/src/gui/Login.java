@@ -1,8 +1,12 @@
 package gui;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.util.Map;
 import javax.swing.*;
+
+import database.ConnessioneDB;
+import eccezioniDatabase.EccezioniDB;
 import impiegato.Impiegato;
 
 /**
@@ -43,14 +47,20 @@ public class Login extends JFrame{
 	 * Questo costruttore fa uso del parametro di tipo Map per controllare se effettivamente
 	 * l'utente che cerca di accedere è un impiegato o meno della collezione di impiegati dell'azienda.
 	 * @param impiegati collezione di impiegati 
+	 * @throws SQLException 
+	 * @throws EccezioniDB 
 	 */
-	public Login (Map<String, Impiegato> impiegati) {
+	public Login (Map<String, Impiegato> impiegati) throws EccezioniDB, SQLException {
 		super();
 		this.login = new JFrame();	
+		
+		
 		setLogin();
 		setImmagineDiLogin();
-		azioneBottone(impiegati);
-		azioneTastiera(impiegati);
+		//if(controlloConnessioneDB()) {
+			azioneBottone(impiegati);
+			azioneTastiera(impiegati);
+		//}
 	}
 	
 	
@@ -159,8 +169,8 @@ public class Login extends JFrame{
 		});
 	}
 	/**
-	 * Metodo che esegue l'azione cdi verifica del codice inserito 
-	 * nel momento che l'utente durante l'inserimento del codice, preme invio.
+	 * Metodo che esegue l'azione di verifica del codice inserito 
+	 * nel momento che l'utente, durante l'inserimento del codice, preme invio.
 	 * Il metodo rende anche invisibile l'esito della verifica quando l'impiegato si appresta a scrivere.
 	 *  @param impiegati collezione di impiegati.
 	 */
@@ -184,17 +194,31 @@ public class Login extends JFrame{
 	 * @param impiegati collezione di impiegati.
 	 */
 	private void chiamaSchermataImpiegato(Map<String, Impiegato> impiegati) {
+		
 		String codiceUtente = tfCodice.getText();
 		
-		if(impiegati.containsKey(codiceUtente)) {
-			login.setVisible(false);
-			JOptionPane.showMessageDialog(rootPane, "Accesso Eseguito");
-			SchermataEffettuaVendita imp = new SchermataEffettuaVendita(impiegati.get(codiceUtente),login);
-		}
-		else {
-			labelAccesso.setVisible(true);
-			labelAccesso.setForeground(Color.RED);
-			labelAccesso.setText("ACCESSO NEGATO");
-		}
+			if(impiegati.containsKey(codiceUtente)) {
+				login.setVisible(false);
+				JOptionPane.showMessageDialog(rootPane, "Accesso Eseguito");
+				SchermataEffettuaVendita imp = new SchermataEffettuaVendita(impiegati.get(codiceUtente),login);
+			}
+			else {
+				labelAccesso.setVisible(true);
+				labelAccesso.setForeground(Color.RED);
+				labelAccesso.setText("ACCESSO NEGATO");
+			}
+	
 	}
+	
+	private boolean controlloConnessioneDB() throws EccezioniDB, SQLException {
+		
+		boolean esito = false;
+		ConnessioneDB con = ConnessioneDB.creaConnessione();
+		
+		
+
+		
+		return esito;	
+	}
+	
 }

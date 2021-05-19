@@ -39,5 +39,6 @@ public class MessaggiGUI {
 	 * messaggio di segnalazione di mancata registrazione della vendita
 	 */
 	public final static String VENDITA_NON_EFFETTUATA= "Vendita NON inserita\n";
+
 	
 }

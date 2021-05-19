@@ -20,6 +20,7 @@ import database.ConnessioneDB;
 import eccezioni.EccezioniVendita;
 import eccezioni.MessaggiErroreVendita;
 import eccezioniDatabase.EccezioniDB;
+import eccezioniDatabase.MessaggiErroreDatabase;
 import gui.eccezioniGui.EccezioniGUI;
 import gui.eccezioniGui.MessaggiGUI;
 import impiegato.Impiegato;
@@ -500,11 +501,11 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 						} catch (EccezioniDB e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							//ALLERT ERRORE APERTURA CONNESSIONE
+							JOptionPane.showMessageDialog(rootPane, MessaggiErroreDatabase.ERRORE_APERTURA_DB);
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							//ALERT ERRORE APERTURA CONNESSIONE
+							JOptionPane.showMessageDialog(rootPane, MessaggiErroreDatabase.ERRORE_APERTURA_DB);
 						}
 						try {
 							con.inserimentoVendita(
@@ -519,7 +520,7 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							//ALERT ERRORE INSERIMENTO DATI VENDITA
+							JOptionPane.showMessageDialog(rootPane, MessaggiErroreDatabase.ERRORE_CARICAMENTO_DATI_DB);
 						}
 								
 					} 
@@ -529,20 +530,20 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				} catch (EccezioniVendita e) {
 					JOptionPane.showMessageDialog(rootPane, e.getMessage());
 				} finally {
-					
-					//chiude la connessione-------------------------------------
+				
 					ConnessioneDB con = ConnessioneDB.creaConnessione();
 					try {
 						con.chiudiConnessioneDB();
 					} catch (EccezioniDB e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						//ALERT ERRORE CHIUSURA CONNESSIONE
+						JOptionPane.showMessageDialog(rootPane, MessaggiErroreDatabase.ERRORE_CHIUSURA_DB);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						//ALERT ERRORE CHIUSURA CONNESSIONE
+						JOptionPane.showMessageDialog(rootPane, MessaggiErroreDatabase.ERRORE_CHIUSURA_DB);
 					}
+					
 				}
 			}
 		});
@@ -608,22 +609,6 @@ public class SchermataEffettuaVendita extends SchermataVisualizzaVendite {
 				throw new EccezioniGUI(MessaggiGUI.ERRORE_DATA_VUOTA, new EccezioniGUI());
 			}
 			esito=true;
-			/*
-			try {
-				impiegato.creaVendita(quantitaVera, codiceVendita, cereale, data);
-				JOptionPane.showMessageDialog(rootPane, MessaggiGUI.VENDITA_EFFETTUATA);
-				cancella ();		
-				super.setInfoImpiegato();
-				ConnessioneDB con = ConnessioneDB.creaConnessione();
-				con.connettiDB();
-				con.inserimentoVendita(codiceVendita, impiegato.getCodiceImpiegato(), cereale, data, impiegato.getVenditaDataImballaggio(codiceVendita) , impiegato.getVenditaDataScadenza(codiceVendita), quantitaVera);
-				con.chiudiConnessioneDB();
-			
-			} 
-			catch (EccezioniVendita e){
-				JOptionPane.showMessageDialog(rootPane, e.getMessage());
-			}
-			*/
 		}
 		return esito;
 	}

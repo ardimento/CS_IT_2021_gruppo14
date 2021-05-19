@@ -59,6 +59,7 @@ public class ConnessioneDB {
 	 * @return true se la connessione è stata aperta con successo, false se non è stato possibile aprire la connessione
 	 */
 	public boolean connettiDB() throws EccezioniDB, SQLException{
+		
 		if(connettore==null || connettore.isClosed()) {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -67,9 +68,11 @@ public class ConnessioneDB {
 				return true;
 			}catch(ClassNotFoundException e1) {
 				e1.printStackTrace();
+				throw new EccezioniDB(MessaggiErroreDatabase.ERRORE_APERTURA_DB, new EccezioniDB());
+				//return false;
 			}
 		}
-		throw new EccezioniDB(MessaggiErroreDatabase.ERRORE_APERTURA_DB, new EccezioniDB());
+		return false;
 
 	}
 	
