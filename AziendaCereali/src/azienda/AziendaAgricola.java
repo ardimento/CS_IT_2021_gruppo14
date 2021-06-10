@@ -8,10 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import javax.swing.JOptionPane;
 import javax.swing.text.html.HTMLDocument.Iterator;
-
 import database.ConnessioneDB;
 import eccezioni.EccezioniVendita;
 import eccezioniDatabase.EccezioniDB;
@@ -27,19 +25,25 @@ import vendita.VenditaInterfaccia;
  *
  */
 public class AziendaAgricola {
+	
 	/**
 	 * Valore String che indica il nome dell' azienda
 	 */
 	private String nomeAzienda = "AziendaAgricola";
+	
 	/**
 	 * Valore int che indica il numero massimo di impiegati che può assumere l'azienda
 	 */
 	private static int NumeroImpiegatiMax = 20;
+	
 	/**
 	 * Collezione di un gruppo di oggetti di impiegati, impostando, come default, un numero massimo di impiegati.
 	 */
 	private static Map<String,Impiegato> impiegati = new HashMap<String, Impiegato>(NumeroImpiegatiMax);
 	
+	/**
+	 * Messaggio pop-up utilizzato nel cas in cui non avviene il collegamento con il server.
+	 */
 	static JOptionPane schermataAvviso;
 	
 	/**
@@ -77,48 +81,55 @@ public class AziendaAgricola {
 	}
 	
 	/**
-	 * Main del programma. Qui avviene l'avvio del programma. Tale main realizza in primis la realizzazione dell'azienda
-	 * ed in un secondo momento andrà a fare uso di tutte le funzionalità del programma.
-	 * 
+	 * Main del programma. Qui avviene l'avvio del programma. Tale main realizza in primis la creazione dell'azienda
+	 * ed in un secondo momento andrà a fare uso di tutte le funzionalità del programma riportate sotto.
 	 * @throws EccezioniVendita 
 	 */
 	public static void main(String[] args) throws EccezioniVendita {
 		
+		//Nome dell'azienda a cui si cederà il software
 		AziendaAgricola azienda = new AziendaAgricola("Azienda Agricola");
-
-			ConnessioneDB con = ConnessioneDB.creaConnessione();
+			
+		/**
+		 * Connessione con il Database
+		 */
+		ConnessioneDB con = ConnessioneDB.creaConnessione();
+		
+		try {
+			con.connettiDB();
+		} catch (EccezioniDB | SQLException e1) {
+			e1.printStackTrace();
+			schermataAvviso = new JOptionPane("Connessione al server fallita");
+		}
+		
+		try {
+			con.caricaDatiImpiegati(azienda.getImpiegati());
+		} catch (SQLException e1) {	
+			e1.printStackTrace();
+		}
+			
+		java.util.Iterator<Entry<String,Impiegato>> iterator = azienda.impiegati.entrySet().iterator();
+			
+		while(iterator.hasNext()) {
+			
+			Entry<String,Impiegato> entry = iterator.next();
+			Impiegato i = entry.getValue();
+			
 			try {
-				con.connettiDB();
-			} catch (EccezioniDB | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				schermataAvviso = new JOptionPane("Connessione al server fallita");
+				con.caricaDativendita(i.getVendite(), i);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			try {
-				con.caricaDatiImpiegati(azienda.getImpiegati());
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			System.out.println(i);
+		}
 			
-			java.util.Iterator<Entry<String,Impiegato>> iterator = azienda.impiegati.entrySet().iterator();
-			
-			while(iterator.hasNext()) {
-				Entry<String,Impiegato> entry = iterator.next();
-				Impiegato i = entry.getValue();
-				try {
-					con.caricaDativendita(i.getVendite(), i);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println(i);
-			}
-			
-
-
+		/**
+		 * Invocazione della schermata Login
+		 */
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
+				
 				try{
 					Login login = new Login(azienda.getImpiegati());
 				}
@@ -127,11 +138,6 @@ public class AziendaAgricola {
 				}		
 			}
 		});
-		
-
-		
-		
-		
 	}
 	
 	/**
