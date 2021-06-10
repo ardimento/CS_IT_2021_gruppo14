@@ -7,7 +7,7 @@ import eccezioni.MessaggiErroreVendita;
  * @autor Ben Sidi Alessio 717848
  * 
  * Classe Concreta dell'Avena che rappresenta il prodotto vendibile dall'azienda
- * estende la classe astratta @see AbstractCereali
+ * estende la classe astratta AbstractCereali
  *  
  */
 public class Avena extends AbstractCereale {
@@ -22,12 +22,12 @@ public class Avena extends AbstractCereale {
 	private final static double QUANTITA_GIORNALIERA_MAX = 30.00;
 	
 	/**
-	 * costruttore della classe Avena a cui viene associato un controllo per la possibile vendita dello stesso attraverso il metodo @seeisCerealeVendibile.
+	 * costruttore della classe Avena a cui viene associato un controllo per la possibile vendita dello stesso attraverso il metodo isCerealeVendibile.
 	 * 
 	 * @param proprietaNutritive Stringa che elenca le proprietà nutritive del cereale in costruzione
 	 * @param quantitaCereale valore Double del peso del cereale in vendita
 	 * @param quantitaVenduta valore Double della somma di tutti i cereali già venduti per lo stesso impiegato
-	 * @pre la somma tra quantitaVenduta e la quantitaCereale non deve superare il valore di @seeQUANTITA_GIORNALIERA_MAX
+	 * @pre la somma tra quantitaVenduta e la quantitaCereale non deve superare il valore di QUANTITA_GIORNALIERA_MAX
 	 * @post inizializzazione e costruzione dell'oggetto Avena.
 	 * 
 	 */
@@ -51,13 +51,13 @@ public class Avena extends AbstractCereale {
 		
 	}
 	/**
-	 * Override del metodo "isCerealeVendibile" della classe astratta @see AbstractCereale che effettua il controllo sul vincolo
+	 * Override del metodo "isCerealeVendibile" della classe astratta AbstractCereale che effettua il controllo sul vincolo
 	 * del peso giornaliero massimo legato all'avena.
 	 * 
 	 * @param quantitaCereale valore Double del peso in vendita del cereale in questione
 	 * @param quantitaVenduta valore Double della somma del peso di tutte le vendite dell'impiegato che sta effettuando la vendita dello specifico cereale
-	 * @return True se la somma tra quantitaVenduta e quantitaCereale è maggiore o uguale di @seeQUANTITA_GIORNALIERA_MAX quindi la vendita è effettuabile,
-	 * 	False se @seeQUANTITA_GIORNALIERA_MAX è minore della somma tra quantitaCereale e quantitaVenduta, quindi la vendita non è effettuabile.
+	 * @return True se la somma tra quantitaVenduta e quantitaCereale è maggiore o uguale di QUANTITA_GIORNALIERA_MAX quindi la vendita è effettuabile,
+	 * 	False se QUANTITA_GIORNALIERA_MAX è minore della somma tra quantitaCereale e quantitaVenduta, quindi la vendita non è effettuabile.
 	 */
 	@Override
 	protected boolean isCerealeVendibile(Double quantitaCereale, Double quantitaVenduta) {

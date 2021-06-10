@@ -5,7 +5,7 @@
  * Classe che permette di connettersi al database dell'azienda
  * La classe puo essere istanziata solo una volta per avvio dato che è stata strutturata come una classe singleton.
  * 
- * Importante, prima di effettuare ogni tipo di utilizzo, è importante connettesi al database tramite la funzione @seeconnettiDB
+ * Importante, prima di effettuare ogni tipo di utilizzo, è importante connettesi al database tramite la funzione connettiDB
  * 
  */
 package database;
@@ -149,7 +149,7 @@ public class ConnessioneDB {
 	 * inserisce nel database un impiegato correttamente istanziato inviando al database i suoi dati correlati
 	 * @param id stringa di caratteri alfanumerici che identifica univocamente un impiegato dell'azienda
 	 * @param quantitaMaxAnnua quantità massima di cereali espressa in kg che un impiegato puo vendere annualmente
-	 * precondizione: la connessione al database deve essere aperta precedentemente la chiamata a questo metodo attraverso il metodo @see connettiDB
+	 * precondizione: la connessione al database deve essere aperta precedentemente la chiamata a questo metodo attraverso il metodo  connettiDB
 	 * postcondizione: i dati passati come parametro verranno salvati sul database connesso in precedenza
 	 * @return True se l'inserimento dei dati è avvenuta con successo, False se l'inserimento dei dati e fallita.
 	 */
@@ -170,7 +170,7 @@ public class ConnessioneDB {
 	
 	/**
 	 * inserisce una nuova vendita nel database
-	 * precondizione: la connessione al database deve essere attivata tramite il metodo @seeconnettiDB
+	 * precondizione: la connessione al database deve essere attivata tramite il metodo connettiDB
 	 * postcondizione: i dati passati come parametro verranno salvati sul database connesso in precedenza
 	 * @param codVendita Stringa alfanumerica che identifica univocamente la vendita
 	 * @param codImpiegato Stringa alfanumerica che identifica univocamente l'impiegato che ha effettuato la vendita

@@ -4,7 +4,7 @@
  * @autor BenSidi Alessio 717848
  * 
  * Classe Vendita che permette di effettuare la vendita dei cereali da parte di un impiegato attraverso l'implementazione
- * dell'interfaccia @see VenditaInterfaccia
+ * dell'interfaccia VenditaInterfaccia
  */
 package vendita;
 import java.time.LocalDate;
@@ -20,11 +20,11 @@ public class Vendita implements VenditaInterfaccia {
 	/** valore che indica la quantità in kg di cereali che è stata venduta*/
 	private double quantitaCereale = 0.0;
 	/** è l'oggetto che rappresenta il cereale implicato nella vendita, da esso saranno presi i suoi dati attraverso i metodi
-	 * implementati dall'interfaccia @see Cereale */
+	 * implementati dall'interfaccia Cereale */
 	Cereale cerealeInVendita = null;
 	/** Stringa che indica la data in cui è stata effettuata la vendita*/
 	private String dataVendita = "";
-	/** data in cui viene effettuato l'imballaggio. E' un dato ricavato sulla base del valore della @see dataVendita*/
+	/** data in cui viene effettuato l'imballaggio. E' un dato ricavato sulla base del valore della dataVendita*/
 	private String dataImballaggio = "";
 	/** data in cui il prodotto in vendita perde le sue qualità organolettiche. Il valore di questo dato è ricavato sulla base
 	 * del valore della @see dataVendita e il valore del dato dei giorni di freschezza relativo allo specifico cereale venduto*/
@@ -105,7 +105,7 @@ public class Vendita implements VenditaInterfaccia {
 		this.prezzoVendita = prezzoVendita;
 	}
 	/**
-	 * Metodo che richiama il cereale coinvolto nella vendita @see cerealeInVendita e richiama la funzione implementata
+	 * Metodo che richiama il cereale coinvolto nella vendita cerealeInVendita e richiama la funzione implementata
 	 * dall'interfaccia @see Cereale che permette di restituire la stringa di caratteri
 	 * rappresentante l'elenco delle proprietà nutritive del cereale in oggetto
 	 * */
@@ -115,7 +115,7 @@ public class Vendita implements VenditaInterfaccia {
 		return cerealeInVendita.getProprietaNutritive(); 
 	}
 	/**
-	 * restituisce il valore della quantita di prodotto venduta in oggetto preso dall'attributo @see quantitaCereale
+	 * restituisce il valore della quantita di prodotto venduta in oggetto preso dall'attributo quantitaCereale
 	 * 
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class Vendita implements VenditaInterfaccia {
 		return quantitaCereale;
 	}
 	/**
-	 * restituisce la stringa che rappresenta la data di vendita @see dataVendita del prodotto.
+	 * restituisce la stringa che rappresenta la data di vendita dataVendita del prodotto.
 	 * il formato della data è YYYY-MM-GG
 	 * 
 	 */
