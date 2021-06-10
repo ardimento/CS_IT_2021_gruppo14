@@ -1,11 +1,3 @@
-/**
- * 
- * 
- * @autor BenSidi Alessio 717848
- * 
- * Classe Vendita che permette di effettuare la vendita dei cereali da parte di un impiegato attraverso l'implementazione
- * dell'interfaccia VenditaInterfaccia
- */
 package vendita;
 import java.time.LocalDate;
 
@@ -16,6 +8,12 @@ import eccezioni.MessaggiErroreVendita;
 import gui.eccezioniGui.EccezioniGUI;
 import gui.eccezioniGui.MessaggiGUI;
 
+/**
+ * Classe Vendita che permette di effettuare la vendita dei cereali da parte di un impiegato attraverso l'implementazione
+ * dell'interfaccia VenditaInterfaccia
+ * 
+ * @autor BenSidi Alessio 717848
+ */
 public class Vendita implements VenditaInterfaccia {
 	/** valore che indica la quantità in kg di cereali che è stata venduta*/
 	private double quantitaCereale = 0.0;

@@ -3,12 +3,11 @@ package cereale;
 import eccezioni.EccezioniVendita;
 import eccezioni.MessaggiErroreVendita;
 
-/**
- * @autor Ben Sidi Alessio 717848
- * 
+/** 
  * Classe Concreta dell'Avena che rappresenta il prodotto vendibile dall'azienda
  * estende la classe astratta AbstractCereali
- *  
+ * 
+ * @autor Ben Sidi Alessio 717848
  */
 public class Avena extends AbstractCereale {
 	

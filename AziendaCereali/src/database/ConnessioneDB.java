@@ -1,13 +1,3 @@
-/**
- * 
- * @author Ben Sidi Alessio 717848
- * 
- * Classe che permette di connettersi al database dell'azienda
- * La classe puo essere istanziata solo una volta per avvio dato che è stata strutturata come una classe singleton.
- * 
- * Importante, prima di effettuare ogni tipo di utilizzo, è importante connettesi al database tramite la funzione connettiDB
- * 
- */
 package database;
 
 import eccezioni.MessaggiErroreVendita;
@@ -25,6 +15,14 @@ import impiegato.Impiegato;
 import vendita.Vendita;
 import vendita.VenditaInterfaccia;
 
+/**
+ * Classe che permette di connettersi al database dell'azienda
+ * La classe puo essere istanziata solo una volta per avvio dato che è stata strutturata come una classe singleton.
+ * 
+ * Importante, prima di effettuare ogni tipo di utilizzo, è importante connettesi al database tramite la funzione connettiDB
+ * 
+ * @author Ben Sidi Alessio 717848
+ */
 public class ConnessioneDB {
 	private String nomeDB = "aziendaagricola";
 	private String user = "admin";
